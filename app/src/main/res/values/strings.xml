@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">Arkhire Company</string>
+    <string name="maps_api_key">AIzaSyDBF8RfrDl1Haqxxjqidf9J_B4pBof6FKY</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="become_your_hiring_apps">BECOME YOUR HIRING APPS</string>
+    <string name="handshake_desc">Arkhire will provide all information about your hiring progress, Of course with realtime update. All information about hiring will showed on your hand.</string>
+    <string name="desc_engineerCriteria">Looking for engineer who meet your company criteria? Dont worry in arkhire you can choice best engineer who meet your company requirement.</string>
+    <string name="hire_engineer_as_your_criteria">HIRE ENGINEER AS YOUR CRITERIA</string>
+    <string name="let_s_get_started_by_creating_your_account">Let\'s Get Started By Creating Your Account</string>
+    <string name="welcome">Welcome</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="forget_password">Forget password</string>
+    <string name="or">or</string>
+    <string name="register">REGISTER</string>
+    <string name="welcome_let_s_get_started">Welcome, Let\'s get Started</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="already_have_account_click_here">Already have account ? Click here</string>
+    <string name="your_position_at_company">Job Position</string>
+    <string name="company">Company</string>
+    <string name="send_recovery_email">Send Recovery Email</string>
+    <string name="registered_email_address">Registered Email Address</string>
+    <string name="to_continue_please_input_registered_email">To Continue, Please Input Registered Email</string>
+    <string name="android_developer">Android Developer</string>
+    <string name="dev_ops_engineer">DevOps Engineer</string>
+    <string name="fullstack_mobile">FullStack Mobile</string>
+    <string name="fullstack_web">FullStack Web</string>
+    <string name="title_activity_company_profile_maps">Map</string>
+    <string name="looking_for">Looking For</string>
+    <string name="company_description">Company Description</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut pulvinar porttitor arcu, in rhoncus libero ultricies eget. Nullam eget vulputate sapien, eu posuere metus. Praesent bibendum nisl at ultrices ullamcorper. In in pretium erat. Sed volutpat erat pulvinar tortor rutrum consectetur. Integer a ligula risus. Sed hendrerit sed augue vel elementum. Sed imperdiet tellus a quam mattis feugiat. Suspendisse turpis mauris, congue in neque eu, luctus vulputate quam. Suspendisse potenti. Donec pretium consequat urna ut tincidunt.</string>
+
+</resources>

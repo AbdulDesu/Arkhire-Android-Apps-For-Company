@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/home"
+        android:icon="@drawable/ic_home"
+        android:title="Home"
+        app:cnb_iconColor="@color/primary"/>
+
+    <item
+        android:id="@+id/makeCompanyProject"
+        android:icon="@drawable/ic_project"
+        android:title="Project"
+        app:cnb_iconColor="@color/primary" />
+
+    <item
+        android:id="@+id/chat"
+        android:icon="@drawable/ic_chat"
+        android:title="Chat"
+        app:cnb_iconColor="@color/primary"/>
+
+    <item
+        android:id="@+id/account"
+        android:icon="@drawable/ic_account"
+        android:title="Account"
+        app:cnb_iconColor="@color/primary" />
+
+
+</menu>

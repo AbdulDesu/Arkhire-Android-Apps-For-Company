@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/arkhirenavigation"
+    app:startDestination="@id/splashScreenFragment">
+
+    <fragment
+        android:id="@+id/splashScreenFragment"
+        android:name="com.sizdev.arkhireforcompany.onboarding.SplashScreenFragment"
+        android:label="fragment_splash_screen"
+        tools:layout="@layout/fragment_splash_screen" >
+        <action
+            android:id="@+id/action_splashScreenFragment_to_welcomeViewPager"
+            app:destination="@id/welcomeViewPager" />
+        <action
+            android:id="@+id/action_splashScreenFragment_to_loginActivity"
+            app:destination="@id/loginActivity" />
+    </fragment>
+    <fragment
+        android:id="@+id/welcomeViewPager"
+        android:name="com.sizdev.arkhireforcompany.onboarding.WelcomeViewPager"
+        android:label="fragment_welcome_view_pager"
+        tools:layout="@layout/fragment_welcome_view_pager" >
+        <action
+            android:id="@+id/action_welcomeViewPager_to_loginActivity"
+            app:destination="@id/loginActivity" />
+    </fragment>
+    <activity
+        android:id="@+id/loginActivity"
+        android:name="com.sizdev.arkhireforcompany.administration.LoginActivity"
+        android:label="activity_login"
+        tools:layout="@layout/activity_login" />
+</navigation>

@@ -1,0 +1,69 @@
+package com.sizdev.arkhireforcompany.homepage
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import com.sizdev.arkhireforcompany.R
+import com.sizdev.arkhireforcompany.homepage.item.AccountFragment
+import com.sizdev.arkhireforcompany.homepage.item.ChatFragment
+import com.sizdev.arkhireforcompany.homepage.item.HomeFragment
+import com.sizdev.arkhireforcompany.homepage.item.ProjectFragment
+import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.android.synthetic.main.fragment_home.*
+
+class HomeActivity : AppCompatActivity() {
+
+    lateinit var homeFragment: HomeFragment
+    lateinit var projectFragment: ProjectFragment
+    lateinit var chatFragment: ChatFragment
+    lateinit var accountFragment: AccountFragment
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_home)
+
+        //Launch Home Fragment At First
+        homeNavigationBar.setItemSelected(R.id.home)
+        homeFragment = HomeFragment()
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.homeViewer, homeFragment)
+            .commit()
+
+        homeNavigationBar.setOnItemSelectedListener { id ->
+            when (id) {
+                R.id.home -> {
+                    homeFragment = HomeFragment()
+                    supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.homeViewer, homeFragment)
+                        .commit()
+                }
+
+                R.id.makeCompanyProject -> {
+                    projectFragment = ProjectFragment()
+                    supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.homeViewer, projectFragment)
+                        .commit()
+                }
+
+                R.id.chat -> {
+                    chatFragment = ChatFragment()
+                    supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.homeViewer, chatFragment)
+                        .commit()
+                }
+
+                R.id.account -> {
+                    accountFragment = AccountFragment()
+                    supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.homeViewer, accountFragment)
+                        .commit()
+                }
+            }
+            true
+        }
+    }
+}
