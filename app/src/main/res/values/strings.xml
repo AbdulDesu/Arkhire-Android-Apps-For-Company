@@ -32,5 +32,6 @@
     <string name="looking_for">Looking For</string>
     <string name="company_description">Company Description</string>
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut pulvinar porttitor arcu, in rhoncus libero ultricies eget. Nullam eget vulputate sapien, eu posuere metus. Praesent bibendum nisl at ultrices ullamcorper. In in pretium erat. Sed volutpat erat pulvinar tortor rutrum consectetur. Integer a ligula risus. Sed hendrerit sed augue vel elementum. Sed imperdiet tellus a quam mattis feugiat. Suspendisse turpis mauris, congue in neque eu, luctus vulputate quam. Suspendisse potenti. Donec pretium consequat urna ut tincidunt.</string>
+    <string name="company_location">Company Location</string>
 
 </resources>

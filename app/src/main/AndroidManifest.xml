@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
 
     <application
         android:allowBackup="true"
@@ -30,7 +31,7 @@
         <activity android:name=".administration.RegisterActivity" />
         <activity android:name=".administration.LoginActivity" />
         <activity android:name=".homepage.HomeActivity" />
-        <activity android:name=".OnBoardActivity">
+        <activity android:name=".onboarding.OnBoardActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

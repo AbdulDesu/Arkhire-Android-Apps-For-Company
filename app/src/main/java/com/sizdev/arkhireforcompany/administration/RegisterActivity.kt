@@ -5,24 +5,29 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
 import com.sizdev.arkhireforcompany.R
+import com.sizdev.arkhireforcompany.databinding.ActivityRegisterBinding
 import com.sizdev.arkhireforcompany.homepage.HomeActivity
 import kotlinx.android.synthetic.main.activity_register.*
 import java.util.*
 
 class RegisterActivity : AppCompatActivity() {
+
+    private  lateinit var binding: ActivityRegisterBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_register)
 
-        bt_register.setOnClickListener {
-            val registerPassword = et_registPassword.text.toString()
-            val confirmRegisterPassword = et_confirmRegistPassword.text.toString()
-            val fullName = et_fullName.text.toString()
-            val registerEmail = et_registEmail.text.toString().toLowerCase()
-            val registerPhoneNumber = et_registPhone.text.toString()
-            val registerCompanyName = et_registCompany.text.toString()
-            val registerCompanyPosition = et_registCompanyPosition.text.toString()
+        binding.btRegister.setOnClickListener {
+            val registerPassword = binding.etRegistPassword.text.toString()
+            val confirmRegisterPassword = binding.etConfirmRegistPassword.text.toString()
+            val fullName = binding.etFullName.text.toString()
+            val registerEmail = binding.etRegistEmail.text.toString()
+            val registerPhoneNumber = binding.etRegistPhone.text.toString()
+            val registerCompanyName = binding.etRegistCompanyName.text.toString()
+            val registerCompanyPosition = binding.etRegistCompanyPosition.text.toString()
 
             if (registerPassword != confirmRegisterPassword){
                 Toast.makeText(this, "Password not match", Toast.LENGTH_LONG).show()
@@ -42,12 +47,12 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun saveData() {
-        val fullName = et_fullName.text.toString()
-        val registerEmail = et_registEmail.text.toString().toLowerCase()
-        val registerPassword = et_registPassword.text.toString()
-        val registerPhoneNumber = et_registPhone.text.toString()
-        val registerCompanyName = et_registCompany.text.toString()
-        val registerCompanyPosition = et_registCompanyPosition.text.toString()
+        val fullName = binding.etFullName.text.toString()
+        val registerEmail = binding.etRegistEmail.text.toString().toLowerCase()
+        val registerPassword = binding.etRegistPassword.text.toString()
+        val registerPhoneNumber = binding.etRegistPhone.text.toString()
+        val registerCompanyName = binding.etRegistCompanyName.text.toString()
+        val registerCompanyPosition = binding.etRegistCompanyPosition.text.toString()
         val sharedPrefData = getSharedPreferences("fullData", Context.MODE_PRIVATE)
         val editor = sharedPrefData.edit()
         editor.apply {

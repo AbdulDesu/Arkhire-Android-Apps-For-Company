@@ -1,145 +1,150 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#E5E5E5"
-    android:orientation="vertical"
     tools:context=".homepage.item.HomeFragment">
 
-
-    <RelativeLayout
-        android:id="@+id/relativeLayout2"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@drawable/bg_header"
-        android:gravity="center"
+        android:layout_height="match_parent"
+        android:background="#E5E5E5"
         android:orientation="vertical">
 
-
         <RelativeLayout
+            android:id="@+id/relativeLayout2"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="200dp"
+            android:background="@drawable/bg_header"
+            android:gravity="center"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tv_homeDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="85dp"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                tools:context="Today Date" />
 
-            <TextView
-                android:id="@+id/tv_userGreeting"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tv_homeDate"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="8dp"
-                android:textColor="@color/white"
-                android:textSize="23sp"
-                tools:context="Today Date" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/iv_notif_bell"
-                android:layout_width="26dp"
-                android:layout_height="26dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="85dp"
-                android:layout_marginRight="24dp"
-                android:src="@drawable/ic_notif_bell" />
+                <TextView
+                    android:id="@+id/tv_homeDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="85dp"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    tools:context="Today Date" />
+
+                <TextView
+                    android:id="@+id/tv_userGreeting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_homeDate"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="8dp"
+                    android:textColor="@color/white"
+                    android:textSize="23sp"
+                    tools:context="Today Date" />
+
+                <ImageView
+                    android:id="@+id/iv_notif_bell"
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="85dp"
+                    android:layout_marginRight="24dp"
+                    android:src="@drawable/ic_notif_bell" />
+            </RelativeLayout>
         </RelativeLayout>
-    </RelativeLayout>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/tv_androidDeveloperTalent"
-                android:layout_marginTop="28dp"
-                android:layout_marginStart="24dp"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:text="@string/android_developer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_androidDeveloperTalent"
-                android:background="#E5E5E5"
-                android:layout_marginTop="12dp"
-                android:layout_marginStart="12dp"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:orientation="vertical"
+                android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/tv_devOpsEngineerTalent"
-                android:layout_marginTop="28dp"
-                android:layout_marginStart="24dp"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:text="@string/dev_ops_engineer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/tv_androidDeveloperTalent"
+                    android:layout_marginTop="28dp"
+                    android:layout_marginStart="24dp"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:text="@string/android_developer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_devOpsEngineerTalent"
-                android:layout_marginTop="12dp"
-                android:layout_marginStart="12dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_androidDeveloperTalent"
+                    android:background="#E5E5E5"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
 
-            <TextView
-                android:id="@+id/tv_fullStackMobileTalent"
-                android:layout_marginTop="28dp"
-                android:layout_marginStart="24dp"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:text="@string/fullstack_mobile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/tv_devOpsEngineerTalent"
+                    android:layout_marginTop="28dp"
+                    android:layout_marginStart="24dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:text="@string/dev_ops_engineer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_fullStackMobileTalent"
-                android:layout_marginTop="12dp"
-                android:layout_marginStart="12dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_devOpsEngineerTalent"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
 
-            <TextView
-                android:id="@+id/tv_fullStackWebTalent"
-                android:layout_marginTop="28dp"
-                android:layout_marginStart="24dp"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:text="@string/fullstack_web"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/tv_fullStackMobileTalent"
+                    android:layout_marginTop="28dp"
+                    android:layout_marginStart="24dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:text="@string/fullstack_mobile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_fullStackWebTalent"
-                android:layout_marginTop="12dp"
-                android:layout_marginStart="12dp"
-                android:layout_marginBottom="48dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-        </LinearLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_fullStackMobileTalent"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
 
-    </ScrollView>
+                <TextView
+                    android:id="@+id/tv_fullStackWebTalent"
+                    android:layout_marginTop="28dp"
+                    android:layout_marginStart="24dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:text="@string/fullstack_web"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_fullStackWebTalent"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginBottom="48dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+        </ScrollView>
 
 
 
-</LinearLayout>
+    </LinearLayout>
+
+
+</layout>

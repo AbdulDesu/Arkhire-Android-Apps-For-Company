@@ -12,19 +12,25 @@
         tools:layout="@layout/fragment_splash_screen" >
         <action
             android:id="@+id/action_splashScreenFragment_to_welcomeViewPager"
-            app:destination="@id/welcomeViewPager" />
+            app:destination="@id/welcomeViewPager"
+            app:popUpTo="@id/welcomeViewPager"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_splashScreenFragment_to_loginActivity"
-            app:destination="@id/loginActivity" />
+            app:destination="@id/loginActivity"
+            app:popUpTo="@id/loginActivity"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/welcomeViewPager"
-        android:name="com.sizdev.arkhireforcompany.onboarding.WelcomeViewPager"
+        android:name="com.sizdev.arkhireforcompany.onboarding.WelcomeViewPagerFragment"
         android:label="fragment_welcome_view_pager"
         tools:layout="@layout/fragment_welcome_view_pager" >
         <action
             android:id="@+id/action_welcomeViewPager_to_loginActivity"
-            app:destination="@id/loginActivity" />
+            app:destination="@id/loginActivity"
+            app:popUpTo="@id/loginActivity"
+            app:popUpToInclusive="true" />
     </fragment>
     <activity
         android:id="@+id/loginActivity"

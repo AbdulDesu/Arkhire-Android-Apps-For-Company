@@ -5,25 +5,30 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
 import com.sizdev.arkhireforcompany.R
+import com.sizdev.arkhireforcompany.databinding.ActivityLoginBinding
 import com.sizdev.arkhireforcompany.homepage.HomeActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_register.*
 import java.util.*
 
 class LoginActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityLoginBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
 
         val sharedPrefData = this.getSharedPreferences("fullData", Context.MODE_PRIVATE)
         val registeredEmail = sharedPrefData.getString("companyEmail", null)
         val registeredPassword = sharedPrefData.getString("companyPassword", null)
 
 
-        bt_login.setOnClickListener {
-            val email = et_loginEmail.text.toString().toLowerCase()
-            val password = et_loginPassword.text.toString()
+        binding.btLogin.setOnClickListener {
+            val email = binding.etLoginEmail.text.toString().toLowerCase()
+            val password = binding.etLoginPassword.text.toString()
 
             if(email == registeredEmail && password == registeredPassword){
                 Toast.makeText(this, "Welcome Back", Toast.LENGTH_LONG).show()
@@ -44,12 +49,12 @@ class LoginActivity : AppCompatActivity() {
 
         }
 
-        tv_registerScreen.setOnClickListener {
+        binding.tvRegisterScreen.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }
 
-        tv_forgetPassword.setOnClickListener {
+        binding.tvForgetPassword.setOnClickListener {
             val intent = Intent(this, ForgetPasswordActivity::class.java)
             startActivity(intent)
         }

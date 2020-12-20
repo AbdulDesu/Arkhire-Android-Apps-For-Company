@@ -2,7 +2,9 @@ package com.sizdev.arkhireforcompany.homepage
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.databinding.DataBindingUtil
 import com.sizdev.arkhireforcompany.R
+import com.sizdev.arkhireforcompany.databinding.ActivityHomeBinding
 import com.sizdev.arkhireforcompany.homepage.item.AccountFragment
 import com.sizdev.arkhireforcompany.homepage.item.ChatFragment
 import com.sizdev.arkhireforcompany.homepage.item.HomeFragment
@@ -12,6 +14,8 @@ import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityHomeBinding
+
     lateinit var homeFragment: HomeFragment
     lateinit var projectFragment: ProjectFragment
     lateinit var chatFragment: ChatFragment
@@ -19,17 +23,17 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_home)
 
         //Launch Home Fragment At First
-        homeNavigationBar.setItemSelected(R.id.home)
+        binding.homeNavigationBar.setItemSelected(R.id.home)
         homeFragment = HomeFragment()
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.homeViewer, homeFragment)
             .commit()
 
-        homeNavigationBar.setOnItemSelectedListener { id ->
+        binding.homeNavigationBar.setOnItemSelectedListener { id ->
             when (id) {
                 R.id.home -> {
                     homeFragment = HomeFragment()

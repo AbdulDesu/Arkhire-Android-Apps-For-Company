@@ -30,8 +30,6 @@ class CompanyProfileActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMa
     private var defaultLocation = LatLng(-6.200000, 106.816666)
     private lateinit var markerDefault: Marker
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_company_profile)

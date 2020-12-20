@@ -1,190 +1,228 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     tools:context=".homepage.profile.CompanyProfileActivity">
 
-    <ImageView
-        android:id="@+id/iv_companyProfileCover"
-        android:layout_width="match_parent"
-        android:layout_height="170dp"
-        android:background="@color/primary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/profile_image"
-        android:layout_width="96dp"
-        android:layout_height="96dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="132dp"
-        android:src="@drawable/kiryusento"
-        app:civ_border_color="#FFFFFF"
-        app:civ_border_width="2dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tv_companyProfileName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="180dp"
-        android:layout_marginEnd="88dp"
-        android:text="PT. MIHOYO CO.LTD"
-        android:textColor="#0568FB"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tv_companyType"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
-        android:layout_marginEnd="140dp"
-        android:text="Enterprise Company"
-        android:textColor="#60A0FF"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/tv_companyProfileName"
-        app:layout_constraintTop_toBottomOf="@+id/tv_companyProfileName" />
-
-    <ImageView
-        android:id="@+id/iv_companyLinkedIn"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginTop="8dp"
-        android:src="@drawable/ic_linkedin"
-        app:layout_constraintEnd_toEndOf="@+id/tv_companyProfileName"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/tv_companyProfileName"
-        app:layout_constraintTop_toBottomOf="@+id/tv_companyType" />
-
-    <ImageView
-        android:id="@+id/iv_companyInstagram"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="6dp"
-        android:src="@drawable/ic_instagram"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_companyLinkedIn"
-        app:layout_constraintStart_toEndOf="@+id/iv_companyLinkedIn"
-        app:layout_constraintTop_toTopOf="@+id/iv_companyLinkedIn" />
-
-    <ImageView
-        android:id="@+id/iv_companyFacebook"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="6dp"
-        android:src="@drawable/ic_facebook"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_companyInstagram"
-        app:layout_constraintStart_toEndOf="@+id/iv_companyInstagram"
-        app:layout_constraintTop_toTopOf="@+id/iv_companyInstagram"
-        app:layout_constraintVertical_bias="0.0" />
-
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/profile_image"
-        app:layout_constraintTop_toBottomOf="@+id/profile_image">
-
-        <TextView
-            android:id="@+id/tv_companyLookingFor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/looking_for"
-            android:textColor="@color/black"
-            android:textSize="12sp" />
-
-        <ImageView
-            android:id="@+id/iv_helpLookingFor"
-            android:layout_width="14dp"
-            android:layout_height="14dp"
-            android:layout_gravity="center"
-            android:layout_marginStart="4dp"
-            android:src="@drawable/ic_help" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="match_parent"
-        android:layout_height="32dp"
-        android:layout_marginStart="27dp"
-        android:layout_marginEnd="27dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="@+id/linearLayout"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_companyLookingFor"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="27dp"
-        android:layout_marginEnd="27dp"
-        android:layout_marginTop="18dp"
         android:orientation="vertical"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/companyHeaderProfile"
+            android:layout_width="411dp"
+            android:layout_height="260dp">
+
+            <ImageView
+                android:id="@+id/iv_companyProfileCover"
+                android:layout_width="match_parent"
+                android:layout_height="170dp"
+                android:background="@color/primary"/>
 
             <LinearLayout
+                android:id="@+id/linearProfileCompanyPhoto"
+                android:layout_marginTop="130dp"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="96dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profile_image"
+                    android:layout_width="96dp"
+                    android:layout_height="96dp"
+                    android:layout_marginStart="28dp"
+                    android:src="@drawable/kiryusento"
+                    app:civ_border_color="#FFFFFF"
+                    app:civ_border_width="2dp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_companyProfileName"
+                android:layout_below="@id/iv_companyProfileCover"
+                android:layout_toEndOf="@id/linearProfileCompanyPhoto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:text="PT. MIHOYO CO.LTD"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="20sp"/>
+
+            <TextView
+                android:id="@+id/tv_companyType"
+                android:layout_below="@id/tv_companyProfileName"
+                android:layout_toEndOf="@id/linearProfileCompanyPhoto"
+                android:layout_marginStart="24dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Enterprise Company"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"/>
+
+            <LinearLayout
+                android:layout_below="@+id/tv_companyType"
+                android:layout_toEndOf="@id/linearProfileCompanyPhoto"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="4dp"
                 android:orientation="horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/tv_titleCompanyDescription"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/company_description"
-                    android:textColor="@color/black"
-                    android:textSize="12sp" />
                 <ImageView
-                    android:id="@+id/iv_helpCompanyDescription"
-                    android:layout_width="14dp"
-                    android:layout_height="14dp"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="4dp"
-                    android:src="@drawable/ic_help" />
+                    android:id="@+id/iv_companyLinkedIn"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_linkedin"/>
+
+                <ImageView
+                    android:id="@+id/iv_companyInstagram"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="6dp"
+                    android:src="@drawable/ic_instagram"/>
+
+                <ImageView
+                    android:id="@+id/iv_companyFacebook"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="6dp"
+                    android:src="@drawable/ic_facebook"/>
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/tv_companyDescription"
-                android:layout_marginTop="4dp"
-                android:lineSpacingExtra="6dp"
-                android:textSize="11sp"
-                android:justificationMode="inter_word"
-                android:layout_width="match_parent"
-                android:layout_height="190dp"/>
+        </RelativeLayout>
 
-            <FrameLayout
-                android:id="@+id/frameLayout"
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
                 android:layout_width="match_parent"
-                android:layout_height="220dp"
-                android:layout_marginBottom="36dp">
-                <androidx.fragment.app.FragmentContainerView
-                    android:id="@+id/map"
-                    android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/linearLayout"
+                    android:layout_marginTop="18dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_companyLookingFor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/looking_for"
+                        android:textColor="@color/black"
+                        android:textSize="13sp" />
+
+                    <ImageView
+                        android:id="@+id/iv_helpLookingFor"
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="4dp"
+                        android:src="@drawable/ic_help" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLayout3"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="32dp"
+                    android:layout_marginTop="8dp">
 
-            </FrameLayout>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_companyLookingFor"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
 
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/tv_titleCompanyDescription"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/company_description"
+                            android:textColor="@color/black"
+                            android:textSize="13sp" />
+                        <ImageView
+                            android:id="@+id/iv_helpCompanyDescription"
+                            android:layout_width="14dp"
+                            android:layout_height="14dp"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="4dp"
+                            android:src="@drawable/ic_help" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tv_companyDescription"
+                        android:layout_marginTop="4dp"
+                        android:lineSpacingExtra="6dp"
+                        android:textSize="11sp"
+                        android:justificationMode="inter_word"
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"/>
+
+                      <LinearLayout
+                        android:orientation="horizontal"
+                          android:layout_marginTop="8dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/tv_titleCompanyLocation"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/company_location"
+                            android:textColor="@color/black"
+                            android:textSize="13sp" />
+                        <ImageView
+                            android:id="@+id/iv_helpCompanyLocation"
+                            android:layout_width="14dp"
+                            android:layout_height="14dp"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="4dp"
+                            android:src="@drawable/ic_help" />
+
+                      </LinearLayout>
+
+
+                    <FrameLayout
+                        android:id="@+id/frameLayout"
+                        android:layout_marginTop="8dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="220dp">
+                        <androidx.fragment.app.FragmentContainerView
+                            android:id="@+id/map"
+                            android:name="com.google.android.gms.maps.SupportMapFragment"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                    </FrameLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            
+        </ScrollView>
+        
+        
     </LinearLayout>
 
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
