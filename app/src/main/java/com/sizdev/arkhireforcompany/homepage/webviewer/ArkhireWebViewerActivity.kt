@@ -24,7 +24,7 @@ class ArkhireWebViewerActivity : AppCompatActivity(), WebListener {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_arkhire_web_viewer)
 
-        binding.wvArkhireWebViewer.loadUrl("https://github.com/")
+        binding.wvArkhireWebViewer.loadUrl("https://github.com/KiryuuSento")
         binding.wvArkhireWebViewer.webChromeClient = ArkhireChromeClient(this)
         binding.wvArkhireWebViewer.webViewClient = ArkhireWebClient(this)
         binding.wvArkhireWebViewer.settings.javaScriptEnabled = true
