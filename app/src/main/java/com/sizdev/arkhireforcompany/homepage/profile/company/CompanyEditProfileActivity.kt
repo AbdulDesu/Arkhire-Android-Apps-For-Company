@@ -11,6 +11,7 @@ import android.location.Location
 import android.location.LocationManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -57,6 +58,7 @@ class CompanyEditProfileActivity : AppCompatActivity(), OnMapReadyCallback, Loca
         binding.btNewProfileDone.setOnClickListener {
             val intent = Intent(this, CompanyProfileActivity::class.java)
             updateCompanyData()
+            Toast.makeText(this, "Profile Updated", Toast.LENGTH_LONG).show()
             startActivity(intent)
             finish()
         }
