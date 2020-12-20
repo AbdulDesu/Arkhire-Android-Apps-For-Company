@@ -34,7 +34,7 @@
                     android:layout_width="96dp"
                     android:layout_height="96dp"
                     android:layout_marginStart="28dp"
-                    android:src="@drawable/kiryusento"
+                    android:src="@drawable/ic_traveloka"
                     app:civ_border_color="#FFFFFF"
                     app:civ_border_width="2dp" />
             </LinearLayout>
@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="8dp"
-                android:text="PT. MIHOYO CO.LTD"
+                android:text=""
                 android:gravity="center"
                 android:textColor="@color/black"
                 android:textSize="20sp"/>
@@ -59,7 +59,7 @@
                 android:layout_marginStart="24dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Enterprise Company"
+                android:text=""
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"/>
@@ -93,6 +93,19 @@
                     android:layout_marginStart="6dp"
                     android:src="@drawable/ic_facebook"/>
             </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/bt_editCompanyProfile"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/iv_companyProfileCover"
+                android:text="Edit"
+                android:textColor="@color/white"
+                android:layout_marginTop="49dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/round_bg"
+                android:textSize="12sp"
+                android:layout_width="65dp"
+                android:layout_height="30dp"/>
 
         </RelativeLayout>
 

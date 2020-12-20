@@ -1,6 +1,8 @@
 package com.sizdev.arkhireforcompany.homepage.profile.company
 
 
+import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -28,16 +30,38 @@ class CompanyProfileActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMa
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_company_profile)
 
+        val sharedPrefData = this.getSharedPreferences("fullData", Context.MODE_PRIVATE)
+        val sharedPrefDataLocation = this.getSharedPreferences("companyLocation", Context.MODE_PRIVATE)
+
+        //Get Company Data
+        val savedCompanyName = sharedPrefData.getString("companyName", "Traveloka ID")
+        val savedCompanyType = sharedPrefData.getString("companyType", "Enterprise Company")
+        val savedLocationLatitude = sharedPrefDataLocation.getString("latitude", null)
+        val savedLocationLongitude = sharedPrefDataLocation.getString("longitude", null)
         val lorem: String = getString(R.string.lorem_ipsum)
+
+        if(savedLocationLatitude !=null && savedLocationLongitude != null) {
+            defaultLocation = LatLng(savedLocationLatitude.toDouble(), savedLocationLongitude.toDouble())
+        }
+
+        binding.tvCompanyProfileName.text = savedCompanyName
+        binding.tvCompanyType.text = savedCompanyType
+        binding.tvCompanyDescription.text = lorem
 
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
+        //RecyclerViewAdapter Manager
         binding.rvCompanyLookingFor.adapter = CompanyLookingForAdapter()
         binding.rvCompanyLookingFor.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
 
-        binding.tvCompanyDescription.text = lorem
+
+
+        binding.btEditCompanyProfile.setOnClickListener {
+            val intent = Intent(this, CompanyEditProfileActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
@@ -47,7 +71,7 @@ class CompanyProfileActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMa
             markerDefault = googleMap.addMarker(
                 MarkerOptions()
                     .position(defaultLocation)
-                    .title("Company")
+                    .title(binding.tvCompanyProfileName.text as String?)
             )
             markerDefault.tag = 0
 

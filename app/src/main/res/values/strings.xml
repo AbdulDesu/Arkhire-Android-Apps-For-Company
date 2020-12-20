@@ -39,5 +39,13 @@
     <string name="yes">yes</string>
     <string name="no">no</string>
     <string name="make_call_with_this_talent">Make a call with this talent ?</string>
+    <string name="done">done</string>
+    <string name="github_nickname">http://github.com/</string>
+    <string name="edit_company_name">Company name</string>
+    <string name="edit_company_type">Company type</string>
+    <string name="id_linkedin_com_company">id.linkedin.com/company/</string>
+    <string name="www_instagram_com">www.instagram.com/</string>
+    <string name="web_facebook_com">web.facebook.com/</string>
+    <string name="update_location">Update Location</string>
 
 </resources>
