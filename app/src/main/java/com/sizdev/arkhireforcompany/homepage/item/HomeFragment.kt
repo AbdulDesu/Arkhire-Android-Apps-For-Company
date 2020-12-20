@@ -15,8 +15,6 @@ import com.sizdev.arkhireforcompany.homepage.AndroidDeveloperAdapter
 import com.sizdev.arkhireforcompany.homepage.DevOpsEngineerAdapter
 import com.sizdev.arkhireforcompany.homepage.FullStackMobileAdapter
 import com.sizdev.arkhireforcompany.homepage.FullStackWebAdapter
-import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.fragment_home.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 

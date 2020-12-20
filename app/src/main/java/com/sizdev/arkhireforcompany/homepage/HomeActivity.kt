@@ -9,8 +9,7 @@ import com.sizdev.arkhireforcompany.homepage.item.AccountFragment
 import com.sizdev.arkhireforcompany.homepage.item.ChatFragment
 import com.sizdev.arkhireforcompany.homepage.item.HomeFragment
 import com.sizdev.arkhireforcompany.homepage.item.ProjectFragment
-import kotlinx.android.synthetic.main.activity_home.*
-import kotlinx.android.synthetic.main.fragment_home.*
+
 
 class HomeActivity : AppCompatActivity() {
 

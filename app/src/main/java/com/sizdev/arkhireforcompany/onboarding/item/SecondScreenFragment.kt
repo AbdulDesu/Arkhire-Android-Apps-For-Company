@@ -10,7 +10,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import com.sizdev.arkhireforcompany.R
 import com.sizdev.arkhireforcompany.databinding.FragmentSecondScreenBinding
-import kotlinx.android.synthetic.main.fragment_second_screen.view.*
 
 
 class SecondScreenFragment : Fragment() {

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".homepage.profile.talent.PortofolioFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/iv_portofolio1"
+                    android:src="@drawable/portofolio1"
+                    android:layout_width="match_parent"
+                    android:layout_height="270dp"/>
+
+                <ImageView
+                    android:id="@+id/iv_portofolio2"
+                    android:src="@drawable/portofolio2"
+                    android:layout_marginTop="30dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="270dp"/>
+
+                <ImageView
+                    android:id="@+id/iv_portofolio3"
+                    android:src="@drawable/portofolio3"
+                    android:layout_marginTop="30dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="270dp"/>
+
+                <ImageView
+                    android:id="@+id/iv_portofolio4"
+                    android:src="@drawable/portofolio4"
+                    android:layout_marginTop="30dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="270dp"/>
+
+                <ImageView
+                    android:id="@+id/iv_portofolio5"
+                    android:src="@drawable/portofolio5"
+                    android:layout_marginTop="30dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="270dp"/>
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+
+    </LinearLayout>
+</layout>
+

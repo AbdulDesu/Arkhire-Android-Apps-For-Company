@@ -11,9 +11,7 @@ import androidx.databinding.DataBindingUtil
 import com.sizdev.arkhireforcompany.R
 import com.sizdev.arkhireforcompany.administration.LoginActivity
 import com.sizdev.arkhireforcompany.databinding.FragmentAccountBinding
-import com.sizdev.arkhireforcompany.homepage.profile.CompanyProfileActivity
-import kotlinx.android.synthetic.main.activity_company_profile.*
-import kotlinx.android.synthetic.main.fragment_account.view.*
+import com.sizdev.arkhireforcompany.homepage.profile.company.CompanyProfileActivity
 
 
 class AccountFragment : Fragment() {

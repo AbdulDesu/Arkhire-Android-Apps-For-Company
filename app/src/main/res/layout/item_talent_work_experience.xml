@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_marginBottom="14dp"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@drawable/ic_shopee"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="20dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"/>
+
+            <LinearLayout
+                android:layout_marginStart="28dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_workExperiencePosition"
+                    android:text="Front-End Developer"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="21dp"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/tv_workExperienceCompany"
+                    android:text="Shopee"
+                    android:textSize="12sp"
+                    android:textColor="@color/black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/tv_workExperienceYearRange"
+                    android:text="2019-2020"
+                    android:textSize="12sp"
+                    android:layout_marginTop="4dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/tv_workExperienceDescription"
+                    android:layout_marginTop="4dp"
+                    android:textSize="12sp"
+                    android:text="@string/lite_lorem_ipsum"
+                    android:justificationMode="inter_word"
+                    android:lineSpacingExtra="6dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

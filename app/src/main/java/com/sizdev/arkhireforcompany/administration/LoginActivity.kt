@@ -9,9 +9,7 @@ import androidx.databinding.DataBindingUtil
 import com.sizdev.arkhireforcompany.R
 import com.sizdev.arkhireforcompany.databinding.ActivityLoginBinding
 import com.sizdev.arkhireforcompany.homepage.HomeActivity
-import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.activity_register.*
-import java.util.*
+
 
 class LoginActivity : AppCompatActivity() {
 

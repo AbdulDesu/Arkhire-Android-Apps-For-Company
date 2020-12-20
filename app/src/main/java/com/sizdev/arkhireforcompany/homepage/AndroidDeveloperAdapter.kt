@@ -1,12 +1,15 @@
 package com.sizdev.arkhireforcompany.homepage
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.sizdev.arkhireforcompany.R
+import com.sizdev.arkhireforcompany.homepage.profile.talent.TalentProfileActivity
 
 class AndroidDeveloperAdapter : RecyclerView.Adapter<AndroidDeveloperAdapter.AndroidDeveloperTalentHolder>() {
 
@@ -26,9 +29,18 @@ class AndroidDeveloperAdapter : RecyclerView.Adapter<AndroidDeveloperAdapter.And
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: AndroidDeveloperTalentHolder, position: Int) {
+
+        holder.itemView.setOnClickListener {
+            val context = holder.tv_title.context
+            val intent = Intent(context, TalentProfileActivity::class.java )
+            context.startActivity(intent)
+        }
+
         holder.tv_name.text = listName[position]
         holder.tv_title.text = "Android Developer"
+
     }
 
     override fun getItemCount(): Int = listName.size
+
 }

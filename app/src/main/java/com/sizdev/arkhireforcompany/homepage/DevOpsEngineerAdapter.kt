@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.sizdev.arkhireforcompany.R
-import kotlinx.android.synthetic.main.item_devops_engineer_talent.view.*
 
 class DevOpsEngineerAdapter : RecyclerView.Adapter<DevOpsEngineerAdapter.DevopsEngineerTalentHolder>() {
 

@@ -33,5 +33,11 @@
     <string name="company_description">Company Description</string>
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut pulvinar porttitor arcu, in rhoncus libero ultricies eget. Nullam eget vulputate sapien, eu posuere metus. Praesent bibendum nisl at ultrices ullamcorper. In in pretium erat. Sed volutpat erat pulvinar tortor rutrum consectetur. Integer a ligula risus. Sed hendrerit sed augue vel elementum. Sed imperdiet tellus a quam mattis feugiat. Suspendisse turpis mauris, congue in neque eu, luctus vulputate quam. Suspendisse potenti. Donec pretium consequat urna ut tincidunt.</string>
     <string name="company_location">Company Location</string>
+    <string name="html_css"><![CDATA[html & css]]></string>
+    <string name="lite_lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas elit ligula, aliquam sed eros in, pretium malesuada elit. Cras euismod dictum placerat. Aliquam et mauris non metus venenatis malesuada. Nullam venenatis porta ipsum id tristique.</string>
+    <string name="are_you_sure_want_to_hire_this_talent">Are you sure want to hire this talent?</string>
+    <string name="yes">yes</string>
+    <string name="no">no</string>
+    <string name="make_call_with_this_talent">Make a call with this talent ?</string>
 
 </resources>

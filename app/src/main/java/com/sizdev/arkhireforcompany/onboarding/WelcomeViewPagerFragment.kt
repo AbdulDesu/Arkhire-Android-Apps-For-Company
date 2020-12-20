@@ -10,7 +10,6 @@ import com.sizdev.arkhireforcompany.R
 import com.sizdev.arkhireforcompany.databinding.FragmentWelcomeViewPagerBinding
 import com.sizdev.arkhireforcompany.onboarding.item.FirstScreenFragment
 import com.sizdev.arkhireforcompany.onboarding.item.SecondScreenFragment
-import kotlinx.android.synthetic.main.fragment_welcome_view_pager.view.*
 
 
 class WelcomeViewPagerFragment : Fragment() {
