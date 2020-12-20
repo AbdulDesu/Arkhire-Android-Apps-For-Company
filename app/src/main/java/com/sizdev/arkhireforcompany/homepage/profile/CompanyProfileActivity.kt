@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -22,17 +23,19 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.sizdev.arkhireforcompany.R
+import com.sizdev.arkhireforcompany.databinding.ActivityCompanyProfileBinding
 import kotlinx.android.synthetic.main.activity_company_profile.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 
 class CompanyProfileActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
+    private lateinit var binding: ActivityCompanyProfileBinding
     private var defaultLocation = LatLng(-6.200000, 106.816666)
     private lateinit var markerDefault: Marker
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_company_profile)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_company_profile)
 
         val lorem: String = getString(R.string.lorem_ipsum)
 
@@ -40,10 +43,10 @@ class CompanyProfileActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMa
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-        rv_companyLookingFor.adapter = CompanyLookingForAdapter()
-        rv_companyLookingFor.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
+        binding.rvCompanyLookingFor.adapter = CompanyLookingForAdapter()
+        binding.rvCompanyLookingFor.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
 
-        tv_companyDescription.text = lorem
+        binding.tvCompanyDescription.text = lorem
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
