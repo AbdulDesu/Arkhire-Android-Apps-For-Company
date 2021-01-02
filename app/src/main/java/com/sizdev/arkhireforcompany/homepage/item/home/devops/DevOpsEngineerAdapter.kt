@@ -1,4 +1,4 @@
-package com.sizdev.arkhireforcompany.homepage
+package com.sizdev.arkhireforcompany.homepage.item.home.devops
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -18,7 +18,7 @@ class DevOpsEngineerAdapter : RecyclerView.Adapter<DevOpsEngineerAdapter.DevopsE
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DevopsEngineerTalentHolder {
-        return DevOpsEngineerAdapter.DevopsEngineerTalentHolder(
+        return DevopsEngineerTalentHolder(
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_devops_engineer_talent, parent, false)
         )

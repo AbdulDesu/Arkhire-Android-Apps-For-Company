@@ -6,15 +6,26 @@
     android:layout_width="240dp"
     android:background="@drawable/item_bg"
     android:layout_marginEnd="12dp"
-    android:layout_height="285dp">
+    android:layout_height="245dp">
 
-    <ImageView
-        android:id="@+id/iv_fullStackWeb_talent_image"
-        android:layout_width="96dp"
-        android:layout_height="96dp"
-        android:layout_gravity="center"
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="22dp"
-        android:src="@drawable/kiryusento" />
+        app:cardCornerRadius="10dp"
+        android:elevation="12dp"
+        android:layout_gravity="center">
+
+        <ImageView
+            android:id="@+id/iv_fullStackWeb_talent_image"
+            android:layout_width="86dp"
+            android:layout_height="86dp"
+            android:scaleType="centerCrop"
+            android:layout_gravity="center"
+            android:src="@drawable/kiryusento" />
+
+    </androidx.cardview.widget.CardView>
+
 
     <TextView
         android:id="@+id/tv_fullStackWebTalentName"
@@ -40,7 +51,7 @@
 
     <LinearLayout
         android:gravity="center"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="10dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:orientation="horizontal"

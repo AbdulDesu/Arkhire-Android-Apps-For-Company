@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.sizdev.arkhireforcompany.R
 import com.sizdev.arkhireforcompany.databinding.FragmentWelcomeViewPagerBinding
+import com.sizdev.arkhireforcompany.onboarding.item.AdapterWelcome
 import com.sizdev.arkhireforcompany.onboarding.item.FirstScreenFragment
 import com.sizdev.arkhireforcompany.onboarding.item.SecondScreenFragment
 

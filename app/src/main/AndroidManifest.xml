@@ -31,11 +31,11 @@
             android:value="${mapsApiKey}" />
 
         <activity android:name=".homepage.profile.company.CompanyProfileActivity" />
-        <activity android:name=".administration.ForgetPasswordActivity" />
-        <activity android:name=".administration.RegisterActivity" />
-        <activity android:name=".administration.LoginActivity" />
+        <activity android:name=".administration.password.ForgetPasswordActivity" />
+        <activity android:name=".administration.register.RegisterActivity" />
+        <activity android:name=".administration.login.LoginActivity" />
         <activity android:name=".homepage.HomeActivity" />
-        <activity android:name=".onboarding.OnBoardActivity">
+        <activity android:name=".onboarding.OnBoardingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

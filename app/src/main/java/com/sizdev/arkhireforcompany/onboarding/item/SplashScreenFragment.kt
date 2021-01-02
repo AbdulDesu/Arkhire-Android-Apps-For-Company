@@ -1,4 +1,4 @@
-package com.sizdev.arkhireforcompany.onboarding
+package com.sizdev.arkhireforcompany.onboarding.item
 
 import android.content.Context
 import android.content.Intent
@@ -24,9 +24,13 @@ class SplashScreenFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_splash_screen, container, false)
+
+        val sharedPref = requireActivity().getSharedPreferences("Token", Context.MODE_PRIVATE)
+        val logedUser = sharedPref.getString("accID", null)
+
         Handler().postDelayed({
             if(onBoardingFinish()){
-                if (logedInSuccesfully()){
+                if (logedUser != null){
                     val intent = Intent(activity, HomeActivity::class.java)
                     startActivity(intent)
                     activity?.finish()
@@ -47,12 +51,4 @@ class SplashScreenFragment : Fragment() {
         val sharedPref = requireActivity().getSharedPreferences("onBoarding", Context.MODE_PRIVATE)
         return sharedPref.getBoolean("Complete", false)
     }
-
-    private fun logedInSuccesfully(): Boolean{
-        val sharedPref = requireActivity().getSharedPreferences("User", Context.MODE_PRIVATE)
-        return sharedPref.getBoolean("Login", false)
-    }
-
-
-
 }

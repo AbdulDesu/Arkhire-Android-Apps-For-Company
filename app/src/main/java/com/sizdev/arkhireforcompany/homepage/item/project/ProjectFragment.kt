@@ -1,4 +1,4 @@
-package com.sizdev.arkhireforcompany.homepage.item
+package com.sizdev.arkhireforcompany.homepage.item.project
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,19 +7,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.sizdev.arkhireforcompany.R
-import com.sizdev.arkhireforcompany.databinding.FragmentChatBinding
+import com.sizdev.arkhireforcompany.databinding.FragmentProjectBinding
 
+class ProjectFragment : Fragment() {
 
-class ChatFragment : Fragment() {
-
-    private lateinit var binding: FragmentChatBinding
+    private lateinit var binding: FragmentProjectBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_chat, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_project, container, false)
         return binding.root
     }
 

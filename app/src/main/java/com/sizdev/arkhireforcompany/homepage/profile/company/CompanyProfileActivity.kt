@@ -56,12 +56,11 @@ class CompanyProfileActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMa
         binding.rvCompanyLookingFor.adapter = CompanyLookingForAdapter()
         binding.rvCompanyLookingFor.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
 
-
-
         binding.btEditCompanyProfile.setOnClickListener {
             val intent = Intent(this, CompanyEditProfileActivity::class.java)
             startActivity(intent)
         }
+        
     }
 
     override fun onMapReady(googleMap: GoogleMap) {

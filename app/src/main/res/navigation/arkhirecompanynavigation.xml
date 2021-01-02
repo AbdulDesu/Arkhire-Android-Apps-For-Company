@@ -7,18 +7,18 @@
 
     <fragment
         android:id="@+id/splashScreenFragment"
-        android:name="com.sizdev.arkhireforcompany.onboarding.SplashScreenFragment"
+        android:name="com.sizdev.arkhireforcompany.onboarding.item.SplashScreenFragment"
         android:label="fragment_splash_screen"
         tools:layout="@layout/fragment_splash_screen" >
         <action
             android:id="@+id/action_splashScreenFragment_to_welcomeViewPager"
             app:destination="@id/welcomeViewPager"
-            app:popUpTo="@id/welcomeViewPager"
+            app:popUpTo="@id/splashScreenFragment"
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_splashScreenFragment_to_loginActivity"
             app:destination="@id/loginActivity"
-            app:popUpTo="@id/loginActivity"
+            app:popUpTo="@id/splashScreenFragment"
             app:popUpToInclusive="true" />
     </fragment>
     <fragment
@@ -29,12 +29,12 @@
         <action
             android:id="@+id/action_welcomeViewPager_to_loginActivity"
             app:destination="@id/loginActivity"
-            app:popUpTo="@id/loginActivity"
+            app:popUpTo="@id/welcomeViewPager"
             app:popUpToInclusive="true" />
     </fragment>
     <activity
         android:id="@+id/loginActivity"
-        android:name="com.sizdev.arkhireforcompany.administration.LoginActivity"
+        android:name="com.sizdev.arkhireforcompany.administration.login.LoginActivity"
         android:label="activity_login"
         tools:layout="@layout/activity_login" />
 </navigation>

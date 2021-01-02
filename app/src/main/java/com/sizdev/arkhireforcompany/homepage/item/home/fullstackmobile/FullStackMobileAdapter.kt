@@ -1,4 +1,4 @@
-package com.sizdev.arkhireforcompany.homepage
+package com.sizdev.arkhireforcompany.homepage.item.home.fullstackmobile
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater

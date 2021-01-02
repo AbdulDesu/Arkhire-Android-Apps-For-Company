@@ -1,4 +1,4 @@
-package com.sizdev.arkhireforcompany.administration
+package com.sizdev.arkhireforcompany.administration.register
 
 import android.content.Context
 import android.content.Intent

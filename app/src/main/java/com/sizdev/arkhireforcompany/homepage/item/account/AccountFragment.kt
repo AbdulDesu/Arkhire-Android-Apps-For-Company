@@ -1,4 +1,4 @@
-package com.sizdev.arkhireforcompany.homepage.item
+package com.sizdev.arkhireforcompany.homepage.item.account
 
 import android.content.Context
 import android.content.Intent
@@ -9,7 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.sizdev.arkhireforcompany.R
-import com.sizdev.arkhireforcompany.administration.LoginActivity
+import com.sizdev.arkhireforcompany.administration.login.LoginActivity
 import com.sizdev.arkhireforcompany.databinding.FragmentAccountBinding
 import com.sizdev.arkhireforcompany.homepage.profile.company.CompanyProfileActivity
 

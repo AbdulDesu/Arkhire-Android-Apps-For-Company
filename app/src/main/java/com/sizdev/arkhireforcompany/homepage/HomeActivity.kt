@@ -5,10 +5,10 @@ import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import com.sizdev.arkhireforcompany.R
 import com.sizdev.arkhireforcompany.databinding.ActivityHomeBinding
-import com.sizdev.arkhireforcompany.homepage.item.AccountFragment
-import com.sizdev.arkhireforcompany.homepage.item.ChatFragment
-import com.sizdev.arkhireforcompany.homepage.item.HomeFragment
-import com.sizdev.arkhireforcompany.homepage.item.ProjectFragment
+import com.sizdev.arkhireforcompany.homepage.item.account.AccountFragment
+import com.sizdev.arkhireforcompany.homepage.item.chat.ChatFragment
+import com.sizdev.arkhireforcompany.homepage.item.home.HomeFragment
+import com.sizdev.arkhireforcompany.homepage.item.project.ProjectFragment
 
 
 class HomeActivity : AppCompatActivity() {

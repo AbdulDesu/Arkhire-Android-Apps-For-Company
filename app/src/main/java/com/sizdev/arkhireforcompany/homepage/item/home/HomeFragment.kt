@@ -1,4 +1,4 @@
-package com.sizdev.arkhireforcompany.homepage.item
+package com.sizdev.arkhireforcompany.homepage.item.home
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -11,10 +11,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sizdev.arkhireforcompany.R
 import com.sizdev.arkhireforcompany.databinding.FragmentHomeBinding
-import com.sizdev.arkhireforcompany.homepage.AndroidDeveloperAdapter
-import com.sizdev.arkhireforcompany.homepage.DevOpsEngineerAdapter
-import com.sizdev.arkhireforcompany.homepage.FullStackMobileAdapter
-import com.sizdev.arkhireforcompany.homepage.FullStackWebAdapter
+import com.sizdev.arkhireforcompany.homepage.item.home.android.AndroidDeveloperAdapter
+import com.sizdev.arkhireforcompany.homepage.item.home.devops.DevOpsEngineerAdapter
+import com.sizdev.arkhireforcompany.homepage.item.home.fullstackmobile.FullStackMobileAdapter
+import com.sizdev.arkhireforcompany.homepage.item.home.fullstackweb.FullStackWebAdapter
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -46,7 +46,7 @@ class HomeFragment : Fragment() {
         }
         else {
             val lastName = nameSplitter?.get(1).toString()
-            binding.tvUserGreeting.text = "Check This out, $lastName"
+            binding.tvUserGreeting.text = "Check This out, ${lastName.capitalize()}"
         }
 
         binding.rvAndroidDeveloperTalent.adapter = AndroidDeveloperAdapter()

@@ -1,4 +1,4 @@
-package com.sizdev.arkhireforcompany.onboarding
+package com.sizdev.arkhireforcompany.onboarding.item
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

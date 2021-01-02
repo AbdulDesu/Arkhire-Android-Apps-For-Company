@@ -1,4 +1,4 @@
-package com.sizdev.arkhireforcompany.administration
+package com.sizdev.arkhireforcompany.administration.password
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
