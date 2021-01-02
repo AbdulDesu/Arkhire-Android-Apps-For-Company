@@ -1,4 +1,4 @@
-package com.sizdev.arkhireforcompany.homepage.profile.company
+package com.sizdev.arkhireforcompany.homepage.item.account.profile
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater

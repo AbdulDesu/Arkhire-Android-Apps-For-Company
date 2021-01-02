@@ -3,7 +3,7 @@
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".homepage.profile.talent.PortofolioFragment">
+    tools:context=".homepage.item.home.detailedtalent.PortofolioFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -13,7 +13,7 @@ import com.sizdev.arkhireforcompany.onboarding.item.FirstScreenFragment
 import com.sizdev.arkhireforcompany.onboarding.item.SecondScreenFragment
 
 
-class WelcomeViewPagerFragment : Fragment() {
+class SplashScreenFragment : Fragment() {
 
     private lateinit var binding: FragmentWelcomeViewPagerBinding
 

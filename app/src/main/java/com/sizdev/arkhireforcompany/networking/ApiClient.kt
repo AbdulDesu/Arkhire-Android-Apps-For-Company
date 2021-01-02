@@ -1,4 +1,4 @@
-package com.sizdev.arkhirefortalent.networking
+package com.sizdev.arkhireforcompany.networking
 
 import android.content.Context
 import okhttp3.OkHttpClient

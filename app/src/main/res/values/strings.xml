@@ -47,5 +47,8 @@
     <string name="www_instagram_com">www.instagram.com/</string>
     <string name="web_facebook_com">web.facebook.com/</string>
     <string name="update_location">Update Location</string>
+    <string name="back">back</string>
+    <string name="menu">menu</string>
+    <string name="_404_not_found">404 NOT FOUND</string>
 
 </resources>

@@ -1,4 +1,4 @@
-package com.sizdev.arkhireforcompany.homepage.profile.talent
+package com.sizdev.arkhireforcompany.homepage.item.home.detailedtalent
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

@@ -1,4 +1,4 @@
-package com.sizdev.arkhireforcompany.homepage.profile.company
+package com.sizdev.arkhireforcompany.homepage.item.account.profile
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -14,7 +14,6 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
-import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationListener
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.LatLng

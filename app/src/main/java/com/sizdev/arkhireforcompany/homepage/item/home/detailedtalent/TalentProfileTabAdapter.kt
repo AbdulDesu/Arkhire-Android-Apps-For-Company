@@ -1,10 +1,8 @@
-package com.sizdev.arkhirefortalent.homepage.profile
+package com.sizdev.arkhireforcompany.homepage.item.home.detailedtalent
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
-import com.sizdev.arkhireforcompany.homepage.profile.talent.PortofolioFragment
-import com.sizdev.arkhireforcompany.homepage.profile.talent.WorkExperienceFragment
 
 class TalentProfileTabAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT){
 

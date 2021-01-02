@@ -23,7 +23,7 @@
     </fragment>
     <fragment
         android:id="@+id/welcomeViewPager"
-        android:name="com.sizdev.arkhireforcompany.onboarding.WelcomeViewPagerFragment"
+        android:name="com.sizdev.arkhireforcompany.onboarding.SplashScreenFragment"
         android:label="fragment_welcome_view_pager"
         tools:layout="@layout/fragment_welcome_view_pager" >
         <action

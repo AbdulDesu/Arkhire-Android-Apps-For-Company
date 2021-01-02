@@ -6,25 +6,89 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".homepage.webviewer.ArkhireWebViewerActivity">
 
-    <LinearLayout
+    <RelativeLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/tb_arkhireBrowser"
+                    android:background="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:text="ARKHIRE"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:layout_centerInParent="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </RelativeLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
         <ProgressBar
             android:id="@+id/arkhireWebProgressBar"
-            android:layout_width="wrap_content"
+            android:layout_below="@id/toolbar"
+            android:layout_width="match_parent"
             android:layout_gravity="center"
             android:background="@null"
             android:indeterminate="true"
-            android:layout_height="50dp"/>
+            android:layout_height="wrap_content"/>
 
-        <WebView
-            android:id="@+id/wv_arkhireWebViewer"
+        <RelativeLayout
+            android:layout_below="@id/arkhireWebProgressBar"
+            android:background="@color/white"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent">
 
-    </LinearLayout>
+            <WebView
+                android:id="@+id/wv_arkhireWebViewer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <RelativeLayout
+                android:id="@+id/notFound"
+                android:visibility="invisible"
+                android:orientation="vertical"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/iv_notFound"
+                    android:src="@drawable/ic_search_company_not_found"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"/>
+
+                <TextView
+                    android:text="@string/_404_not_found"
+                    android:layout_marginTop="8dp"
+                    android:textSize="24sp"
+                    android:layout_below="@id/iv_notFound"
+                    android:layout_centerInParent="true"
+                    android:textColor="@color/black"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </RelativeLayout>
+            
+        </RelativeLayout>
+
+    </RelativeLayout>
 
 </layout>
-

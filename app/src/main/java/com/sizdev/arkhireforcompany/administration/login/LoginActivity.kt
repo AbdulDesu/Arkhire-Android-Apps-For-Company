@@ -11,7 +11,7 @@ import com.sizdev.arkhireforcompany.administration.register.RegisterActivity
 import com.sizdev.arkhireforcompany.administration.password.ForgetPasswordActivity
 import com.sizdev.arkhireforcompany.databinding.ActivityLoginBinding
 import com.sizdev.arkhireforcompany.homepage.HomeActivity
-import com.sizdev.arkhirefortalent.networking.ApiClient
+import com.sizdev.arkhireforcompany.networking.ApiClient
 import kotlinx.coroutines.*
 
 
@@ -68,7 +68,7 @@ class LoginActivity : AppCompatActivity() {
 
                 if (result.message == "Success Login!") {
 
-                    if(result.data?.privilege == "0"){
+                    if(result.data?.privilege == "1"){
                         Toast.makeText(this@LoginActivity, "Welcome Back !", Toast.LENGTH_SHORT).show()
 
                         // Save Token
