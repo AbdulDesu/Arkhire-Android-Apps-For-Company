@@ -49,6 +49,10 @@ class RegisterActivity : AppCompatActivity() {
                }
             }
         }
+
+        binding.tvBackLogin.setOnClickListener {
+            finish()
+        }
     }
 
     private fun startRegister(acName:String, acEmail:String, acPhone:String, password:String, privilege:Int, companyName: String, companyPosition: String) {
@@ -67,8 +71,6 @@ class RegisterActivity : AppCompatActivity() {
                 startActivity(intent)
                 finish()
             }
-
-
         }
     }
 
