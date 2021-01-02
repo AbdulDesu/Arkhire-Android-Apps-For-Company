@@ -70,8 +70,8 @@
                 android:paddingTop="2dp"
                 android:paddingBottom="2dp"
                 android:textColor="@color/white"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_width="70dp"
+                android:layout_height="23dp"/>
 
             <TextView
                 android:id="@+id/androidTalentSkill2"
@@ -84,8 +84,8 @@
                 android:paddingTop="2dp"
                 android:paddingBottom="2dp"
                 android:textColor="@color/white"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_width="70dp"
+                android:layout_height="23dp"/>
 
             <TextView
                 android:id="@+id/androidTalentSkill3"
@@ -98,8 +98,8 @@
                 android:paddingTop="2dp"
                 android:paddingBottom="2dp"
                 android:textColor="@color/white"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_width="70dp"
+                android:layout_height="23dp"/>
         </LinearLayout>
 
         <TextView

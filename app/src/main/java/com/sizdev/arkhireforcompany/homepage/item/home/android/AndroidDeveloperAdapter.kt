@@ -24,7 +24,11 @@ class AndroidDeveloperAdapter : RecyclerView.Adapter<AndroidDeveloperAdapter.And
     class AndroidDeveloperTalentHolder(val binding: ItemAndroidDeveloperTalentBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AndroidDeveloperTalentHolder {
-        return AndroidDeveloperTalentHolder(DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_android_developer_talent, parent, false))
+        return AndroidDeveloperTalentHolder(
+            DataBindingUtil.inflate(
+                LayoutInflater.from(parent.context),
+                R.layout.item_android_developer_talent,
+                parent, false))
     }
 
     @SuppressLint("SetTextI18n")

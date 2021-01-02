@@ -12,8 +12,6 @@ class HeaderInterceptor(context: Context) : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response = chain.run {
         val token = sharedPref.getString("accToken", null)
-        Log.d("token", "$token")
-
         proceed(
                 request().newBuilder()
                         .addHeader("Authorization", "Bearer $token")
