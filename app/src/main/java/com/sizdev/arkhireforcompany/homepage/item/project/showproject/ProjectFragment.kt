@@ -54,7 +54,7 @@ class ProjectFragment : Fragment() {
             if (result is ProjectResponse) {
                 Log.d("Arkhire Company", result.toString())
                 val list = result.data?.map{
-                    ProjectModel(it.offeringID, it.projectID, it.projectTitle, it.projectDuration, it.projectDesc, it.projectSalary, it.hiringStatus, it.repliedAt, it.replyMsg)
+                    ProjectModel(it.offeringID, it.projectID, it.projectTitle, it.projectDuration, it.projectDesc, it.projectSalary, it.hiringStatus, it.replyMsg, it.repliedAt)
                 }
 
                 (binding.rvProjectList.adapter as ProjectAdapter).addList(list)

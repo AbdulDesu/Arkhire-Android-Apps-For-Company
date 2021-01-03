@@ -10,7 +10,7 @@ import com.sizdev.arkhireforcompany.R
 
 class CompanyLookingForAdapter : RecyclerView.Adapter<CompanyLookingForAdapter.CompanyLookingForHolder>() {
 
-    val listInterest = listOf("Android Developer", "Devops Engineer")
+    val listInterest = listOf("Android Developer", "Devops Engineer", "Fullstack Mobile", "Fullstack web")
 
     class CompanyLookingForHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         var tv_lookingfor:TextView = itemView.findViewById(R.id.iv_lookingFor)
