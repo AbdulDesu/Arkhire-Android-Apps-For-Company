@@ -12,6 +12,7 @@ import com.sizdev.arkhireforcompany.R
 import com.sizdev.arkhireforcompany.databinding.ItemFullstackWebTalentBinding
 import com.sizdev.arkhireforcompany.homepage.item.home.detailedtalent.TalentProfileActivity
 import com.sizdev.arkhireforcompany.homepage.item.home.fullstackmobile.FullStackMobileAdapter
+import com.squareup.picasso.Picasso
 
 class FullStackWebAdapter : RecyclerView.Adapter<FullStackWebAdapter.FullStackWebTalentHolder>() {
     private var items = mutableListOf<FullStackWebModel>()
@@ -44,6 +45,11 @@ class FullStackWebAdapter : RecyclerView.Adapter<FullStackWebAdapter.FullStackWe
         holder.binding.fullStackWebTalentSkill1.text = item.talentSkill1
         holder.binding.fullStackWebTalentSkill2.text = item.talentSkill2
         holder.binding.fullStackWebTalentSkill3.text = item.talentSkill3
+        Picasso.get()
+                .load("http://54.82.81.23:911/image/${item.talentImage}")
+                .resize(86, 86)
+                .centerCrop()
+                .into(holder.binding.ivFullStackWebTalentImage)
 
         holder.itemView.setOnClickListener {
             val context = holder.binding.itemFullStackWebHolder.context

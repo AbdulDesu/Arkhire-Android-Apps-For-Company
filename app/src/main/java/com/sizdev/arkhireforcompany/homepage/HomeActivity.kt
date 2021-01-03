@@ -8,7 +8,7 @@ import com.sizdev.arkhireforcompany.databinding.ActivityHomeBinding
 import com.sizdev.arkhireforcompany.homepage.item.account.AccountFragment
 import com.sizdev.arkhireforcompany.homepage.item.chat.ChatFragment
 import com.sizdev.arkhireforcompany.homepage.item.home.HomeFragment
-import com.sizdev.arkhireforcompany.homepage.item.project.ProjectFragment
+import com.sizdev.arkhireforcompany.homepage.item.project.showproject.ProjectFragment
 
 
 class HomeActivity : AppCompatActivity() {

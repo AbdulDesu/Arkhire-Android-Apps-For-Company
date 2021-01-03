@@ -20,7 +20,7 @@
         android:usesCleartextTraffic="true"
         android:theme="@style/Theme.ArkhireCompany">
         <activity android:name=".homepage.item.account.profile.CompanyEditProfileActivity" />
-        <activity android:name=".homepage.item.home.detailedtalent.CreateProjectActivity" />
+        <activity android:name=".homepage.item.project.createproject.CreateProjectActivity" />
         <activity android:name=".homepage.webviewer.ArkhireWebViewerActivity" />
         <activity android:name=".homepage.item.home.detailedtalent.TalentProfileActivity" />
 

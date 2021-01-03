@@ -3,7 +3,7 @@
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".homepage.item.project.ProjectFragment">
+    tools:context=".homepage.item.project.showproject.ProjectFragment">
 
     <FrameLayout
         android:layout_width="match_parent"

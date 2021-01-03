@@ -1,4 +1,4 @@
-package com.sizdev.arkhireforcompany.homepage.item.project
+package com.sizdev.arkhireforcompany.homepage.item.project.showproject
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sizdev.arkhireforcompany.R
 import com.sizdev.arkhireforcompany.databinding.ItemDevopsEngineerTalentBinding
 import com.sizdev.arkhireforcompany.homepage.item.home.detailedtalent.TalentProfileActivity
+import com.squareup.picasso.Picasso
 
 
 class DevOpsEngineerAdapter : RecyclerView.Adapter<DevOpsEngineerAdapter.DevopsEngineerTalentHolder>() {
@@ -41,6 +42,11 @@ class DevOpsEngineerAdapter : RecyclerView.Adapter<DevOpsEngineerAdapter.DevopsE
         holder.binding.devopsTalentSkill1.text = item.talentSkill1
         holder.binding.devopsTalentSkill2.text = item.talentSkill2
         holder.binding.devopsTalentSkill3.text = item.talentSkill3
+        Picasso.get()
+                .load("http://54.82.81.23:911/image/${item.talentImage}")
+                .resize(86, 86)
+                .centerCrop()
+                .into(holder.binding.ivDevOpsEngineerTalentImage)
 
         holder.itemView.setOnClickListener {
             val context = holder.binding.itemDevOpsEngineerHolder.context

@@ -11,6 +11,7 @@ import com.sizdev.arkhireforcompany.R
 import com.sizdev.arkhireforcompany.databinding.ItemFullstackMobileTalentBinding
 import com.sizdev.arkhireforcompany.homepage.item.home.detailedtalent.TalentProfileActivity
 import com.sizdev.arkhireforcompany.homepage.item.home.devops.DevOpsEngineerAdapter
+import com.squareup.picasso.Picasso
 
 class FullStackMobileAdapter : RecyclerView.Adapter<FullStackMobileAdapter.FullStackMobileTalentHolder>() {
     private var items = mutableListOf<FullStackMobileModel>()
@@ -44,6 +45,11 @@ class FullStackMobileAdapter : RecyclerView.Adapter<FullStackMobileAdapter.FullS
         holder.binding.fullStackMobileTalentSkill1.text = item.talentSkill1
         holder.binding.fullStackMobileTalentSkill2.text = item.talentSkill2
         holder.binding.fullStackMobileTalentSkill3.text = item.talentSkill3
+        Picasso.get()
+                .load("http://54.82.81.23:911/image/${item.talentImage}")
+                .resize(86, 86)
+                .centerCrop()
+                .into(holder.binding.ivFullStackMobileTalentImage)
 
         holder.itemView.setOnClickListener {
             val context = holder.binding.itemFullStackMobileHolder.context

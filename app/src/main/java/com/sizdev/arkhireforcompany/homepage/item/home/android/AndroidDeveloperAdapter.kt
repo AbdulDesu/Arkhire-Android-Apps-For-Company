@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sizdev.arkhireforcompany.R
 import com.sizdev.arkhireforcompany.databinding.ItemAndroidDeveloperTalentBinding
 import com.sizdev.arkhireforcompany.homepage.item.home.detailedtalent.TalentProfileActivity
+import com.squareup.picasso.Picasso
 
 class AndroidDeveloperAdapter : RecyclerView.Adapter<AndroidDeveloperAdapter.AndroidDeveloperTalentHolder>() {
     private var items = mutableListOf<AndroidDeveloperModel>()
@@ -39,6 +40,11 @@ class AndroidDeveloperAdapter : RecyclerView.Adapter<AndroidDeveloperAdapter.And
         holder.binding.androidTalentSkill1.text = item.talentSkill1
         holder.binding.androidTalentSkill2.text = item.talentSkill2
         holder.binding.androidTalentSkill3.text = item.talentSkill3
+        Picasso.get()
+                .load("http://54.82.81.23:911/image/${item.talentImage}")
+                .resize(86, 86)
+                .centerCrop()
+                .into(holder.binding.ivAndroidDeveloperTalentImage)
 
         holder.itemView.setOnClickListener {
             val context = holder.binding.itemAndroidDeveloperHolder.context

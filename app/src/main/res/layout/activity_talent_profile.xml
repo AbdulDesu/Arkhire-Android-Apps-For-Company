@@ -61,7 +61,7 @@
                 android:layout_height="96dp">
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/talentImage"
+                    android:id="@+id/iv_talentImageProfile"
                     android:layout_marginStart="28dp"
                     android:layout_width="96dp"
                     android:layout_height="96dp"
@@ -220,6 +220,7 @@
                         android:id="@+id/tv_profileTalentDesc"
                         android:layout_width="match_parent"
                         android:layout_height="150dp"
+                        android:maxLength="480"
                         android:justificationMode="inter_word"
                         android:lineSpacingExtra="6dp"
                         android:textSize="11sp" />
