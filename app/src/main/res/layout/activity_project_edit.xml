@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".homepage.item.project.showproject.editproject.ProjectEditActivity">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <View
+                android:id="@+id/topView"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:background="@color/primary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_editProject"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="32dp"
+                android:text="Editing A Project"
+                android:textColor="@color/white"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </RelativeLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/et_projectTitle"
+                    android:layout_width="349dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="28dp"
+                    android:layout_marginEnd="32dp"
+                    android:background="@drawable/bg_editlongtext"
+                    android:drawablePadding="16dp"
+                    android:ems="10"
+                    android:hint="Project Title"
+                    android:textSize="16sp"
+                    android:padding="16dp" />
+
+                <EditText
+                    android:id="@+id/et_projectDuration"
+                    android:layout_width="349dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="32dp"
+                    android:background="@drawable/bg_editlongtext"
+                    android:drawablePadding="16dp"
+                    android:ems="10"
+                    android:hint="Project Duration"
+                    android:textSize="16sp"
+                    android:padding="16dp" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginEnd="32dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:src="@drawable/ic_rupiah"
+                        android:layout_width="54dp"
+                        android:scaleType="centerCrop"
+                        android:layout_height="match_parent"/>
+
+                    <EditText
+                        android:id="@+id/et_projectSalary"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_editlongtext"
+                        android:ems="10"
+                        android:hint="6.000.000"
+                        android:textSize="16sp"
+                        android:padding="16dp" />
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/et_projectDesc"
+                    android:layout_width="349dp"
+                    android:layout_height="130dp"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="32dp"
+                    android:background="@drawable/bg_editlongtext"
+                    android:padding="2dp"
+                    android:drawablePadding="16dp"
+                    android:gravity="start"
+                    android:ems="10"
+                    android:maxLength="500"
+                    android:hint="Tell Talent About This Project (Max. 500)"
+                    android:textSize="14sp" />
+
+                <android.widget.Button
+                    android:id="@+id/bt_updateProjectDone"
+                    android:layout_width="349dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/round_bg"
+                    android:text="@string/done"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </ScrollView>
+
+
+    </LinearLayout>
+
+</layout>

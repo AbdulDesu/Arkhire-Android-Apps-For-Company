@@ -1,4 +1,4 @@
-package com.sizdev.arkhireforcompany.homepage.webviewer
+package com.sizdev.arkhireforcompany.webviewer
 
 import android.annotation.SuppressLint
 import android.graphics.Bitmap

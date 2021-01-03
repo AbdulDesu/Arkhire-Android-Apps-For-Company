@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/item_list_project_holder"
+        android:layout_marginBottom="12dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        app:cardCornerRadius="8dp"
+        android:elevation="28dp"
+        android:layout_width="match_parent"
+        android:layout_height="130dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv_projectTitle"
+                android:text="Project Title"
+                android:textColor="@color/black"
+                android:layout_marginTop="12dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:textSize="18sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/tv_projectDuration"
+                android:layout_below="@id/tv_projectTitle"
+                android:textSize="12sp"
+                android:text="Project Duration"
+                android:layout_marginTop="4dp"
+                android:layout_marginStart="32dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/tv_projectSalary"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="32dp"
+                android:layout_marginBottom="15dp"
+                android:text="Rp. x.xxx.xxx"
+                android:textSize="12sp"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"/>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="8dp"
+                android:elevation="12dp"
+                android:layout_marginEnd="18dp"
+                android:layout_marginBottom="12dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true">
+
+                <ImageView
+                    android:id="@+id/iv_projectStatus"
+                    android:scaleType="centerCrop"
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"/>
+
+            </androidx.cardview.widget.CardView>
+
+
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+</layout>

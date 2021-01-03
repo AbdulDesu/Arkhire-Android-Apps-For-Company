@@ -17,7 +17,7 @@ import androidx.databinding.DataBindingUtil
 import com.sizdev.arkhireforcompany.R
 import com.sizdev.arkhireforcompany.databinding.ActivityTalentProfileBinding
 import com.sizdev.arkhireforcompany.homepage.item.project.createproject.CreateProjectActivity
-import com.sizdev.arkhireforcompany.homepage.webviewer.ArkhireWebViewerActivity
+import com.sizdev.arkhireforcompany.webviewer.ArkhireWebViewerActivity
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.alert_call_confirmation.view.*
 import kotlinx.android.synthetic.main.alert_hiring_confirmation.view.*
@@ -68,7 +68,7 @@ class TalentProfileActivity : AppCompatActivity() {
         binding.tvTitleProfileTalentSkill5.text = talentSkill5
         Picasso.get()
                 .load("http://54.82.81.23:911/image/$talentImage")
-                .resize(86, 86)
+                .resize(512, 512)
                 .centerCrop()
                 .into(binding.ivTalentImageProfile)
 

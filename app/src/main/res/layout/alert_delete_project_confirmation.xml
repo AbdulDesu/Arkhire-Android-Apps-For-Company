@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="18dp"
+        android:src="@drawable/ic_attention"
+        android:layout_width="150dp"
+        android:layout_height="150dp"/>
+
+    <TextView
+        android:id="@+id/tv_confirmationAlert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_gravity="center"
+        android:text="ARE YOU SURE WANT TO DELETE THIS ?"
+        android:textSize="18sp"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:text="Changes can't be Reverted / Restored"
+        android:textSize="11sp"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <RelativeLayout
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="24dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <android.widget.Button
+            android:id="@+id/bt_yesDelete"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:background="@color/primary"
+            android:text="Yes"
+            android:textColor="@color/white"/>
+
+        <android.widget.Button
+            android:id="@+id/bt_noDelete"
+            android:layout_toEndOf="@id/bt_yesDelete"
+            android:layout_marginStart="50dp"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:background="@color/primary"
+            android:text="No"
+            android:textColor="@color/white"/>
+
+    </RelativeLayout>
+
+
+</LinearLayout>

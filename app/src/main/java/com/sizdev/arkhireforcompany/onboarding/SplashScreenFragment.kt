@@ -1,43 +1,54 @@
 package com.sizdev.arkhireforcompany.onboarding
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
 import com.sizdev.arkhireforcompany.R
-import com.sizdev.arkhireforcompany.databinding.FragmentWelcomeViewPagerBinding
-import com.sizdev.arkhireforcompany.onboarding.item.AdapterWelcome
-import com.sizdev.arkhireforcompany.onboarding.item.FirstScreenFragment
-import com.sizdev.arkhireforcompany.onboarding.item.SecondScreenFragment
-
+import com.sizdev.arkhireforcompany.databinding.FragmentSplashScreenBinding
+import com.sizdev.arkhireforcompany.homepage.HomeActivity
 
 class SplashScreenFragment : Fragment() {
 
-    private lateinit var binding: FragmentWelcomeViewPagerBinding
+    private lateinit var binding: FragmentSplashScreenBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_welcome_view_pager, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_splash_screen, container, false)
 
-        val fragmentList = arrayListOf<Fragment>(
-            FirstScreenFragment(),
-            SecondScreenFragment(),
-        )
+        val sharedPref = requireActivity().getSharedPreferences("Token", Context.MODE_PRIVATE)
+        val logedUser = sharedPref.getString("accID", null)
 
-        val adapter = AdapterWelcome(
-            fragmentList,
-            requireActivity().supportFragmentManager,
-            lifecycle
-        )
+        Handler().postDelayed({
+            if(onBoardingFinish()){
+                if (logedUser != null){
+                    val intent = Intent(activity, HomeActivity::class.java)
+                    startActivity(intent)
+                    activity?.finish()
+                }
+                else{
+                    findNavController().navigate(R.id.action_splashScreenFragment_to_loginActivity)
+                }
+            }
+            else{
+                findNavController().navigate(R.id.action_splashScreenFragment_to_welcomeViewPager)
+            }
+        }, 3000)
 
-        binding.welcomeViewPager.adapter = adapter
         return binding.root
     }
 
-
+    private fun onBoardingFinish(): Boolean{
+        val sharedPref = requireActivity().getSharedPreferences("onBoarding", Context.MODE_PRIVATE)
+        return sharedPref.getBoolean("Complete", false)
+    }
 }

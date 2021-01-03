@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".homepage.item.project.showproject.detailproject.ProjectDetailActivity">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:background="#E5E5E5"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/tb_detailsProject"
+                    android:background="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:text="DETAILS"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:layout_centerInParent="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </RelativeLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:text="Project Name :"/>
+
+            <TextView
+                android:id="@+id/tv_projecTitle"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="4dp"
+                android:text="Lorem ipsum dolor sid amed"
+                android:textSize="14sp"
+                android:background="@color/white"
+                android:padding="4dp"
+                android:layout_width="match_parent"
+                android:layout_height="28dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:text="Project Duration :"/>
+
+            <TextView
+                android:id="@+id/tv_projectDuration"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="4dp"
+                android:text="Lorem ipsum dolor sid amed"
+                android:textSize="14sp"
+                android:background="@color/white"
+                android:padding="4dp"
+                android:layout_width="match_parent"
+                android:layout_height="28dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:text="Project Salary :"/>
+
+            <TextView
+                android:id="@+id/tv_projectSalary"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="4dp"
+                android:text="Lorem ipsum dolor sid amed"
+                android:textSize="14sp"
+                android:background="@color/white"
+                android:padding="4dp"
+                android:layout_width="match_parent"
+                android:layout_height="28dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:text="Project Status :"/>
+
+            <TextView
+                android:id="@+id/tv_projectStatus"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="4dp"
+                android:text="Lorem ipsum dolor sid amed"
+                android:textSize="14sp"
+                android:background="@color/white"
+                android:padding="4dp"
+                android:layout_width="match_parent"
+                android:layout_height="28dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:text="Project Desc :"/>
+
+            <TextView
+                android:id="@+id/tv_projectDesc"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="4dp"
+                android:text="Lorem ipsum dolor sid amed"
+                android:textSize="14sp"
+                android:background="@color/white"
+                android:padding="4dp"
+                android:maxLength="300"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"/>
+
+            <LinearLayout
+                android:id="@+id/ln_replyMessage"
+                android:orientation="vertical"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:text="Reply Message :"/>
+
+                <TextView
+                    android:id="@+id/tv_projectReplyMsg"
+                    android:layout_marginTop="4dp"
+                    android:text="Lorem ipsum dolor sid amed"
+                    android:textSize="14sp"
+                    android:background="@color/white"
+                    android:padding="4dp"
+                    android:maxLength="300"
+                    android:layout_width="match_parent"
+                    android:layout_height="28dp"/>
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/tv_projectEdit"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="28dp"
+                android:text="EDIT PROJECT"
+                android:textSize="16sp"
+                android:textColor="@color/primary"
+                android:gravity="center_vertical|center_horizontal"
+                android:background="@color/white"
+                android:maxLength="300"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"/>
+
+            <TextView
+                android:id="@+id/tv_projectDelete"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="10dp"
+                android:text="DELETE PROJECT"
+                android:textSize="16sp"
+                android:textColor="#FF0000"
+                android:gravity="center_vertical|center_horizontal"
+                android:background="@color/white"
+                android:maxLength="300"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"/>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</layout>

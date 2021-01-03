@@ -17,11 +17,13 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/Theme.ArkhireCompany">
+        android:theme="@style/Theme.ArkhireCompany"
+        android:usesCleartextTraffic="true">
+        <activity android:name="com.sizdev.arkhireforcompany.homepage.item.project.showproject.editproject.ProjectEditActivity"></activity>
+        <activity android:name="com.sizdev.arkhireforcompany.homepage.item.project.showproject.detailproject.ProjectDetailActivity" />
         <activity android:name=".homepage.item.account.profile.CompanyEditProfileActivity" />
         <activity android:name=".homepage.item.project.createproject.CreateProjectActivity" />
-        <activity android:name=".homepage.webviewer.ArkhireWebViewerActivity" />
+        <activity android:name=".webviewer.ArkhireWebViewerActivity" />
         <activity android:name=".homepage.item.home.detailedtalent.TalentProfileActivity" />
 
         <meta-data
