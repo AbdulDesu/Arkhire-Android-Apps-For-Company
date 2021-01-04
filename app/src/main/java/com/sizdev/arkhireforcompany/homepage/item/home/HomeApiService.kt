@@ -1,5 +1,6 @@
 package com.sizdev.arkhireforcompany.homepage.item.home
 
+import com.sizdev.arkhireforcompany.homepage.item.home.alltalent.ShowAllTalentResponse
 import com.sizdev.arkhireforcompany.homepage.item.home.android.AndroidDeveloperResponse
 import com.sizdev.arkhireforcompany.homepage.item.home.devops.DevOpsEngineerResponse
 import com.sizdev.arkhireforcompany.homepage.item.home.fullstackmobile.FullStackMobileResponse
@@ -11,6 +12,9 @@ interface HomeApiService {
 
     @GET("/account/{accountID}")
     suspend fun getAccountResponse(@Path("accountID") accountID: String): HomeResponse
+
+    @GET("/talent/filter/name")
+    suspend fun getAllTalentResponse(): ShowAllTalentResponse
 
     @GET("/talent/filter/title?search=Android Developer")
     suspend fun getTalentAndroidResponse(): AndroidDeveloperResponse

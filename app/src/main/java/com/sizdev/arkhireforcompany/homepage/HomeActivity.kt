@@ -2,6 +2,8 @@ package com.sizdev.arkhireforcompany.homepage
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.sizdev.arkhireforcompany.R
 import com.sizdev.arkhireforcompany.databinding.ActivityHomeBinding
@@ -14,6 +16,7 @@ import com.sizdev.arkhireforcompany.homepage.item.project.showproject.ProjectFra
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHomeBinding
+    private var doubleBackToExitPressedOnce = false
 
     lateinit var homeFragment: HomeFragment
     lateinit var projectFragment: ProjectFragment
@@ -69,4 +72,20 @@ class HomeActivity : AppCompatActivity() {
             true
         }
     }
+
+    override fun onBackPressed() {
+
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed()
+            return
+        }
+
+        this.doubleBackToExitPressedOnce = true
+        Toast.makeText(this, "Tap back again to exit from apps", Toast.LENGTH_SHORT).show()
+
+        Handler().postDelayed(Runnable {
+            doubleBackToExitPressedOnce = false
+        }, 2000)
+    }
+
 }

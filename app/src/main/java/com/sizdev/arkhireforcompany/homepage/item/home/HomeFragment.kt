@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sizdev.arkhireforcompany.R
 import com.sizdev.arkhireforcompany.administration.login.LoginActivity
 import com.sizdev.arkhireforcompany.databinding.FragmentHomeBinding
+import com.sizdev.arkhireforcompany.homepage.item.home.alltalent.ShowAllTalentActivity
 import com.sizdev.arkhireforcompany.homepage.item.home.android.AndroidDeveloperAdapter
 import com.sizdev.arkhireforcompany.homepage.item.home.android.AndroidDeveloperModel
 import com.sizdev.arkhireforcompany.homepage.item.home.android.AndroidDeveloperResponse
@@ -81,6 +82,11 @@ class HomeFragment : Fragment() {
         showFullStackWebTalent()
         binding.rvFullStackWebTalent.adapter = FullStackWebAdapter()
         binding.rvFullStackWebTalent.layoutManager = LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false)
+
+        binding.laShowAllTalent.setOnClickListener {
+            val intent = Intent(activity, ShowAllTalentActivity::class.java)
+            startActivity(intent)
+        }
 
         return binding.root
     }
