@@ -6,7 +6,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.widget.SearchView
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -16,19 +15,15 @@ import com.sizdev.arkhireforcompany.R
 import com.sizdev.arkhireforcompany.administration.login.LoginActivity
 import com.sizdev.arkhireforcompany.databinding.FragmentHomeBinding
 import com.sizdev.arkhireforcompany.homepage.item.home.android.AndroidDeveloperAdapter
-import com.sizdev.arkhireforcompany.homepage.item.home.android.AndroidDeveloperApiService
 import com.sizdev.arkhireforcompany.homepage.item.home.android.AndroidDeveloperModel
 import com.sizdev.arkhireforcompany.homepage.item.home.android.AndroidDeveloperResponse
 import com.sizdev.arkhireforcompany.homepage.item.home.devops.DevOpsEngineerAdapter
-import com.sizdev.arkhireforcompany.homepage.item.home.devops.DevOpsEngineerApiService
 import com.sizdev.arkhireforcompany.homepage.item.home.devops.DevOpsEngineerModel
 import com.sizdev.arkhireforcompany.homepage.item.home.devops.DevOpsEngineerResponse
 import com.sizdev.arkhireforcompany.homepage.item.home.fullstackmobile.FullStackMobileAdapter
-import com.sizdev.arkhireforcompany.homepage.item.home.fullstackmobile.FullStackMobileApiService
 import com.sizdev.arkhireforcompany.homepage.item.home.fullstackmobile.FullStackMobileModel
 import com.sizdev.arkhireforcompany.homepage.item.home.fullstackmobile.FullStackMobileResponse
 import com.sizdev.arkhireforcompany.homepage.item.home.fullstackweb.FullStackWebAdapter
-import com.sizdev.arkhireforcompany.homepage.item.home.fullstackweb.FullStackWebApiService
 import com.sizdev.arkhireforcompany.homepage.item.home.fullstackweb.FullStackWebModel
 import com.sizdev.arkhireforcompany.homepage.item.home.fullstackweb.FullStackWebResponse
 import com.sizdev.arkhireforcompany.networking.ApiClient
@@ -45,10 +40,6 @@ class HomeFragment : Fragment() {
     private lateinit var dialog: AlertDialog
     private lateinit var coroutineScope: CoroutineScope
     private lateinit var service: HomeApiService
-    private lateinit var serviceAndroidDeveloper: AndroidDeveloperApiService
-    private lateinit var serviceDevOpsEngineer: DevOpsEngineerApiService
-    private lateinit var serviceFullStackMobile: FullStackMobileApiService
-    private lateinit var serviceFullStackWeb: FullStackWebApiService
 
     @SuppressLint("SimpleDateFormat", "WeekBasedYear", "SetTextI18n")
     override fun onCreateView(
@@ -59,10 +50,6 @@ class HomeFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
         coroutineScope = CoroutineScope(Job() + Dispatchers.Main)
         service = ApiClient.getApiClient(requireActivity())!!.create(HomeApiService::class.java)
-        serviceAndroidDeveloper = ApiClient.getApiClient(requireActivity())!!.create(AndroidDeveloperApiService::class.java)
-        serviceDevOpsEngineer = ApiClient.getApiClient(requireActivity())!!.create(DevOpsEngineerApiService::class.java)
-        serviceFullStackMobile = ApiClient.getApiClient(requireActivity())!!.create(FullStackMobileApiService::class.java)
-        serviceFullStackWeb = ApiClient.getApiClient(requireActivity())!!.create(FullStackWebApiService::class.java)
 
         // Get Date
         val dateFormat = SimpleDateFormat("EEEE, dd MMMM YYYY")
@@ -176,7 +163,7 @@ class HomeFragment : Fragment() {
             val result = withContext(Dispatchers.IO) {
                 Log.d("Arkhire Company", "CallApi: ${Thread.currentThread().name}")
                 try {
-                    serviceAndroidDeveloper?.getTalentAndroidResponse()
+                    service?.getTalentAndroidResponse()
                 } catch (e: Throwable) {
                     e.printStackTrace()
                 }
@@ -200,7 +187,7 @@ class HomeFragment : Fragment() {
             val result = withContext(Dispatchers.IO) {
                 Log.d("Arkhire Company", "CallApi: ${Thread.currentThread().name}")
                 try {
-                    serviceDevOpsEngineer?.getTalentDevOpsResponse()
+                    service?.getTalentDevOpsResponse()
                 } catch (e: Throwable) {
                     e.printStackTrace()
                 }
@@ -223,7 +210,7 @@ class HomeFragment : Fragment() {
             val result = withContext(Dispatchers.IO) {
                 Log.d("Arkhire Company", "CallApi: ${Thread.currentThread().name}")
                 try {
-                    serviceFullStackMobile?.getTalentFullStackMobileResponse()
+                    service?.getTalentFullStackMobileResponse()
                 } catch (e: Throwable) {
                     e.printStackTrace()
                 }
@@ -246,7 +233,7 @@ class HomeFragment : Fragment() {
             val result = withContext(Dispatchers.IO) {
                 Log.d("Arkhire Company", "CallApi: ${Thread.currentThread().name}")
                 try {
-                    serviceFullStackWeb?.getTalentFullStackWebResponse()
+                    service?.getTalentFullStackWebResponse()
                 } catch (e: Throwable) {
                     e.printStackTrace()
                 }

@@ -41,6 +41,7 @@ class AccountFragment : Fragment() {
         val sharedPrefData = requireActivity().getSharedPreferences("Token", Context.MODE_PRIVATE)
         val savedName = sharedPrefData.getString("accName", null)
 
+
         // Show Account Data
         if (savedName != null){
             showAccountData(savedName)
@@ -51,10 +52,6 @@ class AccountFragment : Fragment() {
             dialog.show()
         }
 
-        binding.tvMyProfile.setOnClickListener {
-            val intent = Intent(activity, CompanyProfileActivity::class.java)
-            startActivity(intent)
-        }
         return  binding.root
     }
 
@@ -75,6 +72,12 @@ class AccountFragment : Fragment() {
             if (result is AccountResponse) {
                 binding.tvFullNameAccount.text = result.data[0].accountName
                 binding.tvCompanyName.text = "${result.data[0].companyName} (${result.data[0].companyPosition})"
+                binding.tvMyProfile.setOnClickListener {
+                    val intent = Intent(activity, CompanyProfileActivity::class.java)
+                    intent.putExtra("companyLatitude", result.data[0].companyLatitude)
+                    intent.putExtra("companyLongitude", result.data[0].companyLongitude)
+                    startActivity(intent)
+                }
 
                 //Set Profile Images
                 Picasso.get()
@@ -82,6 +85,7 @@ class AccountFragment : Fragment() {
                         .resize(512, 512)
                         .centerCrop()
                         .into(binding.ivCompanyProfileImage)
+
             }
         }
     }

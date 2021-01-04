@@ -47,6 +47,15 @@ class CompanyProfileActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMa
 
         val sharedPrefData = this.getSharedPreferences("Token", Context.MODE_PRIVATE)
         val accountOwner = sharedPrefData.getString("accName", null)
+        val companyLatitude = intent.getStringExtra("companyLatitude")
+        val companyLongitude = intent.getStringExtra("companyLongitude")
+
+        // Set Map
+        if (companyLatitude != "null" && companyLongitude != "null") {
+            if (companyLatitude != null && companyLongitude != null) {
+                defaultLocation = LatLng(companyLatitude.toDouble(), companyLongitude.toDouble())
+            }
+        }
 
 
         //Show Company Data
@@ -160,19 +169,18 @@ class CompanyProfileActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMa
         googleMap.uiSettings.isZoomControlsEnabled = true
         googleMap.mapType = GoogleMap.MAP_TYPE_TERRAIN
 
-            markerDefault = googleMap.addMarker(
-                MarkerOptions()
-                    .position(defaultLocation)
-                    .title(binding.tvCompanyProfileName.text as String?)
-            )
+        markerDefault = googleMap.addMarker(
+            MarkerOptions()
+                .position(defaultLocation)
+                .title(binding.tvCompanyProfileName.text as String?)
+        )
 
-            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(defaultLocation, 12f))
-            googleMap.setOnMarkerClickListener(this)
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(defaultLocation, 12f))
+        googleMap.setOnMarkerClickListener(this)
         }
 
         override fun onMarkerClick(marker: Marker): Boolean {
             Toast.makeText(this, marker.title, Toast.LENGTH_SHORT).show()
-
             return false
         }
 
