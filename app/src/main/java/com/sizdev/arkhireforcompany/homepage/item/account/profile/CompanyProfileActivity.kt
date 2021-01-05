@@ -45,6 +45,10 @@ class CompanyProfileActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMa
         coroutineScope = CoroutineScope(Job() + Dispatchers.Main)
         service = ApiClient.getApiClient(this)!!.create(AccountApiService::class.java)
 
+        // Data Loading Management
+        binding.loadingScreen.visibility = View.VISIBLE
+        binding.progressBar.max = 100
+
         val sharedPrefData = this.getSharedPreferences("Token", Context.MODE_PRIVATE)
         val accountOwner = sharedPrefData.getString("accName", null)
         val companyLatitude = intent.getStringExtra("companyLatitude")
@@ -56,7 +60,6 @@ class CompanyProfileActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMa
                 defaultLocation = LatLng(companyLatitude.toDouble(), companyLongitude.toDouble())
             }
         }
-
 
         //Show Company Data
         if (accountOwner != null) {
@@ -161,6 +164,9 @@ class CompanyProfileActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMa
                         false
                     }
                 }
+
+                // End Of Loading
+                binding.loadingScreen.visibility = View.GONE
             }
         }
     }

@@ -92,7 +92,14 @@ class TalentProfileActivity : AppCompatActivity() {
 
         binding.ivTalentGithub.setOnClickListener {
             val intent = Intent(this, ArkhireWebViewerActivity::class.java)
-            intent.putExtra("url", talentGithub)
+            if (talentGithub != "null"){
+                intent.putExtra("url", "https://github.com/$talentGithub")
+            }
+
+            else{
+                intent.putExtra("url", "https://github.com/")
+            }
+
             startActivity(intent)
         }
 
