@@ -94,13 +94,11 @@ class TalentProfileActivity : AppCompatActivity() {
             val intent = Intent(this, ArkhireWebViewerActivity::class.java)
             if (talentGithub != "null"){
                 intent.putExtra("url", "https://github.com/$talentGithub")
+                startActivity(intent)
             }
-
             else{
-                intent.putExtra("url", "https://github.com/")
+                Toast.makeText(this, "This talent not have github account", Toast.LENGTH_SHORT).show()
             }
-
-            startActivity(intent)
         }
 
         binding.btDoHire.setOnClickListener {
