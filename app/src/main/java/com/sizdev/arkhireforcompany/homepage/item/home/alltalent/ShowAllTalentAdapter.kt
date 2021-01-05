@@ -32,6 +32,8 @@ class ShowAllTalentAdapter : RecyclerView.Adapter<ShowAllTalentAdapter.ShowAllTa
         holder.binding.tvTalentName.text = item.accountName
         holder.binding.tvTalentTitle.text = item.talentTitle
         holder.binding.tvTalentLocation.text = item.talentCity
+        holder.binding.tvTalentSkill1.text = item.talentSkill1
+        holder.binding.tvTalentSkill2.text = item.talentSkill2
         Picasso.get()
             .load("http://54.82.81.23:911/image/${item.talentImage}")
             .resize(86, 86)

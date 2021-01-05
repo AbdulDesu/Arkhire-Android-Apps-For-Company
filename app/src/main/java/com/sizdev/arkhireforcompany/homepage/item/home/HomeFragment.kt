@@ -1,5 +1,6 @@
 package com.sizdev.arkhireforcompany.homepage.item.home
 
+import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
@@ -28,8 +29,8 @@ import com.sizdev.arkhireforcompany.homepage.item.home.fullstackweb.FullStackWeb
 import com.sizdev.arkhireforcompany.homepage.item.home.fullstackweb.FullStackWebModel
 import com.sizdev.arkhireforcompany.homepage.item.home.fullstackweb.FullStackWebResponse
 import com.sizdev.arkhireforcompany.networking.ApiClient
-import kotlinx.android.synthetic.main.alert_logout_confirmation.view.*
 import kotlinx.android.synthetic.main.alert_session_expired.view.*
+import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.coroutines.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -51,6 +52,10 @@ class HomeFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
         coroutineScope = CoroutineScope(Job() + Dispatchers.Main)
         service = ApiClient.getApiClient(requireActivity())!!.create(HomeApiService::class.java)
+
+        // Data Loading Management
+        binding.loadingScreen.visibility = View.VISIBLE
+        binding.progressBar.max = 100
 
         // Get Date
         val dateFormat = SimpleDateFormat("EEEE, dd MMMM YYYY")
@@ -107,7 +112,6 @@ class HomeFragment : Fragment() {
 
             if(result is HomeResponse){
                 val accountName = result.data.accountName
-
                 // Split The Name
                 val nameSplitter = accountName?.split(" ")
 
@@ -132,6 +136,7 @@ class HomeFragment : Fragment() {
                         in 21..23 -> binding.tvUserGreeting.text = "Good Night, $lastName"
                     }
                 }
+                binding.layoutFragmentHome.visibility = View.VISIBLE
             }
             else {
                 sessionExpiredAlert()
@@ -182,7 +187,6 @@ class HomeFragment : Fragment() {
 
                 (binding.rvAndroidDeveloperTalent.adapter as AndroidDeveloperAdapter).addList(list)
             }
-
         }
     }
 
@@ -249,8 +253,10 @@ class HomeFragment : Fragment() {
                 val list = result.data?.map{
                     FullStackWebModel(it.talentID, it.accountID, it.accountName, it.accountEmail, it.accountPhone, it.talentTitle, it.talentTime, it.talentCity, it.talentDesc, it.talentImage, it.talentGithub, it.talentCv, it.talentSkill1, it.talentSkill2, it.talentSkill3, it.talentSkill4, it.talentSkill5)
                 }
-
                 (binding.rvFullStackWebTalent.adapter as FullStackWebAdapter).addList(list)
+
+                // End Of Loading
+                binding.loadingScreen.visibility = View.GONE
             }
         }
     }

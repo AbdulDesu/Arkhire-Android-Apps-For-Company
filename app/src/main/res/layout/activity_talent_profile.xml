@@ -50,6 +50,7 @@
 
             <ImageView
                 android:id="@+id/iv_talentProfileCover"
+                android:scaleType="centerCrop"
                 android:layout_width="match_parent"
                 android:layout_height="170dp"
                 android:background="@color/primary"/>
@@ -65,7 +66,6 @@
                     android:layout_marginStart="28dp"
                     android:layout_width="96dp"
                     android:layout_height="96dp"
-                    android:src="@drawable/kiryusento"
                     app:civ_border_color="#FFFFFF"
                     app:civ_border_width="2dp" />
 
@@ -160,12 +160,12 @@
 
                 <TextView
                     android:id="@+id/tv_profileTalentLocation"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="22dp"
                     android:layout_marginStart="2dp"
                     android:gravity="center"
                     android:text="Bandung"
-                    android:textColor="#BDBCBC"
+                    android:textColor="@color/black"
                     android:textSize="12sp"
                     tools:context="Talent location" />
 

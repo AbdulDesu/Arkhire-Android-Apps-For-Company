@@ -30,6 +30,9 @@ class ShowAllTalentActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
         supportActionBar?.setDisplayShowTitleEnabled(false)
+        binding.tbShowAllProject.setNavigationOnClickListener {
+            finish()
+        }
 
         showAllTalent()
         binding.rvShowAllTalent.adapter = ShowAllTalentAdapter()

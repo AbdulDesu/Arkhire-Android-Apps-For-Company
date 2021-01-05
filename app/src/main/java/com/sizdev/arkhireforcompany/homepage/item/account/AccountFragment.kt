@@ -1,9 +1,11 @@
 package com.sizdev.arkhireforcompany.homepage.item.account
 
+import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -28,6 +30,7 @@ class AccountFragment : Fragment() {
     private lateinit var coroutineScope: CoroutineScope
     private lateinit var service: AccountApiService
 
+    @SuppressLint("ObjectAnimatorBinding")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,6 +39,10 @@ class AccountFragment : Fragment() {
         binding =  DataBindingUtil.inflate(inflater, R.layout.fragment_account, container, false)
         coroutineScope = CoroutineScope(Job() + Dispatchers.Main)
         service = activity?.let { ApiClient.getApiClient(it) }!!.create(AccountApiService::class.java)
+
+        // Data Loading Management
+        binding.loadingScreen.visibility = View.VISIBLE
+        binding.progressBar.max = 100
 
         // Get Saved Name
         val sharedPrefData = requireActivity().getSharedPreferences("Token", Context.MODE_PRIVATE)
@@ -55,7 +62,7 @@ class AccountFragment : Fragment() {
         return  binding.root
     }
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "ObjectAnimatorBinding")
     private fun showAccountData(accountHolder: String) {
         coroutineScope.launch {
             Log.d("Arkhire company", "Start: ${Thread.currentThread().name}")
@@ -86,6 +93,10 @@ class AccountFragment : Fragment() {
                         .centerCrop()
                         .into(binding.ivCompanyProfileImage)
 
+                // End Of Loading
+                Handler().postDelayed({
+                    binding.loadingScreen.visibility = View.GONE
+                }, 2000)
             }
         }
     }

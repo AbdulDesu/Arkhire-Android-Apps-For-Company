@@ -66,6 +66,14 @@ class TalentProfileActivity : AppCompatActivity() {
         binding.tvTitleProfileTalentSkill3.text = talentSkill3
         binding.tvTitleProfileTalentSkill4.text = talentSkill4
         binding.tvTitleProfileTalentSkill5.text = talentSkill5
+
+        if(talentTime == "Freelance"){
+            binding.ivTalentProfileCover.setImageResource(R.drawable.ic_freelancer)
+        }
+        else {
+            binding.ivTalentProfileCover.setImageResource(R.drawable.ic_fulltimework)
+        }
+
         Picasso.get()
                 .load("http://54.82.81.23:911/image/$talentImage")
                 .resize(512, 512)

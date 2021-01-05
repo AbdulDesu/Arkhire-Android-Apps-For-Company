@@ -4,6 +4,6 @@ interface WebListener {
     fun onPageStarted()
     fun onPageFinish()
     fun onShouldOverrideUrl(redirectUrl:String)
-    fun onProgressChage(progress: Int)
+    fun onProgressChange(progress: Int)
     fun onReceivedError()
 }

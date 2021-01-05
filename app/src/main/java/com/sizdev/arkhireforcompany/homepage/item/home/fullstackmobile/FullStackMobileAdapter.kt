@@ -8,9 +8,8 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.sizdev.arkhireforcompany.R
-import com.sizdev.arkhireforcompany.databinding.ItemFullstackMobileTalentBinding
+import com.sizdev.arkhireforcompany.databinding.ItemTalentAtHomepageBinding
 import com.sizdev.arkhireforcompany.homepage.item.home.detailedtalent.TalentProfileActivity
-import com.sizdev.arkhireforcompany.homepage.item.home.devops.DevOpsEngineerAdapter
 import com.squareup.picasso.Picasso
 
 class FullStackMobileAdapter : RecyclerView.Adapter<FullStackMobileAdapter.FullStackMobileTalentHolder>() {
@@ -22,7 +21,7 @@ class FullStackMobileAdapter : RecyclerView.Adapter<FullStackMobileAdapter.FullS
         notifyDataSetChanged()
     }
 
-    class FullStackMobileTalentHolder(val binding: ItemFullstackMobileTalentBinding): RecyclerView.ViewHolder(binding.root)
+    class FullStackMobileTalentHolder(val binding: ItemTalentAtHomepageBinding): RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -31,7 +30,7 @@ class FullStackMobileAdapter : RecyclerView.Adapter<FullStackMobileAdapter.FullS
         return FullStackMobileAdapter.FullStackMobileTalentHolder(
             DataBindingUtil.inflate(
                 LayoutInflater.from(parent.context),
-                R.layout.item_fullstack_mobile_talent,
+                R.layout.item_talent_at_homepage,
                 parent, false
             )
         )
@@ -40,19 +39,20 @@ class FullStackMobileAdapter : RecyclerView.Adapter<FullStackMobileAdapter.FullS
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: FullStackMobileTalentHolder, position: Int) {
         val item = items[position]
-        holder.binding.tvFullStackMobileTalentName.text = item.accountName
-        holder.binding.tvFullStackMobileTalentTitle.text = item.talentTitle
-        holder.binding.fullStackMobileTalentSkill1.text = item.talentSkill1
-        holder.binding.fullStackMobileTalentSkill2.text = item.talentSkill2
-        holder.binding.fullStackMobileTalentSkill3.text = item.talentSkill3
+        holder.binding.tvTalentName.text = item.accountName
+        holder.binding.tvTalentTitle.text = item.talentTitle
+        holder.binding.tvTalentWorkTime.text = item.talentTime
+        holder.binding.talentSkill1.text = item.talentSkill1
+        holder.binding.talentSkill2.text = item.talentSkill2
+        holder.binding.talentSkill3.text = item.talentSkill3
         Picasso.get()
                 .load("http://54.82.81.23:911/image/${item.talentImage}")
                 .resize(512, 512)
                 .centerCrop()
-                .into(holder.binding.ivFullStackMobileTalentImage)
+                .into(holder.binding.ivTalentImage)
 
         holder.itemView.setOnClickListener {
-            val context = holder.binding.itemFullStackMobileHolder.context
+            val context = holder.binding.itemTalentHolder.context
             val intent = Intent(context, TalentProfileActivity::class.java)
             val talentID = item.talentID.toString()
             val accountID = item.accountID.toString()

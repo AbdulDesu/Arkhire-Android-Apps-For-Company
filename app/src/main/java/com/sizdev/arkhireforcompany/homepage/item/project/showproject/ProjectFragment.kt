@@ -32,8 +32,12 @@ class ProjectFragment : Fragment() {
         binding.rvProjectList.adapter = ProjectAdapter()
         binding.rvProjectList.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
 
-        showAllProjectList()
+        // Data Loading Management
+        binding.loadingScreen.visibility = View.VISIBLE
+        binding.progressBar.max = 100
 
+        //Show Project
+        showAllProjectList()
 
         return binding.root
     }
@@ -58,6 +62,9 @@ class ProjectFragment : Fragment() {
                 }
 
                 (binding.rvProjectList.adapter as ProjectAdapter).addList(list)
+
+                // End Of Loading
+                binding.loadingScreen.visibility = View.GONE
             }
 
         }

@@ -44,7 +44,7 @@ class ArkhireWebViewerActivity : AppCompatActivity(), WebListener {
     class ArkhireChromeClient(private var listener:WebListener) : WebChromeClient() {
         override fun onProgressChanged(view: WebView?, newProgress: Int) {
             super.onProgressChanged(view, newProgress)
-            listener.onProgressChage(newProgress)
+            listener.onProgressChange(newProgress)
         }
     }
 
@@ -90,7 +90,7 @@ class ArkhireWebViewerActivity : AppCompatActivity(), WebListener {
 
     }
 
-    override fun onProgressChage(progress: Int) {
+    override fun onProgressChange(progress: Int) {
         binding.arkhireWebProgressBar.progress = progress
     }
 
