@@ -11,9 +11,9 @@ import androidx.databinding.DataBindingUtil
 import com.sizdev.arkhireforcompany.R
 import com.sizdev.arkhireforcompany.databinding.ActivityProjectDetailBinding
 import com.sizdev.arkhireforcompany.homepage.item.project.showproject.editproject.ProjectEditActivity
-import com.sizdev.arkhireforcompany.homepage.item.project.showproject.ProjectApiService
 import com.sizdev.arkhireforcompany.homepage.item.project.showproject.ProjectResponse
-import com.sizdev.arkhireforcompany.networking.ApiClient
+import com.sizdev.arkhireforcompany.networking.ArkhireApiClient
+import com.sizdev.arkhireforcompany.networking.ArkhireApiService
 import kotlinx.android.synthetic.main.alert_delete_project_confirmation.view.*
 import kotlinx.android.synthetic.main.alert_logout_confirmation.view.*
 import kotlinx.coroutines.*
@@ -23,14 +23,14 @@ class ProjectDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProjectDetailBinding
     private lateinit var dialog: AlertDialog
     private lateinit var coroutineScope: CoroutineScope
-    private lateinit var service: ProjectApiService
+    private lateinit var service: ArkhireApiService
 
     @SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_project_detail)
         coroutineScope = CoroutineScope(Job() + Dispatchers.Main)
-        service = ApiClient.getApiClient(this)!!.create(ProjectApiService::class.java)
+        service = ArkhireApiClient.getApiClient(this)!!.create(ArkhireApiService::class.java)
 
         //Set Action Bar
         setSupportActionBar(binding.tbDetailsProject)

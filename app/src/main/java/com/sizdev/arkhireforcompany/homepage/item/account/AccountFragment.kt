@@ -1,6 +1,5 @@
 package com.sizdev.arkhireforcompany.homepage.item.account
 
-import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
@@ -16,8 +15,10 @@ import androidx.databinding.DataBindingUtil
 import com.sizdev.arkhireforcompany.R
 import com.sizdev.arkhireforcompany.administration.login.LoginActivity
 import com.sizdev.arkhireforcompany.databinding.FragmentAccountBinding
+import com.sizdev.arkhireforcompany.homepage.item.account.profile.CompanyEditProfileActivity
 import com.sizdev.arkhireforcompany.homepage.item.account.profile.CompanyProfileActivity
-import com.sizdev.arkhireforcompany.networking.ApiClient
+import com.sizdev.arkhireforcompany.networking.ArkhireApiClient
+import com.sizdev.arkhireforcompany.networking.ArkhireApiService
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.alert_logout_confirmation.view.*
 import kotlinx.coroutines.*
@@ -28,7 +29,7 @@ class AccountFragment : Fragment() {
     private lateinit var binding: FragmentAccountBinding
     private lateinit var dialog: AlertDialog
     private lateinit var coroutineScope: CoroutineScope
-    private lateinit var service: AccountApiService
+    private lateinit var service: ArkhireApiService
 
     @SuppressLint("ObjectAnimatorBinding")
     override fun onCreateView(
@@ -38,7 +39,7 @@ class AccountFragment : Fragment() {
         // Inflate the layout for this fragment
         binding =  DataBindingUtil.inflate(inflater, R.layout.fragment_account, container, false)
         coroutineScope = CoroutineScope(Job() + Dispatchers.Main)
-        service = activity?.let { ApiClient.getApiClient(it) }!!.create(AccountApiService::class.java)
+        service = activity?.let { ArkhireApiClient.getApiClient(it) }!!.create(ArkhireApiService::class.java)
 
         // Data Loading Management
         binding.loadingScreen.visibility = View.VISIBLE
@@ -65,10 +66,7 @@ class AccountFragment : Fragment() {
     @SuppressLint("SetTextI18n", "ObjectAnimatorBinding")
     private fun showAccountData(accountHolder: String) {
         coroutineScope.launch {
-            Log.d("Arkhire company", "Start: ${Thread.currentThread().name}")
-
             val result = withContext(Dispatchers.IO) {
-                Log.d("Arkhire company", "CallApi: ${Thread.currentThread().name}")
                 try {
                     service?.getAccountDataByNameResponse(accountHolder)
                 } catch (e: Throwable) {
@@ -81,17 +79,37 @@ class AccountFragment : Fragment() {
                 binding.tvCompanyName.text = "${result.data[0].companyName} (${result.data[0].companyPosition})"
                 binding.tvMyProfile.setOnClickListener {
                     val intent = Intent(activity, CompanyProfileActivity::class.java)
+                    intent.putExtra("companyID", result.data[0].companyID)
+                    intent.putExtra("companyName", result.data[0].companyName)
+                    intent.putExtra("companyType", result.data[0].companyType)
+                    intent.putExtra("companyImage", result.data[0].companyImage)
+                    intent.putExtra("companyLinkedin", result.data[0].companyLinkedin)
+                    intent.putExtra("companyInstagram", result.data[0].companyInstagram)
+                    intent.putExtra("companyFacebook", result.data[0].companyFacebook)
+                    intent.putExtra("companyDesc", result.data[0].companyDesc)
                     intent.putExtra("companyLatitude", result.data[0].companyLatitude)
                     intent.putExtra("companyLongitude", result.data[0].companyLongitude)
-                    startActivity(intent)
+
+                    if(result.data[0].companyType == null){
+                        startActivity(Intent(activity, CompanyEditProfileActivity::class.java))
+                    }
+                    else {
+                        startActivity(intent)
+                    }
+
                 }
 
                 //Set Profile Images
-                Picasso.get()
-                        .load("http://54.82.81.23:911/image/${result.data[0].companyImage}")
-                        .resize(512, 512)
-                        .centerCrop()
-                        .into(binding.ivCompanyProfileImage)
+                when(result.data[0].companyImage){
+                    null -> binding.ivCompanyProfileImage.setImageResource(R.drawable.ic_empty_image)
+                    else -> {
+                        Picasso.get()
+                                .load("http://54.82.81.23:911/image/${result.data[0].companyImage}")
+                                .resize(512, 512)
+                                .centerCrop()
+                                .into(binding.ivCompanyProfileImage)
+                    }
+                }
 
                 // End Of Loading
                 Handler().postDelayed({

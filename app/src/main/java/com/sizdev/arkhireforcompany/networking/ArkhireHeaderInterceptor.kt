@@ -6,7 +6,7 @@ import android.util.Log
 import okhttp3.Interceptor
 import okhttp3.Response
 
-class HeaderInterceptor(context: Context) : Interceptor {
+class ArkhireHeaderInterceptor(context: Context) : Interceptor {
 
     private val sharedPref: SharedPreferences =  context.getSharedPreferences("Token", Context.MODE_PRIVATE)
 

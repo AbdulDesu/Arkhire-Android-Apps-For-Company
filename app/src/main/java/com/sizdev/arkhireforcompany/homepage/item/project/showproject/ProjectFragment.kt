@@ -11,14 +11,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sizdev.arkhireforcompany.R
 import com.sizdev.arkhireforcompany.databinding.FragmentProjectBinding
-import com.sizdev.arkhireforcompany.networking.ApiClient
+import com.sizdev.arkhireforcompany.networking.ArkhireApiClient
+import com.sizdev.arkhireforcompany.networking.ArkhireApiService
 import kotlinx.coroutines.*
 
 class ProjectFragment : Fragment() {
 
     private lateinit var binding: FragmentProjectBinding
     private lateinit var coroutineScope: CoroutineScope
-    private lateinit var service: ProjectApiService
+    private lateinit var service: ArkhireApiService
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,7 +28,7 @@ class ProjectFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_project, container, false)
         coroutineScope = CoroutineScope(Job() + Dispatchers.Main)
-        service = activity?.let { ApiClient.getApiClient(it) }!!.create(ProjectApiService::class.java)
+        service = activity?.let { ArkhireApiClient.getApiClient(it) }!!.create(ArkhireApiService::class.java)
 
         binding.rvProjectList.adapter = ProjectAdapter()
         binding.rvProjectList.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
@@ -44,10 +45,7 @@ class ProjectFragment : Fragment() {
 
     private fun showAllProjectList() {
         coroutineScope.launch {
-            Log.d("Arkhire Company", "Start: ${Thread.currentThread().name}")
-
             val result = withContext(Dispatchers.IO) {
-                Log.d("Arkhire Company", "CallApi: ${Thread.currentThread().name}")
                 try {
                     service?.getAllProjectResponse()
                 } catch (e: Throwable) {
@@ -56,7 +54,6 @@ class ProjectFragment : Fragment() {
             }
 
             if (result is ProjectResponse) {
-                Log.d("Arkhire Company", result.toString())
                 val list = result.data?.map{
                     ProjectModel(it.offeringID, it.projectID, it.projectTitle, it.projectDuration, it.projectDesc, it.projectSalary, it.hiringStatus, it.replyMsg, it.repliedAt)
                 }

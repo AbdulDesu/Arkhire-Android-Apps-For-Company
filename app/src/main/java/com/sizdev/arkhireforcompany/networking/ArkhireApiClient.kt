@@ -7,7 +7,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-class ApiClient {
+class ArkhireApiClient {
     companion object {
 
         private const val BASE_URL = "http://54.82.81.23:911/"
@@ -25,7 +25,7 @@ class ApiClient {
             if (retrofit == null) {
                 val okHttpClient = OkHttpClient.Builder()
                         .addInterceptor(provideHttpLoggingInterceptor())
-                        .addInterceptor(HeaderInterceptor(context))
+                        .addInterceptor(ArkhireHeaderInterceptor(context))
                         .connectTimeout(1, TimeUnit.MINUTES)
                         .readTimeout(1, TimeUnit.MINUTES)
                         .writeTimeout(1, TimeUnit.MINUTES)

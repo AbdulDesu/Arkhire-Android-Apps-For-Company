@@ -1,6 +1,5 @@
 package com.sizdev.arkhireforcompany.homepage.item.home
 
-import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
@@ -28,9 +27,9 @@ import com.sizdev.arkhireforcompany.homepage.item.home.fullstackmobile.FullStack
 import com.sizdev.arkhireforcompany.homepage.item.home.fullstackweb.FullStackWebAdapter
 import com.sizdev.arkhireforcompany.homepage.item.home.fullstackweb.FullStackWebModel
 import com.sizdev.arkhireforcompany.homepage.item.home.fullstackweb.FullStackWebResponse
-import com.sizdev.arkhireforcompany.networking.ApiClient
+import com.sizdev.arkhireforcompany.networking.ArkhireApiClient
+import com.sizdev.arkhireforcompany.networking.ArkhireApiService
 import kotlinx.android.synthetic.main.alert_session_expired.view.*
-import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.coroutines.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -41,7 +40,7 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var dialog: AlertDialog
     private lateinit var coroutineScope: CoroutineScope
-    private lateinit var service: HomeApiService
+    private lateinit var service: ArkhireApiService
 
     @SuppressLint("SimpleDateFormat", "WeekBasedYear", "SetTextI18n")
     override fun onCreateView(
@@ -51,7 +50,7 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
         coroutineScope = CoroutineScope(Job() + Dispatchers.Main)
-        service = ApiClient.getApiClient(requireActivity())!!.create(HomeApiService::class.java)
+        service = ArkhireApiClient.getApiClient(requireActivity())!!.create(ArkhireApiService::class.java)
 
         // Data Loading Management
         binding.loadingScreen.visibility = View.VISIBLE
@@ -99,10 +98,7 @@ class HomeFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     private fun showAccountOwner(accountID: String) {
         coroutineScope.launch {
-            Log.d("Arkhire Company", "Start: ${Thread.currentThread().name}")
-
             val result = withContext(Dispatchers.IO) {
-                Log.d("Arkhire Company", "CallApi: ${Thread.currentThread().name}")
                 try {
                     service?.getAccountResponse(accountID)
                 } catch (e: Throwable) {
@@ -170,9 +166,7 @@ class HomeFragment : Fragment() {
 
     private fun showAndroidDeveloperTalent() {
         coroutineScope.launch {
-            Log.d("Arkhire Company", "Start: ${Thread.currentThread().name}")
             val result = withContext(Dispatchers.IO) {
-                Log.d("Arkhire Company", "CallApi: ${Thread.currentThread().name}")
                 try {
                     service?.getTalentAndroidResponse()
                 } catch (e: Throwable) {
@@ -192,10 +186,7 @@ class HomeFragment : Fragment() {
 
     private fun showDevOpsEngineerTalent() {
         coroutineScope.launch {
-            Log.d("Arkhire Company", "Start: ${Thread.currentThread().name}")
-
             val result = withContext(Dispatchers.IO) {
-                Log.d("Arkhire Company", "CallApi: ${Thread.currentThread().name}")
                 try {
                     service?.getTalentDevOpsResponse()
                 } catch (e: Throwable) {
@@ -215,10 +206,7 @@ class HomeFragment : Fragment() {
 
     private fun showFullStackMobileTalent() {
         coroutineScope.launch {
-            Log.d("Arkhire Company", "Start: ${Thread.currentThread().name}")
-
             val result = withContext(Dispatchers.IO) {
-                Log.d("Arkhire Company", "CallApi: ${Thread.currentThread().name}")
                 try {
                     service?.getTalentFullStackMobileResponse()
                 } catch (e: Throwable) {
@@ -238,10 +226,7 @@ class HomeFragment : Fragment() {
 
     private fun showFullStackWebTalent() {
         coroutineScope.launch {
-            Log.d("Arkhire Company", "Start: ${Thread.currentThread().name}")
-
             val result = withContext(Dispatchers.IO) {
-                Log.d("Arkhire Company", "CallApi: ${Thread.currentThread().name}")
                 try {
                     service?.getTalentFullStackWebResponse()
                 } catch (e: Throwable) {

@@ -11,7 +11,8 @@ import com.sizdev.arkhireforcompany.administration.register.RegisterActivity
 import com.sizdev.arkhireforcompany.administration.password.ForgetPasswordActivity
 import com.sizdev.arkhireforcompany.databinding.ActivityLoginBinding
 import com.sizdev.arkhireforcompany.homepage.HomeActivity
-import com.sizdev.arkhireforcompany.networking.ApiClient
+import com.sizdev.arkhireforcompany.networking.ArkhireApiClient
+import com.sizdev.arkhireforcompany.networking.ArkhireApiService
 import kotlinx.coroutines.*
 
 
@@ -19,13 +20,13 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
     private lateinit var coroutineScope: CoroutineScope
-    private lateinit var service: LoginAuthService
+    private lateinit var service: ArkhireApiService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
         coroutineScope = CoroutineScope(Job() + Dispatchers.Main)
-        service = ApiClient.getApiClient(this)!!.create(LoginAuthService::class.java)
+        service = ArkhireApiClient.getApiClient(this)!!.create(ArkhireApiService::class.java)
 
 
         binding.btLogin.setOnClickListener {

@@ -8,7 +8,8 @@ import androidx.databinding.DataBindingUtil
 import com.sizdev.arkhireforcompany.R
 import com.sizdev.arkhireforcompany.administration.login.LoginActivity
 import com.sizdev.arkhireforcompany.databinding.ActivityRegisterBinding
-import com.sizdev.arkhireforcompany.networking.ApiClient
+import com.sizdev.arkhireforcompany.networking.ArkhireApiClient
+import com.sizdev.arkhireforcompany.networking.ArkhireApiService
 import kotlinx.coroutines.*
 
 
@@ -16,13 +17,13 @@ class RegisterActivity : AppCompatActivity() {
 
     private  lateinit var binding: ActivityRegisterBinding
     private lateinit var coroutineScope: CoroutineScope
-    private lateinit var service: RegisterAuthService
+    private lateinit var service: ArkhireApiService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_register)
         coroutineScope = CoroutineScope(Job() + Dispatchers.Main)
-        service = ApiClient.getApiClient(this)!!.create(RegisterAuthService::class.java)
+        service = ArkhireApiClient.getApiClient(this)!!.create(ArkhireApiService::class.java)
 
         binding.btRegister.setOnClickListener {
             val registerPassword = binding.etRegistPassword.text.toString()

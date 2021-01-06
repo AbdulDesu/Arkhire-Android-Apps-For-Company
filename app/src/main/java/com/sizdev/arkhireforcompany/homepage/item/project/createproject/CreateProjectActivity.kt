@@ -6,26 +6,23 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.sizdev.arkhireforcompany.R
-import com.sizdev.arkhireforcompany.administration.login.LoginActivity
-import com.sizdev.arkhireforcompany.administration.register.RegisterAuthService
-import com.sizdev.arkhireforcompany.administration.register.RegisterResponse
 import com.sizdev.arkhireforcompany.databinding.ActivityCreateProjectBinding
 import com.sizdev.arkhireforcompany.homepage.HomeActivity
-import com.sizdev.arkhireforcompany.homepage.item.project.showproject.ProjectApiService
-import com.sizdev.arkhireforcompany.networking.ApiClient
+import com.sizdev.arkhireforcompany.networking.ArkhireApiClient
+import com.sizdev.arkhireforcompany.networking.ArkhireApiService
 import kotlinx.coroutines.*
 
 class CreateProjectActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCreateProjectBinding
     private lateinit var coroutineScope: CoroutineScope
-    private lateinit var service: ProjectApiService
+    private lateinit var service: ArkhireApiService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_create_project)
         coroutineScope = CoroutineScope(Job() + Dispatchers.Main)
-        service = ApiClient.getApiClient(this)!!.create(ProjectApiService::class.java)
+        service = ArkhireApiClient.getApiClient(this)!!.create(ArkhireApiService::class.java)
 
         binding.btSendOffering.setOnClickListener {
             val projectName = binding.etProjectName.text.toString()
