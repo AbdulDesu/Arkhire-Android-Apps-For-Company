@@ -1,5 +1,6 @@
 package com.sizdev.arkhireforcompany.homepage.item.project.showproject
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -37,17 +38,23 @@ class ProjectFragment : Fragment() {
         binding.loadingScreen.visibility = View.VISIBLE
         binding.progressBar.max = 100
 
+        // Get Saved ID
+        val sharedPrefData = requireActivity().getSharedPreferences("Token", Context.MODE_PRIVATE)
+        val savedID = sharedPrefData.getString("accCompany", null)
+
         //Show Project
-        showAllProjectList()
+        if (savedID != null) {
+            showAllProjectList(savedID)
+        }
 
         return binding.root
     }
 
-    private fun showAllProjectList() {
+    private fun showAllProjectList(accountID: String) {
         coroutineScope.launch {
             val result = withContext(Dispatchers.IO) {
                 try {
-                    service?.getAllProjectResponse()
+                    service?.getAllProjectResponse(accountID)
                 } catch (e: Throwable) {
                     e.printStackTrace()
                 }

@@ -1,22 +1,23 @@
 package com.sizdev.arkhireforcompany.homepage.item.account
 
 import android.annotation.SuppressLint
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import com.sizdev.arkhireforcompany.R
 import com.sizdev.arkhireforcompany.administration.login.LoginActivity
 import com.sizdev.arkhireforcompany.databinding.FragmentAccountBinding
-import com.sizdev.arkhireforcompany.homepage.item.account.profile.CompanyEditProfileActivity
 import com.sizdev.arkhireforcompany.homepage.item.account.profile.CompanyProfileActivity
+import com.sizdev.arkhireforcompany.homepage.item.account.profile.edit.CompanyEditProfileActivity
 import com.sizdev.arkhireforcompany.networking.ArkhireApiClient
 import com.sizdev.arkhireforcompany.networking.ArkhireApiService
 import com.squareup.picasso.Picasso
@@ -45,14 +46,35 @@ class AccountFragment : Fragment() {
         binding.loadingScreen.visibility = View.VISIBLE
         binding.progressBar.max = 100
 
-        // Get Saved Name
+        // Get Saved ID
         val sharedPrefData = requireActivity().getSharedPreferences("Token", Context.MODE_PRIVATE)
-        val savedName = sharedPrefData.getString("accName", null)
+        val savedID = sharedPrefData.getString("accID", null)
+
+        // Set Rate Us
+        binding.tvRateUs.setOnClickListener {
+            try {
+                startActivity(
+                    Intent(
+                        Intent.ACTION_VIEW,
+                        Uri.parse("market://details?id=Arkhire")
+                    )
+                )
+            } catch (anfe: ActivityNotFoundException) {
+                startActivity(
+                    Intent(
+                        Intent.ACTION_VIEW,
+                        Uri.parse("https://play.google.com/store/apps/details?id=Arkhire")
+                    )
+                )
+            }
+        }
+
+
 
 
         // Show Account Data
-        if (savedName != null){
-            showAccountData(savedName)
+        if (savedID != null){
+            showAccountData(savedID)
         }
 
         binding.tvLogout.setOnClickListener {
@@ -75,6 +97,13 @@ class AccountFragment : Fragment() {
             }
 
             if (result is AccountResponse) {
+
+                // Save Emergency companyID
+                val sharedPref = activity?.getSharedPreferences("Token", Context.MODE_PRIVATE)
+                val editor = sharedPref?.edit()
+                editor?.putString("accCompany", result.data[0].companyID)
+                editor?.apply()
+
                 binding.tvFullNameAccount.text = result.data[0].accountName
                 binding.tvCompanyName.text = "${result.data[0].companyName} (${result.data[0].companyPosition})"
                 binding.tvMyProfile.setOnClickListener {
@@ -91,7 +120,11 @@ class AccountFragment : Fragment() {
                     intent.putExtra("companyLongitude", result.data[0].companyLongitude)
 
                     if(result.data[0].companyType == null){
-                        startActivity(Intent(activity, CompanyEditProfileActivity::class.java))
+                        val intent = Intent(activity, CompanyEditProfileActivity::class.java)
+                        intent.putExtra("companyID", result.data[0].companyID)
+                        intent.putExtra("companyName", result.data[0].companyName)
+                        intent.putExtra("companyType", result.data[0].companyType)
+                        startActivity(intent)
                     }
                     else {
                         startActivity(intent)

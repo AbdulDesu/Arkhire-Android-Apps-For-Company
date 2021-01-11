@@ -1,6 +1,6 @@
-package com.sizdev.arkhireforcompany.homepage.item.home.alltalent
+package com.sizdev.arkhireforcompany.homepage.item.explore
 
-data class ShowAllTalentModel
+data class ExploreModel
     (val talentID: String?,
      val accountID: String?,
      val accountName: String?,

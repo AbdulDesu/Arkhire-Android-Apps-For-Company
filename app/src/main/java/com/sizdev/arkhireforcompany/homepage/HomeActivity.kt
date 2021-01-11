@@ -8,7 +8,7 @@ import androidx.databinding.DataBindingUtil
 import com.sizdev.arkhireforcompany.R
 import com.sizdev.arkhireforcompany.databinding.ActivityHomeBinding
 import com.sizdev.arkhireforcompany.homepage.item.account.AccountFragment
-import com.sizdev.arkhireforcompany.homepage.item.chat.ChatFragment
+import com.sizdev.arkhireforcompany.homepage.item.explore.ExploreFragment
 import com.sizdev.arkhireforcompany.homepage.item.home.HomeFragment
 import com.sizdev.arkhireforcompany.homepage.item.project.showproject.ProjectFragment
 
@@ -20,7 +20,7 @@ class HomeActivity : AppCompatActivity() {
 
     lateinit var homeFragment: HomeFragment
     lateinit var projectFragment: ProjectFragment
-    lateinit var chatFragment: ChatFragment
+    lateinit var chatFragment: ExploreFragment
     lateinit var accountFragment: AccountFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,8 +53,8 @@ class HomeActivity : AppCompatActivity() {
                         .commit()
                 }
 
-                R.id.chat -> {
-                    chatFragment = ChatFragment()
+                R.id.explore -> {
+                    chatFragment = ExploreFragment()
                     supportFragmentManager
                         .beginTransaction()
                         .replace(R.id.homeViewer, chatFragment)

@@ -21,6 +21,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.sizdev.arkhireforcompany.R
 import com.sizdev.arkhireforcompany.databinding.ActivityCompanyProfileBinding
 import com.sizdev.arkhireforcompany.homepage.HomeActivity
+import com.sizdev.arkhireforcompany.homepage.item.account.profile.edit.CompanyEditProfileActivity
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.*
 

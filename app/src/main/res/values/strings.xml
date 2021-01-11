@@ -50,5 +50,8 @@
     <string name="back">back</string>
     <string name="menu">menu</string>
     <string name="_404_not_found">404 NOT FOUND</string>
+    <string name="set_company_profile_so_people_can_know_yours">Set Company Profile, So People Can Know Yours</string>
+    <string name="pick_image">PICK IMAGE</string>
+    <string name="not_found">not found</string>
 
 </resources>

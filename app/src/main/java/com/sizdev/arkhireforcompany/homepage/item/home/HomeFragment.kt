@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AlertDialog
@@ -14,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sizdev.arkhireforcompany.R
 import com.sizdev.arkhireforcompany.administration.login.LoginActivity
 import com.sizdev.arkhireforcompany.databinding.FragmentHomeBinding
-import com.sizdev.arkhireforcompany.homepage.item.home.alltalent.ShowAllTalentActivity
 import com.sizdev.arkhireforcompany.homepage.item.home.android.AndroidDeveloperAdapter
 import com.sizdev.arkhireforcompany.homepage.item.home.android.AndroidDeveloperModel
 import com.sizdev.arkhireforcompany.homepage.item.home.android.AndroidDeveloperResponse
@@ -71,26 +72,33 @@ class HomeFragment : Fragment() {
 
         binding.tvHomeDate.text = currentDate
 
-        showAndroidDeveloperTalent()
+        // Data Refresh Management
+        val mainHandler = Handler(Looper.getMainLooper())
+        mainHandler.post(object : Runnable {
+            override fun run() {
+                showAndroidDeveloperTalent()
+                showDevOpsEngineerTalent()
+                showFullStackMobileTalent()
+                showFullStackWebTalent()
+                mainHandler.postDelayed(this, 5000)
+            }
+        })
+
+
         binding.rvAndroidDeveloperTalent.adapter = AndroidDeveloperAdapter()
         binding.rvAndroidDeveloperTalent.layoutManager = LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false)
 
-        showDevOpsEngineerTalent()
+
         binding.rvDevOpsEngineerTalent.adapter = DevOpsEngineerAdapter()
         binding.rvDevOpsEngineerTalent.layoutManager = LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false)
 
-        showFullStackMobileTalent()
+
         binding.rvFullStackMobileTalent.adapter = FullStackMobileAdapter()
         binding.rvFullStackMobileTalent.layoutManager = LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false)
 
-        showFullStackWebTalent()
+
         binding.rvFullStackWebTalent.adapter = FullStackWebAdapter()
         binding.rvFullStackWebTalent.layoutManager = LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false)
-
-        binding.laShowAllTalent.setOnClickListener {
-            val intent = Intent(activity, ShowAllTalentActivity::class.java)
-            startActivity(intent)
-        }
 
         return binding.root
     }

@@ -19,10 +19,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ArkhireCompany"
         android:usesCleartextTraffic="true">
-        <activity android:name=".homepage.item.home.alltalent.ShowAllTalentActivity"></activity>
+        <activity android:name=".extra.CostumerServiceActivity"></activity>
+        <activity android:name=".homepage.item.home.detailedtalent.workexperience.WorkExperienceDetailActivity" />
+        <activity android:name=".homepage.item.home.detailedtalent.portfolio.PortfolioDetailsActivity" />
         <activity android:name=".homepage.item.project.showproject.editproject.ProjectEditActivity" />
         <activity android:name=".homepage.item.project.showproject.detailproject.ProjectDetailActivity" />
-        <activity android:name=".homepage.item.account.profile.CompanyEditProfileActivity" />
+        <activity android:name=".homepage.item.account.profile.edit.CompanyEditProfileActivity" />
         <activity android:name=".homepage.item.project.createproject.CreateProjectActivity" />
         <activity android:name=".webviewer.ArkhireWebViewerActivity" />
         <activity android:name=".homepage.item.home.detailedtalent.TalentProfileActivity" />

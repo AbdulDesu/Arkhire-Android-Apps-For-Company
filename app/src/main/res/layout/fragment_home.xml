@@ -151,40 +151,10 @@
                     android:id="@+id/rv_fullStackWebTalent"
                     android:layout_marginTop="12dp"
                     android:layout_marginStart="12dp"
+                    android:layout_marginBottom="12dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
-                <LinearLayout
-                    android:id="@+id/la_showAllTalent"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="22dp"
-                    android:layout_marginBottom="20dp"
-                    android:background="@drawable/bg_menuhome"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:text="Show All Talent"
-                        android:textSize="16sp"
-                        android:layout_marginStart="20dp"
-                        android:layout_gravity="center_vertical"
-                        android:textColor="@color/black"
-                        android:fontFamily="@font/opensans"
-                        android:textStyle="bold"
-                        android:gravity="center_vertical"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"/>
-
-                    <ImageView
-                        android:src="@drawable/ic_arrow_right"
-                        android:layout_marginStart="220dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"/>
-
-                </LinearLayout>
             </LinearLayout>
         </ScrollView>
     </LinearLayout>

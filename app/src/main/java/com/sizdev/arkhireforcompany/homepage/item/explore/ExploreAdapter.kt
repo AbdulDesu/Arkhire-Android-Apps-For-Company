@@ -1,4 +1,4 @@
-package com.sizdev.arkhireforcompany.homepage.item.home.alltalent
+package com.sizdev.arkhireforcompany.homepage.item.explore
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -11,10 +11,10 @@ import com.sizdev.arkhireforcompany.databinding.ItemAllTalentListBinding
 import com.sizdev.arkhireforcompany.homepage.item.home.detailedtalent.TalentProfileActivity
 import com.squareup.picasso.Picasso
 
-class ShowAllTalentAdapter : RecyclerView.Adapter<ShowAllTalentAdapter.ShowAllTalentHolder>() {
-    private var items = mutableListOf<ShowAllTalentModel>()
+class ExploreAdapter : RecyclerView.Adapter<ExploreAdapter.ShowAllTalentHolder>() {
+    private var items = mutableListOf<ExploreModel>()
 
-    fun addList(list: List<ShowAllTalentModel>){
+    fun addList(list: List<ExploreModel>){
         items.clear()
         items.addAll(list)
         notifyDataSetChanged()

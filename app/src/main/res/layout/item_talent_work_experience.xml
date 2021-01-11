@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
+        android:id="@+id/item_workexperience_holder"
         android:layout_marginBottom="14dp"
         android:layout_height="wrap_content"
         android:layout_width="match_parent">
@@ -11,12 +12,16 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <ImageView
-                android:src="@drawable/ic_shopee"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="20dp"
+                android:src="@drawable/ic_worktime"
+                android:scaleType="centerInside"
+                android:background="@drawable/bg_work_experience"
+                android:layout_marginStart="27dp"
+                android:layout_gravity="center_vertical"
                 android:layout_width="50dp"
-                android:layout_height="50dp"/>
+                android:layout_height="50dp"
+                app:tint="@color/white" />
 
             <LinearLayout
                 android:layout_marginStart="28dp"
@@ -26,7 +31,6 @@
 
                 <TextView
                     android:id="@+id/tv_workExperiencePosition"
-                    android:text="Front-End Developer"
                     android:textSize="16sp"
                     android:textColor="@color/black"
                     android:layout_marginTop="21dp"
@@ -36,29 +40,41 @@
 
                 <TextView
                     android:id="@+id/tv_workExperienceCompany"
-                    android:text="Shopee"
                     android:textSize="12sp"
                     android:textColor="@color/black"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
-                <TextView
-                    android:id="@+id/tv_workExperienceYearRange"
-                    android:text="2019-2020"
-                    android:textSize="12sp"
+                <LinearLayout
+                    android:orientation="horizontal"
                     android:layout_marginTop="4dp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_workExperienceYearStart"
+                        android:textSize="12sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:id="@+id/tv_workExperienceYearEnd"
+                        android:textSize="12sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
 
                 <TextView
                     android:id="@+id/tv_workExperienceDescription"
                     android:layout_marginTop="4dp"
+                    android:layout_marginEnd="14dp"
                     android:textSize="12sp"
-                    android:text="@string/lite_lorem_ipsum"
+                    android:maxLength="250"
                     android:justificationMode="inter_word"
                     android:lineSpacingExtra="6dp"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"/>
+                    android:layout_height="wrap_content"/>
             </LinearLayout>
         </LinearLayout>
 
