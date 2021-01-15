@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sizdev.arkhireforcompany.R
 import com.sizdev.arkhireforcompany.databinding.ItemListProjectBinding
 import com.sizdev.arkhireforcompany.homepage.item.project.showproject.detailproject.ProjectDetailActivity
+import com.squareup.picasso.Picasso
 
 class ProjectAdapter : RecyclerView.Adapter<ProjectAdapter.showProjectList>() {
     private var items = mutableListOf<ProjectModel>()
@@ -29,34 +30,25 @@ class ProjectAdapter : RecyclerView.Adapter<ProjectAdapter.showProjectList>() {
     override fun onBindViewHolder(holder: showProjectList, position: Int) {
         val item = items[position]
         holder.binding.tvProjectTitle.text = item.projectTitle
-        holder.binding.tvProjectSalary.text = item.projectSallary
+        holder.binding.tvProjectSalary.text = item.projectSalary
         holder.binding.tvProjectDuration.text = "In ${item.projectDuration}"
-        when(item.hiringStatus){
-            "Approved" -> holder.binding.ivProjectStatus.setImageResource(R.drawable.ic_approved)
-            "Declined" -> holder.binding.ivProjectStatus.setImageResource(R.drawable.ic_declined)
-            else -> holder.binding.ivProjectStatus.setImageResource(R.drawable.ic_waiting)
-        }
+        holder.binding.tvProjectCreated.text = item.postedAt
+        Picasso.get()
+                .load("http://54.82.81.23:911/image/${item.projectImage}")
+                .resize(1280, 560)
+                .centerCrop()
+                .into(holder.binding.ivProjectImage)
 
         holder.itemView.setOnClickListener {
             val context = holder.binding.itemListProjectHolder.context
             val intent = Intent(context, ProjectDetailActivity::class.java)
-            val projectID = item.projectID.toString()
-            val projectTitle = item.projectTitle.toString()
-            val projectSalary = item.projectSallary.toString()
-            val projectDesc = item.projectDesc.toString()
-            val projectDuration = item.projectDuration.toString()
-            val projectStatus = item.hiringStatus.toString()
-            val msgReply = item.replyMsg.toString()
-            val repliedAt = item.repliedAt.toString()
 
-            intent.putExtra("projectID", projectID)
-            intent.putExtra("projectTitle", projectTitle)
-            intent.putExtra("projectSalary", projectSalary)
-            intent.putExtra("projectDesc", projectDesc)
-            intent.putExtra("projectDuration", projectDuration)
-            intent.putExtra("projectStatus", projectStatus)
-            intent.putExtra("msgReply", msgReply)
-            intent.putExtra("repliedAt", repliedAt)
+            intent.putExtra("projectID", item.projectID)
+            intent.putExtra("projectTitle", item.projectTitle)
+            intent.putExtra("projectSalary", item.projectSalary)
+            intent.putExtra("projectDesc", item.projectDesc)
+            intent.putExtra("projectDuration", item.projectDuration)
+            intent.putExtra("projectImage", item.projectImage)
             context.startActivity(intent)
         }
     }

@@ -49,7 +49,7 @@ class CompanyEditProfileActivity : AppCompatActivity(), OnMapReadyCallback, Loca
 
     companion object {
         private const val IMAGE_PICK_CODE = 1000;
-        private const val PERMISSION_CODE = 1001;
+        const val PERMISSION_CODE = 1001;
     }
 
     @SuppressLint("SetTextI18n")
@@ -92,21 +92,15 @@ class CompanyEditProfileActivity : AppCompatActivity(), OnMapReadyCallback, Loca
         }
 
         binding.btEditProfileImage.setOnClickListener {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-                if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) ==
-                    PackageManager.PERMISSION_DENIED){
-                    //permission denied
-                    val permissions = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE);
-                    //show popup to request runtime permission
-                    requestPermissions(permissions, CompanyEditProfileActivity.PERMISSION_CODE);
-                }
-                else{
-                    //permission already granted
-                    pickImageFromGallery();
-                }
+            if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) ==
+                PackageManager.PERMISSION_DENIED){
+                //permission denied
+                val permissions = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE);
+                //show popup to request runtime permission
+                requestPermissions(permissions, CompanyEditProfileActivity.PERMISSION_CODE);
             }
             else{
-                //system OS is < Marshmallow
+                //permission already granted
                 pickImageFromGallery();
             }
         }
@@ -162,6 +156,7 @@ class CompanyEditProfileActivity : AppCompatActivity(), OnMapReadyCallback, Loca
             val companyLinkedin = createPartFromString(binding.etEditCompanyLinkedin.text.toString())
             val companyInstagram = createPartFromString(binding.etEditCompanyInstagram.text.toString())
             val companyFacebook = createPartFromString(binding.etEditCompanyFacebook.text.toString())
+
             var companyImage: MultipartBody.Part? = null
             val mediaTypeImg = "image/jpeg".toMediaType()
             val inputStream = data?.data?.let { contentResolver.openInputStream(it) }

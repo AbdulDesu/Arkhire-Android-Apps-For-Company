@@ -12,8 +12,12 @@ import com.sizdev.arkhireforcompany.homepage.item.home.detailedtalent.workexperi
 import com.sizdev.arkhireforcompany.homepage.item.home.devops.DevOpsEngineerResponse
 import com.sizdev.arkhireforcompany.homepage.item.home.fullstackmobile.FullStackMobileResponse
 import com.sizdev.arkhireforcompany.homepage.item.home.fullstackweb.FullStackWebResponse
+import com.sizdev.arkhireforcompany.homepage.item.project.createhiring.CreateHiringResponses
 import com.sizdev.arkhireforcompany.homepage.item.project.createproject.CreateProjectResponse
 import com.sizdev.arkhireforcompany.homepage.item.project.showproject.ProjectResponse
+import com.sizdev.arkhireforcompany.homepage.item.project.showproject.detailproject.details.ProjectDetailResponse
+import com.sizdev.arkhireforcompany.homepage.item.project.showproject.detailproject.contributor.ProjectContributorResponse
+import com.sizdev.arkhireforcompany.homepage.item.project.showproject.detailproject.hiringlist.ProjectHiringResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.http.*
@@ -86,15 +90,27 @@ interface ArkhireApiService {
 
 
     // Project Service
-    @GET("projectresp/owner/{accountID}")
+    @GET("project/owner/{accountID}")
     suspend fun getAllProjectResponse(@Path("accountID") accountID: String): ProjectResponse
 
-    @FormUrlEncoded
-    @POST("/project")
-    suspend fun createProjectRequest(@Field("project_tittle") projectName: String,
-                                     @Field("project_duration") projectDuration: String,
-                                     @Field("project_desc") projectDesc:String,
-                                     @Field("project_sallary") projectSalary:String) : CreateProjectResponse
+    @GET("project/{projectID}")
+    suspend fun getProjectByIDResponse(@Path("projectID") projectID: String) : ProjectDetailResponse
+
+    @GET("projectresp/owner/{projectID}")
+    suspend fun getHiringListResponse(@Path("projectID") projectID: String) : ProjectHiringResponse
+
+    @GET("contributor/room/{projectID}")
+    suspend fun showContributor(@Path("projectID") projectId: String) : ProjectContributorResponse
+
+    @Multipart
+    @POST("project/new")
+    suspend fun createProjectRequest(@Part("project_tittle") projectName: RequestBody,
+                                     @Part("project_duration") projectDuration: RequestBody,
+                                     @Part("project_desc") projectDesc:RequestBody,
+                                     @Part("project_sallary") projectSalary:RequestBody,
+                                     @Part("project_owner") projectOwner: RequestBody,
+                                     @Part projectImage:MultipartBody.Part
+                                     ) : CreateProjectResponse
 
     @FormUrlEncoded
     @PUT("/project/{projectID}")
@@ -106,6 +122,13 @@ interface ArkhireApiService {
 
     @DELETE("/project/{projectID}")
     suspend fun deleteProjectResponse(@Path ("projectID") projectID: String): ProjectResponse
+
+    // Hiring Service
+    @FormUrlEncoded
+    @POST("talentresp")
+    suspend fun hireTalentResponse(@Field("projectID") projectID: String,
+                                   @Field("offering_owner") talentID: String,
+                                   @Field("offered_salary") offeredSalary: String): CreateHiringResponses
 
     // Portfolio Service
     @GET("portfolio/owner/{accountID}")

@@ -1,20 +1,28 @@
 package com.sizdev.arkhireforcompany.homepage.item.project.showproject
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sizdev.arkhireforcompany.R
 import com.sizdev.arkhireforcompany.databinding.FragmentProjectBinding
+import com.sizdev.arkhireforcompany.homepage.item.project.createproject.CreateProjectActivity
 import com.sizdev.arkhireforcompany.networking.ArkhireApiClient
 import com.sizdev.arkhireforcompany.networking.ArkhireApiService
 import kotlinx.coroutines.*
+import okhttp3.internal.notify
+import retrofit2.HttpException
+import retrofit2.Response
 
 class ProjectFragment : Fragment() {
 
@@ -40,11 +48,21 @@ class ProjectFragment : Fragment() {
 
         // Get Saved ID
         val sharedPrefData = requireActivity().getSharedPreferences("Token", Context.MODE_PRIVATE)
-        val savedID = sharedPrefData.getString("accCompany", null)
+        val savedID = sharedPrefData.getString("accID", null)
 
-        //Show Project
-        if (savedID != null) {
-            showAllProjectList(savedID)
+        // Data Refresh Management
+        val mainHandler = Handler(Looper.getMainLooper())
+        mainHandler.post(object : Runnable {
+            override fun run() {
+                showAllProjectList(savedID!!)
+                mainHandler.postDelayed(this, 2000)
+            }
+        })
+
+        // Enable FAB
+        binding.btCreateProject.setOnClickListener {
+            val intent = Intent(activity, CreateProjectActivity::class.java)
+            startActivity(intent)
         }
 
         return binding.root
@@ -62,7 +80,7 @@ class ProjectFragment : Fragment() {
 
             if (result is ProjectResponse) {
                 val list = result.data?.map{
-                    ProjectModel(it.offeringID, it.projectID, it.projectTitle, it.projectDuration, it.projectDesc, it.projectSalary, it.hiringStatus, it.replyMsg, it.repliedAt)
+                    ProjectModel(it.projectID, it.projectTitle, it.projectDuration, it.projectDesc, it.projectSalary, it.projectImage, it.postedAt)
                 }
 
                 (binding.rvProjectList.adapter as ProjectAdapter).addList(list)
@@ -78,4 +96,5 @@ class ProjectFragment : Fragment() {
         coroutineScope.cancel()
         super.onDestroy()
     }
+
 }

@@ -25,7 +25,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="52dp"
+                android:layout_marginTop="42dp"
                 android:text="Creating a project"
                 android:textColor="@color/white"
                 android:textSize="38sp"
@@ -35,24 +35,6 @@
 
 
         </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
-
-            <View
-                android:id="@+id/view5"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:background="@drawable/login_header"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
-        </RelativeLayout>
-
 
         <ScrollView
             android:layout_width="414dp"
@@ -127,8 +109,33 @@
                     android:maxLength="500"
                     android:padding="16dp" />
 
+                <RelativeLayout
+                    android:id="@+id/rl_pickingImage"
+                    android:layout_marginTop="26dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/iv_projectImage"
+                        android:scaleType="centerCrop"
+                        android:background="#CCCCCC"
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"/>
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/bt_pickImage"
+                        android:text="@string/pick_image"
+                        android:textSize="12sp"
+                        android:textColor="@color/white"
+                        android:layout_centerInParent="true"
+                        android:background="#FBB017"
+                        android:layout_width="100dp"
+                        android:layout_height="36dp"/>
+
+                </RelativeLayout>
+
                 <android.widget.Button
-                    android:id="@+id/bt_sendOffering"
+                    android:id="@+id/bt_createProject"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"

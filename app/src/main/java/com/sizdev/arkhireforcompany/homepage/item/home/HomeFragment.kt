@@ -16,6 +16,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sizdev.arkhireforcompany.R
 import com.sizdev.arkhireforcompany.administration.login.LoginActivity
 import com.sizdev.arkhireforcompany.databinding.FragmentHomeBinding
+import com.sizdev.arkhireforcompany.homepage.item.account.AccountResponse
+import com.sizdev.arkhireforcompany.homepage.item.account.profile.CompanyProfileActivity
+import com.sizdev.arkhireforcompany.homepage.item.account.profile.edit.CompanyEditProfileActivity
 import com.sizdev.arkhireforcompany.homepage.item.home.android.AndroidDeveloperAdapter
 import com.sizdev.arkhireforcompany.homepage.item.home.android.AndroidDeveloperModel
 import com.sizdev.arkhireforcompany.homepage.item.home.android.AndroidDeveloperResponse
@@ -76,6 +79,7 @@ class HomeFragment : Fragment() {
         val mainHandler = Handler(Looper.getMainLooper())
         mainHandler.post(object : Runnable {
             override fun run() {
+                getCompanyData(accountID!!)
                 showAndroidDeveloperTalent()
                 showDevOpsEngineerTalent()
                 showFullStackMobileTalent()
@@ -250,6 +254,29 @@ class HomeFragment : Fragment() {
 
                 // End Of Loading
                 binding.loadingScreen.visibility = View.GONE
+            }
+        }
+    }
+
+    @SuppressLint("SetTextI18n", "ObjectAnimatorBinding")
+    private fun getCompanyData(accountHolder: String) {
+        coroutineScope.launch {
+            val result = withContext(Dispatchers.IO) {
+                try {
+                    service?.getAccountDataByNameResponse(accountHolder)
+                } catch (e: Throwable) {
+                    e.printStackTrace()
+                }
+            }
+
+            if (result is AccountResponse) {
+
+                // Save Emergency companyID
+                val sharedPref = activity?.getSharedPreferences("Token", Context.MODE_PRIVATE)
+                val editor = sharedPref?.edit()
+                editor?.putString("accCompany", result.data[0].companyID)
+                editor?.apply()
+
             }
         }
     }

@@ -1,9 +1,12 @@
 package com.sizdev.arkhireforcompany.homepage.item.home.detailedtalent
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -16,6 +19,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import com.sizdev.arkhireforcompany.R
 import com.sizdev.arkhireforcompany.databinding.ActivityTalentProfileBinding
+import com.sizdev.arkhireforcompany.homepage.item.project.createhiring.CreateHiringActivity
 import com.sizdev.arkhireforcompany.homepage.item.project.createproject.CreateProjectActivity
 import com.sizdev.arkhireforcompany.webviewer.ArkhireWebViewerActivity
 import com.squareup.picasso.Picasso
@@ -28,7 +32,12 @@ class TalentProfileActivity : AppCompatActivity() {
     private lateinit var binding: ActivityTalentProfileBinding
     private lateinit var pagerAdapter: TalentProfileTabAdapter
     private lateinit var dialog: AlertDialog
+    private var phoneNumber : String? = null
     private var doubleBackToExitPressedOnce = false
+
+    companion object {
+        private const val PERMISSION_CODE = 911
+    }
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,8 +50,6 @@ class TalentProfileActivity : AppCompatActivity() {
         binding.tabTalentProfile.setupWithViewPager(binding.vpTalentProfile)
 
         //Get Data
-        val talentID = intent.getStringExtra("talentID")
-        val accountID = intent.getStringExtra("accountID")
         val talentName = intent.getStringExtra("talentName")
         val talentTitle = intent.getStringExtra("talentTitle")
         val talentTime = intent.getStringExtra("talentTime")
@@ -159,7 +166,19 @@ class TalentProfileActivity : AppCompatActivity() {
 
         view.bt_yesHire.setOnClickListener {
             dialog.dismiss()
-            val intent = Intent(this, CreateProjectActivity::class.java)
+
+            // Get Data Saved
+            val talentID = intent.getStringExtra("talentID")
+            val talentName = intent.getStringExtra("talentName")
+            val talentTitle = intent.getStringExtra("talentTitle")
+            val talentImage = intent.getStringExtra("talentImage")
+
+            val intent = Intent(this, CreateHiringActivity::class.java)
+            intent.putExtra("talentID", talentID)
+            intent.putExtra("talentName", talentName)
+            intent.putExtra("talentTitle", talentTitle)
+            intent.putExtra("talentImage", talentImage)
+
             startActivity(intent)
         }
 
@@ -172,6 +191,7 @@ class TalentProfileActivity : AppCompatActivity() {
     private fun startAlertCallConfirmation() {
         val view: View = layoutInflater.inflate(R.layout.alert_call_confirmation, null)
         val talentPhone = intent.getStringExtra("talentPhone")
+        phoneNumber = talentPhone
         dialog = AlertDialog.Builder(this)
             .setView(view)
             .setCancelable(false)
@@ -180,17 +200,41 @@ class TalentProfileActivity : AppCompatActivity() {
         view.tv_alertNumberTalent.text = talentPhone
         view.bt_yesCall.setOnClickListener {
             dialog.dismiss()
-            val call = Intent(Intent.ACTION_CALL, Uri.fromParts("tel", talentPhone, null))
-            try {
-                startActivity(call)
-            } catch (e: ActivityNotFoundException) {
-                e.printStackTrace()
-                Toast.makeText(this, "Please Enable Call permission ", Toast.LENGTH_SHORT).show()
+            if (checkSelfPermission(Manifest.permission.CALL_PHONE) ==
+                    PackageManager.PERMISSION_DENIED){
+                //permission denied
+                val permissions = arrayOf(Manifest.permission.CALL_PHONE);
+                //show popup to request runtime permission
+                requestPermissions(permissions, TalentProfileActivity.PERMISSION_CODE);
+            }
+            else{
+                //permission already granted
+                callTalent(talentPhone!!)
             }
         }
 
         view.bt_noCall.setOnClickListener {
             dialog.cancel()
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+            requestCode: Int,
+            permissions: Array<out String>,
+            grantResults: IntArray
+    ) {
+        when(requestCode) {
+            TalentProfileActivity.PERMISSION_CODE -> {
+                if (grantResults.isNotEmpty() && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED){
+                    //permission from popup granted
+                    callTalent(phoneNumber!!)
+                }
+                else{
+                    //permission from popup denied
+                    Toast.makeText(this, "Please Allow Permission", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 
@@ -223,6 +267,15 @@ class TalentProfileActivity : AppCompatActivity() {
 
         view.bt_noSend.setOnClickListener {
             dialog.cancel()
+        }
+    }
+
+    private fun callTalent(talentPhone: String) {
+        val call = Intent(Intent.ACTION_CALL, Uri.fromParts("tel", talentPhone, null))
+        try {
+            startActivity(call )
+        } catch (e: ActivityNotFoundException) {
+            e.printStackTrace()
         }
     }
 }

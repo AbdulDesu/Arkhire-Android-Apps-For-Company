@@ -69,9 +69,6 @@ class AccountFragment : Fragment() {
             }
         }
 
-
-
-
         // Show Account Data
         if (savedID != null){
             showAccountData(savedID)

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="4dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="160dp">
+
+            <ImageView
+                android:id="@+id/iv_talentImage"
+                android:layout_marginStart="32dp"
+                android:layout_centerVertical="true"
+                android:layout_width="82dp"
+                android:layout_height="82dp"/>
+
+            <TextView
+                android:id="@+id/tv_talentName"
+                android:layout_toEndOf="@id/iv_talentImage"
+                android:text="Muhammad Sirius Aldebaran"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:layout_marginTop="40dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"/>
+
+            <TextView
+                android:id="@+id/tv_talentTitle"
+                android:layout_toEndOf="@id/iv_talentImage"
+                android:layout_below="@id/tv_talentName"
+                android:text="Android Developer"
+                android:textSize="14sp"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="4dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"/>
+
+            <TextView
+                android:id="@+id/tv_talentSalary"
+                android:layout_toEndOf="@id/iv_talentImage"
+                android:layout_below="@id/tv_talentTitle"
+                android:text="Rp. 19.000.000"
+                android:textSize="12sp"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="4dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"/>
+
+            <androidx.cardview.widget.CardView
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                app:cardCornerRadius="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/iv_hiringStatus"
+                    android:src="@drawable/ic_waiting"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"/>
+
+            </androidx.cardview.widget.CardView>
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+</layout>
