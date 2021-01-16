@@ -19,7 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ArkhireCompany"
         android:usesCleartextTraffic="true">
-        <activity android:name=".homepage.item.project.createhiring.CreateHiringActivity"></activity>
+        <activity android:name=".homepage.item.project.createhiring.CreateHiringActivity" />
         <activity android:name=".extra.CostumerServiceActivity" />
         <activity android:name=".homepage.item.home.detailedtalent.workexperience.WorkExperienceDetailActivity" />
         <activity android:name=".homepage.item.home.detailedtalent.portfolio.PortfolioDetailsActivity" />

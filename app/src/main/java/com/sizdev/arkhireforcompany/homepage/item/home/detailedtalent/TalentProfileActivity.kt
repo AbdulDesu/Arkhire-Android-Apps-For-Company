@@ -33,7 +33,6 @@ class TalentProfileActivity : AppCompatActivity() {
     private lateinit var pagerAdapter: TalentProfileTabAdapter
     private lateinit var dialog: AlertDialog
     private var phoneNumber : String? = null
-    private var doubleBackToExitPressedOnce = false
 
     companion object {
         private const val PERMISSION_CODE = 911
@@ -138,21 +137,6 @@ class TalentProfileActivity : AppCompatActivity() {
                 false
             }
         }
-    }
-
-    override fun onBackPressed() {
-
-        if (doubleBackToExitPressedOnce) {
-            super.onBackPressed()
-            return
-        }
-
-        this.doubleBackToExitPressedOnce = true
-        Toast.makeText(this, "Tap back again to exit", Toast.LENGTH_SHORT).show()
-
-        Handler().postDelayed(Runnable {
-            doubleBackToExitPressedOnce = false
-        }, 2000)
     }
 
     @SuppressLint("InflateParams")

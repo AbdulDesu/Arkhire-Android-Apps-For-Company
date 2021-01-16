@@ -47,6 +47,7 @@ class PortfolioAdapter : RecyclerView.Adapter<PortfolioAdapter.ShowPortfolioHold
             intent.putExtra("portfolioID", item.portfolioID)
             intent.putExtra("portfolioTitle", item.portfolioTitle)
             intent.putExtra("portfolioDesc", item.portfolioDesc)
+            intent.putExtra("portfolioRepo", item.portfolioRepository)
             intent.putExtra("portfolioImage", item.portfolioImage)
 
             context.startActivity(intent)

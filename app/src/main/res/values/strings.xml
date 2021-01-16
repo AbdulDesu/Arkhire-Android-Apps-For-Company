@@ -60,5 +60,6 @@
     <string name="hire_talent">Hire Talent</string>
     <string name="send">SEND</string>
     <string name="loging_in">Loging in...</string>
+    <string name="open_repository">open repository</string>
 
 </resources>
