@@ -1,5 +1,8 @@
 package com.sizdev.arkhireforcompany.homepage.item.explore
 
+import android.annotation.SuppressLint
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -10,21 +13,31 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
 import android.widget.SearchView
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import com.sizdev.arkhireforcompany.R
+import com.sizdev.arkhireforcompany.administration.login.LoginActivity
 import com.sizdev.arkhireforcompany.databinding.FragmentExploreBinding
+import com.sizdev.arkhireforcompany.homepage.item.project.showproject.ProjectPresenter
 import com.sizdev.arkhireforcompany.networking.ArkhireApiClient
 import com.sizdev.arkhireforcompany.networking.ArkhireApiService
+import kotlinx.android.synthetic.main.alert_session_expired.view.*
 import kotlinx.coroutines.*
 import java.lang.Runnable
 
 
-class ExploreFragment : Fragment() {
+class ExploreFragment : Fragment(), ExploreContract.View {
 
     private lateinit var binding: FragmentExploreBinding
+    private lateinit var dialog: AlertDialog
+    private lateinit var handler: Handler
     private lateinit var coroutineScope: CoroutineScope
-    private lateinit var service: ArkhireApiService
+    private lateinit var popupMenu: PopupMenu
+
+    private var presenter: ExplorePresenter? = null
+    private var searchKeyword: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,58 +45,69 @@ class ExploreFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_explore, container, false)
-        coroutineScope = CoroutineScope(Job() + Dispatchers.Main)
-        service = activity?.let { ArkhireApiClient.getApiClient(it) }!!.create(ArkhireApiService::class.java)
 
-        // Data Loading Management
-        binding.loadingScreen.visibility = View.VISIBLE
-        binding.progressBar.max = 100
-
-        // Data Refresh Management
-        val mainHandler = Handler(Looper.getMainLooper())
-        mainHandler.post(object : Runnable {
-            override fun run() {
-                showTalent()
-                mainHandler.postDelayed(this, 60000)
-            }
-        })
+        // Set Service
+        setService()
 
         // Set Up RecyclerView
-        binding.rvExplore.adapter = ExploreAdapter()
-        binding.rvExplore.layoutManager = GridLayoutManager(activity, 2, GridLayoutManager.VERTICAL, false)
+        setRecyclerView()
+
+        // Show Progress Bar
+        showProgressBar()
+
+        // Data Refresh Management
+        dataRefreshManager()
 
         // Manage Pop Up
-        val filterBy = PopupMenu(activity, binding.filter)
-        filterBy.menu.add(Menu.NONE, 0 ,0, "Location")
-        filterBy.menu.add(Menu.NONE, 1 ,1, "WorkTime")
+        popUpManager()
+
+        // Manage Search View
+        searchManager()
 
 
+        return binding.root
+    }
 
-        // Set Search View
+    override fun onStart() {
+        super.onStart()
+        presenter?.bindToView(this)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        presenter?.unbind()
+    }
+
+    override fun onDestroy() {
+        coroutineScope.cancel()
+        super.onDestroy()
+    }
+
+    private fun searchManager() {
         binding.tbExplore.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 binding.tbExplore.clearFocus()
                 if (query != null) {
                     binding.rvExplore.visibility = View.VISIBLE
                     binding.lnNotFound.visibility = View.GONE
-                    mainHandler.removeCallbacksAndMessages(null)
-                    filterByName(query)
-
+                    handler.removeCallbacksAndMessages(null)
+                    presenter?.searchByName(query)
+                    searchKeyword = query
                     binding.filter.setOnClickListener {
 
                         // Pop Up Listener
                         binding.loadingScreen.visibility = View.VISIBLE
-                        filterBy.setOnMenuItemClickListener { menuItem ->
+                        popupMenu.setOnMenuItemClickListener { menuItem ->
                             val id = menuItem.itemId
 
                             when (id) {
-                                0 -> filterByLocation(query)
-                                1 -> filterByTime(query)
+                                0 -> presenter?.searchByLocation(query)
+                                1 -> presenter?.searchByWorkTime(query)
                             }
                             false
                         }
 
-                        filterBy.show()
+                        popupMenu.show()
                     }
                 }
                 return false
@@ -91,8 +115,9 @@ class ExploreFragment : Fragment() {
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 if (newText != null) {
-                    mainHandler.removeCallbacksAndMessages(null)
-                    filterByName(newText)
+                    handler.removeCallbacksAndMessages(null)
+                    searchKeyword = newText
+                    presenter?.searchByName(newText)
                 }
                 return false
             }
@@ -100,182 +125,94 @@ class ExploreFragment : Fragment() {
 
         binding.tbExplore.setOnCloseListener {
             binding.tbExplore.clearFocus()
-            showTalent()
+            presenter?.getTalent()
             false
         }
-
-        return binding.root
     }
 
-    private fun showTalent() {
-        coroutineScope.launch {
-            val result = withContext(Dispatchers.IO) {
-                try {
-                    service?.getAllTalentResponse()
-                } catch (e: Throwable) {
-                    e.printStackTrace()
-                }
+    private fun popUpManager() {
+        popupMenu = PopupMenu(activity, binding.filter)
+        popupMenu.menu.add(Menu.NONE, 0 ,0, "Location")
+        popupMenu.menu.add(Menu.NONE, 1 ,1, "WorkTime")
+    }
+
+    private fun showProgressBar() {
+        binding.loadingScreen.visibility = View.VISIBLE
+        binding.progressBar.max = 100
+    }
+
+    private fun setRecyclerView() {
+        binding.rvExplore.adapter = ExploreAdapter()
+        binding.rvExplore.layoutManager = GridLayoutManager(activity, 2, GridLayoutManager.VERTICAL, false)
+
+    }
+
+    private fun setService() {
+        coroutineScope = CoroutineScope(Job() + Dispatchers.Main)
+        val service = activity?.let { ArkhireApiClient.getApiClient(it)?.create(ArkhireApiService::class.java) }
+        presenter = ExplorePresenter(coroutineScope, service)
+    }
+
+    private fun dataRefreshManager() {
+        handler = Handler(Looper.getMainLooper())
+        handler.post(object : Runnable {
+            override fun run() {
+                presenter?.getTalent()
+                handler.postDelayed(this, 60000)
+            }
+        })
+    }
+
+
+
+    override fun addExploreList(list: List<ExploreModel>) {
+        (binding.rvExplore.adapter as ExploreAdapter).addList(list)
+    }
+
+    @SuppressLint("SetTextI18n")
+    override fun setError(error: String) {
+        when (error){
+            "Session Expired !" -> {
+                sessionExpiredAlert()
+                dialog.show()
             }
 
-            if (result is ExploreResponse) {
-                val list = result.data?.map {
-                    ExploreModel(
-                        it.talentID,
-                        it.accountID,
-                        it.accountName,
-                        it.accountEmail,
-                        it.accountPhone,
-                        it.talentTitle,
-                        it.talentTime,
-                        it.talentCity,
-                        it.talentDesc,
-                        it.talentImage,
-                        it.talentGithub,
-                        it.talentCv,
-                        it.talentSkill1,
-                        it.talentSkill2,
-                        it.talentSkill3,
-                        it.talentSkill4,
-                        it.talentSkill5
-                    )
-                }
+            "Search Result Not Found !" -> {
+                binding.rvExplore.visibility = View.GONE
+                binding.tvQueryNotfound.visibility = View.VISIBLE
+                binding.tvQueryNotfound.text = "Search result of $searchKeyword is not found"
+            }
 
-                (binding.rvExplore.adapter as ExploreAdapter).addList(list)
-
-                // End Of Loading
-                binding.loadingScreen.visibility = View.GONE
+            else -> {
+                Toast.makeText(activity, error, Toast.LENGTH_LONG).show()
             }
         }
     }
 
-    private fun filterByName(talentName: String) {
-        coroutineScope.launch {
-            val result = withContext(Dispatchers.IO) {
-                try {
-                    service?.filterTalentByName(talentName)
-                } catch (e: Throwable) {
-                    e.printStackTrace()
-                }
-            }
-
-            if (result is ExploreResponse) {
-                val list = result.data?.map {
-                    ExploreModel(
-                        it.talentID,
-                        it.accountID,
-                        it.accountName,
-                        it.accountEmail,
-                        it.accountPhone,
-                        it.talentTitle,
-                        it.talentTime,
-                        it.talentCity,
-                        it.talentDesc,
-                        it.talentImage,
-                        it.talentGithub,
-                        it.talentCv,
-                        it.talentSkill1,
-                        it.talentSkill2,
-                        it.talentSkill3,
-                        it.talentSkill4,
-                        it.talentSkill5
-                    )
-                }
-
-                (binding.rvExplore.adapter as ExploreAdapter).addList(list)
-
-                // End Of Loading
-                binding.loadingScreen.visibility = View.GONE
-            }
-        }
+    override fun hideProgressBar() {
+        binding.loadingScreen.visibility = View.GONE
     }
 
-    private fun filterByLocation(talentLocation: String) {
-        coroutineScope.launch {
-            val result = withContext(Dispatchers.IO) {
-                try {
-                    service?.filterTalentByLocation(talentLocation)
-                } catch (e: Throwable) {
-                    e.printStackTrace()
-                }
-            }
+    private fun sessionExpiredAlert() {
+        val view: View = layoutInflater.inflate(R.layout.alert_session_expired, null)
 
-            if (result is ExploreResponse) {
-                val list = result.data?.map {
-                    ExploreModel(
-                        it.talentID,
-                        it.accountID,
-                        it.accountName,
-                        it.accountEmail,
-                        it.accountPhone,
-                        it.talentTitle,
-                        it.talentTime,
-                        it.talentCity,
-                        it.talentDesc,
-                        it.talentImage,
-                        it.talentGithub,
-                        it.talentCv,
-                        it.talentSkill1,
-                        it.talentSkill2,
-                        it.talentSkill3,
-                        it.talentSkill4,
-                        it.talentSkill5
-                    )
-                }
+        dialog = activity?.let {
+            AlertDialog.Builder(it)
+                    .setView(view)
+                    .setCancelable(false)
+                    .create()
+        }!!
 
-                (binding.rvExplore.adapter as ExploreAdapter).addList(list)
-
-                // End Of Loading
-                binding.loadingScreen.visibility = View.GONE
-            }
+        view.bt_okRelog.setOnClickListener {
+            dialog.dismiss()
+            val intent = Intent(activity, LoginActivity::class.java)
+            val sharedPref = requireActivity().getSharedPreferences("Token", Context.MODE_PRIVATE)
+            val editor = sharedPref.edit()
+            editor.putString("accID", null)
+            editor.apply()
+            startActivity(intent)
+            activity?.finish()
         }
-    }
-
-    private fun filterByTime(talentTime: String) {
-        coroutineScope.launch {
-            val result = withContext(Dispatchers.IO) {
-                try {
-                    service?.filterTalentByTimeWork(talentTime)
-                } catch (e: Throwable) {
-                    e.printStackTrace()
-                }
-            }
-
-            if (result is ExploreResponse) {
-                val list = result.data?.map {
-                    ExploreModel(
-                        it.talentID,
-                        it.accountID,
-                        it.accountName,
-                        it.accountEmail,
-                        it.accountPhone,
-                        it.talentTitle,
-                        it.talentTime,
-                        it.talentCity,
-                        it.talentDesc,
-                        it.talentImage,
-                        it.talentGithub,
-                        it.talentCv,
-                        it.talentSkill1,
-                        it.talentSkill2,
-                        it.talentSkill3,
-                        it.talentSkill4,
-                        it.talentSkill5
-                    )
-                }
-
-                (binding.rvExplore.adapter as ExploreAdapter).addList(list)
-
-                // End Of Loading
-                binding.loadingScreen.visibility = View.GONE
-            }
-        }
-    }
-
-
-
-    override fun onDestroy() {
-        coroutineScope.cancel()
-        super.onDestroy()
     }
 
 }

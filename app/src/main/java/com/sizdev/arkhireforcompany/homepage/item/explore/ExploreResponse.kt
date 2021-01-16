@@ -2,7 +2,7 @@ package com.sizdev.arkhireforcompany.homepage.item.explore
 
 import com.google.gson.annotations.SerializedName
 
-data class ExploreResponse(val success: String, val message: String, val data: List<AllTalent>) {
+data class ExploreResponse(val success: Boolean, val message: String, val data: List<AllTalent>) {
     data class AllTalent(val talentID : String?,
                              val accountID: String?,
                              @SerializedName("account_name")  val accountName: String?,

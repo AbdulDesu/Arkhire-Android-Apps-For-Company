@@ -40,8 +40,8 @@ class HomeFragment : Fragment(), HomeContract.View {
     private lateinit var coroutineScope: CoroutineScope
     private lateinit var handler: Handler
 
-    private var accountID: String ? = null
-    private var presenter: HomePresenter ? = null
+    private var accountID: String? = null
+    private var presenter: HomePresenter? = null
 
     @SuppressLint("SimpleDateFormat", "WeekBasedYear", "SetTextI18n")
     override fun onCreateView(
@@ -63,7 +63,7 @@ class HomeFragment : Fragment(), HomeContract.View {
         // Get Current Login Data
         getCurrentAccount()
 
-        // Set Up RecyclerView()
+        // Set Up RecyclerView
         setRecyclerView()
 
         // Data Refresh Management

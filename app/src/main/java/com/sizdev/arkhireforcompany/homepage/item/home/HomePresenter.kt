@@ -53,7 +53,6 @@ class HomePresenter(private val coroutineScope: CoroutineScope,
 
             if (result is AccountResponse) {
                 if (result.success){
-                    view?.hideProgressBar()
                     view?.setGreeting(result.data[0].accountName)
                     view?.setCompanyID(result.data[0].companyID)
                 }
@@ -95,7 +94,6 @@ class HomePresenter(private val coroutineScope: CoroutineScope,
                     val list = result.data?.map{
                         AndroidDeveloperModel(it.talentID, it.accountID, it.accountName, it.accountEmail, it.accountPhone, it.talentTitle, it.talentTime, it.talentCity, it.talentDesc, it.talentImage, it.talentGithub, it.talentCv, it.talentSkill1, it.talentSkill2, it.talentSkill3, it.talentSkill4, it.talentSkill5)
                     }
-                    view?.hideProgressBar()
                     view?.addAndroidDeveloperTalent(list)
                 }
                 else {
@@ -136,7 +134,6 @@ class HomePresenter(private val coroutineScope: CoroutineScope,
                     val list = result.data?.map{
                         DevOpsEngineerModel(it.talentID, it.accountID, it.accountName, it.accountEmail, it.accountPhone, it.talentTitle, it.talentTime, it.talentCity, it.talentDesc, it.talentImage, it.talentGithub, it.talentCv, it.talentSkill1, it.talentSkill2, it.talentSkill3, it.talentSkill4, it.talentSkill5)
                     }
-                    view?.hideProgressBar()
                     view?.addDevOpsEngineerTalent(list)
                 }
                 else {
@@ -177,7 +174,6 @@ class HomePresenter(private val coroutineScope: CoroutineScope,
                     val list = result.data?.map{
                         FullStackMobileModel(it.talentID, it.accountID, it.accountName, it.accountEmail, it.accountPhone, it.talentTitle, it.talentTime, it.talentCity, it.talentDesc, it.talentImage, it.talentGithub, it.talentCv, it.talentSkill1, it.talentSkill2, it.talentSkill3, it.talentSkill4, it.talentSkill5)
                     }
-                    view?.hideProgressBar()
                     view?.addFullStackMobileTalent(list)
                 }
                 else {
@@ -218,8 +214,8 @@ class HomePresenter(private val coroutineScope: CoroutineScope,
                     val list = result.data?.map{
                         FullStackWebModel(it.talentID, it.accountID, it.accountName, it.accountEmail, it.accountPhone, it.talentTitle, it.talentTime, it.talentCity, it.talentDesc, it.talentImage, it.talentGithub, it.talentCv, it.talentSkill1, it.talentSkill2, it.talentSkill3, it.talentSkill4, it.talentSkill5)
                     }
-                    view?.hideProgressBar()
                     view?.addFullStackWebTalent(list)
+                    view?.hideProgressBar()
                 }
                 else {
                     view?.hideProgressBar()

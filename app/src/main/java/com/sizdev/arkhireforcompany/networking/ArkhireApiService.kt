@@ -70,6 +70,9 @@ interface ArkhireApiService {
     @GET("/talent/filter/name")
     suspend fun filterTalentByName(@Query("search") name: String): ExploreResponse
 
+    @GET("/talent/filter/title")
+    suspend fun filterTalentByTitle(@Query("search") name: String): ExploreResponse
+
     @GET("/talent/filter/location")
     suspend fun filterTalentByLocation(@Query("search") location: String): ExploreResponse
 

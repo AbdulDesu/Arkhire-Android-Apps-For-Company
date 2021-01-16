@@ -51,6 +51,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
+                <ImageView
+                    android:id="@+id/notfound"
+                    android:visibility="gone"
+                    android:background="@color/white"
+                    android:src="@drawable/empty_data_set"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_projectList"
                     android:layout_width="match_parent"
