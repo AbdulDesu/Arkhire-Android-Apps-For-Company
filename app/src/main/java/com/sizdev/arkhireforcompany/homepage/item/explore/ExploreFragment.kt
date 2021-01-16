@@ -20,7 +20,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.sizdev.arkhireforcompany.R
 import com.sizdev.arkhireforcompany.administration.login.LoginActivity
 import com.sizdev.arkhireforcompany.databinding.FragmentExploreBinding
-import com.sizdev.arkhireforcompany.homepage.item.project.showproject.ProjectPresenter
 import com.sizdev.arkhireforcompany.networking.ArkhireApiClient
 import com.sizdev.arkhireforcompany.networking.ArkhireApiService
 import kotlinx.android.synthetic.main.alert_session_expired.view.*
@@ -42,7 +41,7 @@ class ExploreFragment : Fragment(), ExploreContract.View {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_explore, container, false)
 
@@ -94,19 +93,13 @@ class ExploreFragment : Fragment(), ExploreContract.View {
                     presenter?.searchByName(query)
                     searchKeyword = query
                     binding.filter.setOnClickListener {
-
-                        // Pop Up Listener
-                        binding.loadingScreen.visibility = View.VISIBLE
                         popupMenu.setOnMenuItemClickListener { menuItem ->
-                            val id = menuItem.itemId
-
-                            when (id) {
+                            when (menuItem.itemId) {
                                 0 -> presenter?.searchByLocation(query)
                                 1 -> presenter?.searchByWorkTime(query)
                             }
                             false
                         }
-
                         popupMenu.show()
                     }
                 }
@@ -163,10 +156,11 @@ class ExploreFragment : Fragment(), ExploreContract.View {
         })
     }
 
-
-
     override fun addExploreList(list: List<ExploreModel>) {
         (binding.rvExplore.adapter as ExploreAdapter).addList(list)
+
+        binding.rvExplore.visibility = View.VISIBLE
+        binding.lnNotFound.visibility = View.GONE
     }
 
     @SuppressLint("SetTextI18n")
@@ -179,7 +173,7 @@ class ExploreFragment : Fragment(), ExploreContract.View {
 
             "Search Result Not Found !" -> {
                 binding.rvExplore.visibility = View.GONE
-                binding.tvQueryNotfound.visibility = View.VISIBLE
+                binding.lnNotFound.visibility = View.VISIBLE
                 binding.tvQueryNotfound.text = "Search result of $searchKeyword is not found"
             }
 
