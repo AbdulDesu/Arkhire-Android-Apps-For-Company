@@ -59,5 +59,6 @@
     <string name="adding_talent_to_contribute_on_your_project">Adding talent to contribute on your project</string>
     <string name="hire_talent">Hire Talent</string>
     <string name="send">SEND</string>
+    <string name="loging_in">Loging in...</string>
 
 </resources>

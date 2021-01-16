@@ -2,7 +2,7 @@ package com.sizdev.arkhireforcompany.homepage.item.home.devops
 
 import com.google.gson.annotations.SerializedName
 
-data class DevOpsEngineerResponse(val success: String, val message: String, val data: List<TalentDevOpsEngineer>) {
+data class DevOpsEngineerResponse(val success: Boolean, val message: String, val data: List<TalentDevOpsEngineer>) {
     data class TalentDevOpsEngineer(val talentID : String?,
                                     val accountID: String?,
                                     @SerializedName("account_name")  val accountName: String?,

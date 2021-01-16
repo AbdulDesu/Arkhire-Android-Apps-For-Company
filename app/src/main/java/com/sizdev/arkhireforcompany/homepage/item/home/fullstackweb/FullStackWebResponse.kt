@@ -2,7 +2,7 @@ package com.sizdev.arkhireforcompany.homepage.item.home.fullstackweb
 
 import com.google.gson.annotations.SerializedName
 
-data class FullStackWebResponse(val success: String, val message: String, val data: List<TalentFullStackWeb>) {
+data class FullStackWebResponse(val success: Boolean, val message: String, val data: List<TalentFullStackWeb>) {
     data class TalentFullStackWeb(val talentID : String?,
                                   val accountID: String?,
                                   @SerializedName("account_name")  val accountName: String?,

@@ -12,6 +12,31 @@
         android:orientation="vertical">
 
         <RelativeLayout
+            android:id="@+id/loadingScreen"
+            android:background="@color/white"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:text="Creating Account..."
+                android:textSize="20sp"
+                android:layout_centerInParent="true"
+                android:layout_above="@id/progressBar"
+                android:layout_marginBottom="22dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:max="50"
+                android:layout_centerInParent="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
             android:id="@+id/relativeLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">

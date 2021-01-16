@@ -43,7 +43,7 @@ interface ArkhireApiService {
 
     // Account Service
     @GET("/company/holder/{accountID}")
-    suspend fun getAccountDataByNameResponse(@Path("accountID") accountID : String): AccountResponse
+    suspend fun getAccountDataByHolderResponse(@Path("accountID") accountID : String): AccountResponse
 
     // Profile Service
     @Multipart

@@ -87,7 +87,7 @@ class AccountFragment : Fragment() {
         coroutineScope.launch {
             val result = withContext(Dispatchers.IO) {
                 try {
-                    service?.getAccountDataByNameResponse(accountHolder)
+                    service?.getAccountDataByHolderResponse(accountHolder)
                 } catch (e: Throwable) {
                     e.printStackTrace()
                 }

@@ -3,8 +3,10 @@ package com.sizdev.arkhireforcompany.administration.register
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import com.sizdev.arkhireforcompany.R
 import com.sizdev.arkhireforcompany.administration.login.LoginActivity
 import com.sizdev.arkhireforcompany.databinding.ActivityRegisterBinding
@@ -16,14 +18,16 @@ import kotlinx.coroutines.*
 class RegisterActivity : AppCompatActivity() {
 
     private  lateinit var binding: ActivityRegisterBinding
-    private lateinit var coroutineScope: CoroutineScope
-    private lateinit var service: ArkhireApiService
+    private lateinit var viewModel: RegisterViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_register)
-        coroutineScope = CoroutineScope(Job() + Dispatchers.Main)
-        service = ArkhireApiClient.getApiClient(this)!!.create(ArkhireApiService::class.java)
+        viewModel = ViewModelProvider(this).get(RegisterViewModel::class.java)
+
+        // Set Service
+        setService()
+        subscribeLiveData()
 
         binding.btRegister.setOnClickListener {
             val registerPassword = binding.etRegistPassword.text.toString()
@@ -42,7 +46,7 @@ class RegisterActivity : AppCompatActivity() {
                    Toast.makeText(this, "Password not match", Toast.LENGTH_LONG).show()
                }
                else {
-                   startRegister(fullName,registerEmail,registerPhoneNumber, registerPassword, 1, registerCompanyName, registerCompanyPosition)
+                   viewModel.startRegister(fullName,registerEmail,registerPhoneNumber, registerPassword, 1, registerCompanyName, registerCompanyPosition)
                }
             }
         }
@@ -53,23 +57,36 @@ class RegisterActivity : AppCompatActivity() {
 
     }
 
-    private fun startRegister(acName:String, acEmail:String, acPhone:String, password:String, privilege:Int, companyName: String, companyPosition: String) {
-        coroutineScope.launch {
+    private fun setService() {
+        val service = ArkhireApiClient.getApiClient(this)?.create(ArkhireApiService::class.java)
+        if (service != null) {
+            viewModel.setService(service)
+        }
+    }
 
-            val result = withContext(Dispatchers.IO) {
-                try {
-                    service.registerRequest(acName,acEmail,acPhone,password,privilege,companyName,companyPosition)
-                } catch (e: Throwable) {
-                    e.printStackTrace()
-                }
-            }
-            if (result is RegisterResponse) {
+    private fun subscribeLiveData() {
+        viewModel.isLoading.observe(this, {
+            binding.loadingScreen.visibility = View.VISIBLE
+        })
+
+        viewModel.onSuccess.observe(this, {
+            if (it) {
                 Toast.makeText(this@RegisterActivity, "Registered Succesfully, Please Login To Continue", Toast.LENGTH_LONG).show()
                 val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
                 startActivity(intent)
                 finish()
             }
-        }
+
+            else {
+                // Stop Loading
+                binding.loadingScreen.visibility = View.GONE
+            }
+        })
+
+        viewModel.onFail.observe(this, {
+            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+        })
+
     }
 
 }
