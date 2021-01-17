@@ -35,10 +35,15 @@ class ProjectAdapter : RecyclerView.Adapter<ProjectAdapter.showProjectList>() {
         format.maximumFractionDigits = 0
         format.currency = Currency.getInstance("IDR")
 
+        // Timestamp Convert
+        val dateSplitter = item.postedAt?.split("T")
+        val timeSplitter = dateSplitter?.get(1)?.split(".")
+
         holder.binding.tvProjectTitle.text = item.projectTitle
         holder.binding.tvProjectSalary.text = format.format(item.projectSalary?.toDouble())
-        holder.binding.tvProjectDuration.text = "In ${item.projectDuration}"
-        holder.binding.tvProjectCreated.text = item.postedAt
+        holder.binding.tvProjectDuration.text = "Expired At: ${item.projectDuration}"
+        holder.binding.tvProjectCreated.text = "${dateSplitter!![0]} - ${timeSplitter!![0]}"
+
         Picasso.get()
                 .load("http://54.82.81.23:911/image/${item.projectImage}")
                 .resize(1280, 560)

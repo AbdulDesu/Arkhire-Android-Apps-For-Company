@@ -78,7 +78,6 @@ class ProjectFragment : Fragment(), ProjectContract.View {
         super.onDestroy()
     }
 
-
     private fun getCurrentAccount() {
         val sharedPrefData = requireActivity().getSharedPreferences("Token", Context.MODE_PRIVATE)
         accountID  = sharedPrefData.getString("accID", null)

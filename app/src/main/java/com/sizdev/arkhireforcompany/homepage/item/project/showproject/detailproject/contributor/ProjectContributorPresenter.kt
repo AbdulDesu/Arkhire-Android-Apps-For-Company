@@ -5,6 +5,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import retrofit2.HttpException
 
 class ProjectContributorPresenter (private val coroutineScope: CoroutineScope,
                                    private val service: ArkhireApiService?) : ProjectContributorContract.Presenter {
@@ -24,8 +25,24 @@ class ProjectContributorPresenter (private val coroutineScope: CoroutineScope,
             val result = withContext(Dispatchers.IO) {
                 try {
                     service?.showContributor(projectID)
-                } catch (e: Throwable) {
+                } catch (e: HttpException) {
                     e.printStackTrace()
+                    withContext(Dispatchers.Main){
+                        when{
+                            e.code() == 403 -> {
+                                view?.setError("Session Expired !")
+                            }
+
+                            e.code() == 404 -> {
+                                view?.hideProgressBar()
+                                view?.setError("Project Not Found !")
+                            }
+
+                            else -> {
+                                view?.setError("Unknown Error, Please Try Again Later !")
+                            }
+                        }
+                    }
                 }
             }
 
@@ -34,6 +51,7 @@ class ProjectContributorPresenter (private val coroutineScope: CoroutineScope,
                     ProjectContributorModel(it.accountName, it.accountTitle, it.talentImage)
                 }
                 view?.addListContributor(list)
+                view?.hideProgressBar()
             }
         }
     }

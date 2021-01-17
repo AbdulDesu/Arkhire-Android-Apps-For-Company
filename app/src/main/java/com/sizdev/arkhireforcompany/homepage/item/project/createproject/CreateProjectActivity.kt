@@ -1,7 +1,9 @@
 package com.sizdev.arkhireforcompany.homepage.item.project.createproject
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.DatePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -11,6 +13,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
+import android.widget.DatePicker
 import android.widget.Toast
 import androidx.annotation.NonNull
 import androidx.appcompat.app.AlertDialog
@@ -31,13 +34,20 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.*
 
-class CreateProjectActivity : AppCompatActivity() {
+class CreateProjectActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
 
     private lateinit var binding: ActivityCreateProjectBinding
     private lateinit var viewModel: CreateProjectViewModel
     private lateinit var dialog: AlertDialog
+
     private var companyTag: String? = null
+    private var day = 0
+    private var month = 0
+    private var year = 0
 
     companion object {
         private const val IMAGE_PICK_CODE = 1000;
@@ -52,6 +62,9 @@ class CreateProjectActivity : AppCompatActivity() {
         // Get Data
         val sharedPref = this.getSharedPreferences("Token", Context.MODE_PRIVATE)
         val companyID = sharedPref.getString("accCompany", null)
+
+        // Set Date Picker
+        pickDate()
 
         // Set Data
         companyTag = companyID!!
@@ -79,6 +92,8 @@ class CreateProjectActivity : AppCompatActivity() {
             Toast.makeText(this, "Please Input All Field !", Toast.LENGTH_SHORT).show()
         }
     }
+
+
 
     override fun onRequestPermissionsResult(
             requestCode: Int,
@@ -193,6 +208,28 @@ class CreateProjectActivity : AppCompatActivity() {
                     .create()
         }
 
+    }
+
+    private fun getDateCalendar() {
+        val cal: Calendar = Calendar.getInstance()
+        day = cal.get(Calendar.DAY_OF_MONTH)
+        month = cal.get(Calendar.MONTH)
+        year = cal.get(Calendar.YEAR)
+    }
+
+    private fun pickDate(){
+        binding.etProjectDuration.setOnClickListener {
+            getDateCalendar()
+
+            DatePickerDialog(this, this, year, month, day).show()
+        }
+    }
+
+
+    @SuppressLint("SetTextI18n")
+    override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
+        getDateCalendar()
+        binding.etProjectDuration.text = "$dayOfMonth-${month+1}-$year"
     }
 
 }

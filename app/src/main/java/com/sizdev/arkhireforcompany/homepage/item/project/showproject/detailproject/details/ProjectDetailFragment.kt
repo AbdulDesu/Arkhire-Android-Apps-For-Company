@@ -1,17 +1,18 @@
 package com.sizdev.arkhireforcompany.homepage.item.project.showproject.detailproject.details
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import com.sizdev.arkhireforcompany.R
+import com.sizdev.arkhireforcompany.administration.login.LoginActivity
 import com.sizdev.arkhireforcompany.databinding.FragmentProjectDetailBinding
 import com.sizdev.arkhireforcompany.homepage.item.project.showproject.ProjectResponse
 import com.sizdev.arkhireforcompany.homepage.item.project.showproject.editproject.ProjectEditActivity
@@ -19,88 +20,51 @@ import com.sizdev.arkhireforcompany.networking.ArkhireApiClient
 import com.sizdev.arkhireforcompany.networking.ArkhireApiService
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.alert_delete_project_confirmation.view.*
+import kotlinx.android.synthetic.main.alert_session_expired.view.*
 import kotlinx.coroutines.*
+import java.text.NumberFormat
+import java.util.*
 
-class ProjectDetailFragment : Fragment() {
+class ProjectDetailFragment : Fragment(), ProjectDetailContract.View {
 
     private lateinit var binding: FragmentProjectDetailBinding
     private lateinit var dialog: AlertDialog
-    private lateinit var service: ArkhireApiService
+    private lateinit var handler: Handler
     private lateinit var coroutineScope: CoroutineScope
+
+    private var presenter: ProjectDetailPresenter? = null
+    private var projectID: String? =null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_project_detail, container, false)
-        coroutineScope = CoroutineScope(Job() + Dispatchers.Main)
-        service = activity?.let { ArkhireApiClient.getApiClient(it) }!!.create(ArkhireApiService::class.java)
 
-        //Get Data
-        val projectID = activity?.intent?.getStringExtra("projectID")
+        // Set Service
+        setService()
 
-        // Data Loading Management
-        binding.loadingScreen.visibility = View.VISIBLE
-        binding.progressBar.max = 100
+        // Get Current Project Data
+        getCurrentProjectData()
+
+        // Show Progress Bar
+        showProgressBar()
 
         // Data Refresh Management
-        val mainHandler = Handler(Looper.getMainLooper())
-        mainHandler.post(object : Runnable {
-            override fun run() {
-                showProject(projectID!!)
-                mainHandler.postDelayed(this, 5000)
-            }
-        })
+        setDataRefreshManagement()
 
+        // Button Manager
         binding.tvProjectDelete.setOnClickListener {
             projectDeleteConfirmation()
             dialog.show()
         }
+
         return  binding.root
     }
 
-    private fun showProject(projectID: String) {
-        coroutineScope.launch {
 
-            val result = withContext(Dispatchers.IO) {
-                try {
-                    service.getProjectByIDResponse(projectID)
-                } catch (e: Throwable) {
-                    e.printStackTrace()
-                }
-            }
-
-            if (result is ProjectDetailResponse) {
-                binding.tvProjectTitle.text = result.data.projectTitle
-                binding.tvProjectDuration.text = result.data.projectDuration
-                binding.tvProjectSalary.text = result.data.projectSalary
-                binding.tvProjectDesc.text = result.data.projectDesc
-                Picasso.get()
-                        .load("http://54.82.81.23:911/image/${result.data.projectImage}")
-                        .resize(1280, 560)
-                        .centerCrop()
-                        .into(binding.ivProjectImage)
-
-                // Enable Edit Button
-                binding.tvProjectEdit.setOnClickListener {
-                    val intent = Intent(activity, ProjectEditActivity::class.java)
-                    intent.putExtra("projectID", result.data.projectID)
-                    intent.putExtra("projectTitle", result.data.projectTitle)
-                    intent.putExtra("projectDuration", result.data.projectDuration)
-                    intent.putExtra("projectSalary", result.data.projectSalary)
-                    intent.putExtra("projectDesc", result.data.projectDesc)
-                    startActivity(intent)
-                }
-
-                // End Of Loading
-                binding.loadingScreen.visibility = View.GONE
-            }
-        }
-    }
-
-    private fun projectDeleteConfirmation() {
+    override fun projectDeleteConfirmation() {
         val view: View = layoutInflater.inflate(R.layout.alert_delete_project_confirmation, null)
-        val projectID = activity?.intent?.getStringExtra("projectID")
 
         dialog = this.let {
             activity?.let { it1 ->
@@ -112,9 +76,7 @@ class ProjectDetailFragment : Fragment() {
         }!!
 
         view.bt_yesDelete.setOnClickListener {
-            if (projectID != null) {
-                deleteProject(projectID)
-            }
+            presenter?.deleteProject(projectID!!)
             dialog.dismiss()
         }
 
@@ -123,31 +85,132 @@ class ProjectDetailFragment : Fragment() {
         }
     }
 
-    private fun deleteProject(projectID : String) {
-        coroutineScope.launch {
+    override fun showSessionExpiredAlert() {
+        val view: View = layoutInflater.inflate(R.layout.alert_session_expired, null)
 
-            val result = withContext(Dispatchers.IO) {
-                try {
-                    service.deleteProjectResponse(projectID)
-                } catch (e: Throwable) {
-                    e.printStackTrace()
-                }
-            }
+        dialog = activity?.let {
+            AlertDialog.Builder(it)
+                    .setView(view)
+                    .setCancelable(false)
+                    .create()
+        }!!
 
-            if (result is ProjectResponse) {
-                Toast.makeText(
-                        activity,
-                        "Project Deleted Successfully",
-                        Toast.LENGTH_LONG
-                ).show()
-
-                activity?.finish()
-            }
+        view.bt_okRelog.setOnClickListener {
+            dialog.dismiss()
+            val intent = Intent(activity, LoginActivity::class.java)
+            val sharedPref = requireActivity().getSharedPreferences("Token", Context.MODE_PRIVATE)
+            val editor = sharedPref.edit()
+            editor.putString("accID", null)
+            editor.apply()
+            startActivity(intent)
+            activity?.finish()
         }
+    }
+
+
+    override fun onStart() {
+        super.onStart()
+        presenter?.bindToView(this)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        presenter?.unbind()
     }
 
     override fun onDestroy() {
         coroutineScope.cancel()
         super.onDestroy()
+    }
+
+    override fun setError(error: String) {
+        when (error){
+            "Session Expired !" -> {
+                showSessionExpiredAlert()
+                dialog.show()
+            }
+
+            else -> {
+                Toast.makeText(activity, error, Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+
+    override fun setService() {
+        coroutineScope = CoroutineScope(Job() + Dispatchers.Main)
+        val service = activity?.let { ArkhireApiClient.getApiClient(it)?.create(ArkhireApiService::class.java) }
+        presenter = ProjectDetailPresenter(coroutineScope, service)
+    }
+
+    override fun getCurrentProjectData() {
+        projectID = activity?.intent?.getStringExtra("projectID")
+    }
+
+
+    @SuppressLint("SetTextI18n")
+    override fun setProjectData(projectID: String, projectTitle: String, projectDuration: String, projectDesc: String, projectSalary: String, projectImage: String, postedAt: String) {
+
+        // Currency Formatter
+        val format = NumberFormat.getCurrencyInstance()
+        format.maximumFractionDigits = 0
+        format.currency = Currency.getInstance("IDR")
+
+        // Timestamp Convert
+        val dateSplitter = postedAt.split("T")
+        val timeSplitter = dateSplitter[1].split(".")
+
+        binding.tvProjectTitle.text = projectTitle
+        binding.tvProjectDuration.text = projectDuration
+        binding.tvProjectSalary.text = format.format(projectSalary.toDouble())
+        binding.tvProjectDesc.text = projectDesc
+        binding.tvProjectCreated.text = "${dateSplitter[0]} - ${timeSplitter[0]}"
+
+        Picasso.get()
+                .load("http://54.82.81.23:911/image/${projectImage}")
+                .resize(1280, 560)
+                .centerCrop()
+                .into(binding.ivProjectImage)
+
+        // Enable Edit Button
+        binding.tvProjectEdit.setOnClickListener {
+            val intent = Intent(activity, ProjectEditActivity::class.java)
+            intent.putExtra("projectID", projectID)
+            intent.putExtra("projectTitle", projectTitle)
+            intent.putExtra("projectDuration", projectDuration)
+            intent.putExtra("projectSalary", projectSalary)
+            intent.putExtra("projectDesc", projectDesc)
+            startActivity(intent)
+        }
+
+        binding.helpProjectSalary.setOnClickListener {
+            Toast.makeText(activity, "Expected Salary Of current project: $projectTitle", Toast.LENGTH_LONG).show()
+        }
+
+        binding.helpProjectDeadline.setOnClickListener {
+            Toast.makeText(activity, "Deadline Of current project: $projectDuration", Toast.LENGTH_LONG).show()
+        }
+
+        binding.helpProjectCreated.setOnClickListener {
+            Toast.makeText(activity, "Date Of created this project: $postedAt", Toast.LENGTH_LONG).show()
+        }
+    }
+
+    override fun setDataRefreshManagement() {
+        handler = Handler(Looper.getMainLooper())
+        handler.post(object : Runnable {
+            override fun run() {
+                presenter?.getProject(projectID!!)
+                handler.postDelayed(this, 5000)
+            }
+        })
+    }
+
+    override fun showProgressBar() {
+        binding.loadingScreen.visibility = View.VISIBLE
+        binding.progressBar.max = 100
+    }
+
+    override fun hideProgressBar() {
+        binding.loadingScreen.visibility = View.GONE
     }
 }
