@@ -39,18 +39,6 @@ class WorkExperienceAdapter : RecyclerView.Adapter<WorkExperienceAdapter.WorkExp
             else -> holder.binding.tvWorkExperienceDescription.text = item.experienceDesc
         }
 
-        holder.itemView.setOnClickListener {
-            val context = holder.binding.itemWorkexperienceHolder.context
-            val intent = Intent(context, WorkExperienceDetailActivity::class.java)
-
-            intent.putExtra("experienceID", item.experienceID)
-            intent.putExtra("experienceTitle", item.experienceTitle)
-            intent.putExtra("experienceSource", item.experienceSource)
-            intent.putExtra("experienceStart", item.experienceStart)
-            intent.putExtra("experienceEnd", item.experienceEnd)
-            intent.putExtra("experienceDesc", item.experienceDesc)
-            context.startActivity(intent)
-        }
     }
 
     override fun getItemCount(): Int = items.size

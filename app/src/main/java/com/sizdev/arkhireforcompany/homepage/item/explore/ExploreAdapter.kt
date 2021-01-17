@@ -62,7 +62,7 @@ class ExploreAdapter : RecyclerView.Adapter<ExploreAdapter.ShowAllTalentHolder>(
             else -> {
                 Picasso.get()
                         .load("http://54.82.81.23:911/image/${item.talentImage}")
-                        .resize(86, 86)
+                        .resize(512, 512)
                         .centerCrop()
                         .into(holder.binding.ivTalentImage)
             }

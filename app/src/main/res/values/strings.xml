@@ -7,7 +7,7 @@
     <string name="handshake_desc">Arkhire will provide all information about your hiring progress, Of course with realtime update. All information about hiring will showed on your hand.</string>
     <string name="desc_engineerCriteria">Looking for engineer who meet your company criteria? Dont worry in arkhire you can choice best engineer who meet your company requirement.</string>
     <string name="hire_engineer_as_your_criteria">HIRE ENGINEER AS YOUR CRITERIA</string>
-    <string name="let_s_get_started_by_creating_your_account">Let\'s Get Started By Creating Your Account</string>
+    <string name="let_s_get_started_by_creating_your_account">Let\'s Get Started!</string>
     <string name="welcome">Welcome</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
@@ -18,7 +18,7 @@
     <string name="welcome_let_s_get_started">Welcome, Let\'s get Started</string>
     <string name="phone_number">Phone Number</string>
     <string name="confirm_password">Confirm Password</string>
-    <string name="already_have_account_click_here">Already have account ? Click here</string>
+    <string name="already_have_account_click_here">Already have account? Sign in here</string>
     <string name="your_position_at_company">Job Position</string>
     <string name="company">Company</string>
     <string name="send_recovery_email">Send Recovery Email</string>
@@ -63,5 +63,8 @@
     <string name="open_repository">open repository</string>
     <string name="hired">Hired</string>
     <string name="sign_up_question">Sign up</string>
+    <string name="create_account_to_join_arkhire">Create account to become partner and start exploring</string>
+    <string name="full_name">Full Name</string>
+    <string name="sign_up">Sign Up</string>
 
 </resources>

@@ -40,183 +40,217 @@
             android:id="@+id/relativeLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <View
-                android:id="@+id/topView"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:background="@color/primary" />
 
-            <TextView
-                android:id="@+id/tv_register"
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/backButton"
+                app:backgroundTint="#FFFFFF"
+                app:tint="@color/black"
+                android:src="@drawable/ic_back"
+                app:fabCustomSize="44dp"
+                app:maxImageSize="34dp"
+                app:elevation="0dp"
+                app:pressedTranslationZ="0dp"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="22dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="52dp"
-                android:text="Register"
-                android:textColor="@color/white"
-                android:textSize="38sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:contentDescription="@string/back" />
 
             <TextView
-                android:id="@+id/tv_registerDesc"
-                android:layout_width="380dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_register"
-                android:layout_marginStart="32dp"
+                android:id="@+id/tv_letsgetStarted"
                 android:text="@string/let_s_get_started_by_creating_your_account"
-                android:textColor="@color/white"
-                android:textSize="17sp" />
+                android:gravity="center"
+                android:fontFamily="@font/aestetico"
+                android:layout_marginTop="80dp"
+                android:textColor="@color/black"
+                android:textSize="34sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
+            <TextView
+                android:id="@+id/tv_letsgetStartedDesc"
+                android:layout_below="@id/tv_letsgetStarted"
+                android:text="@string/create_account_to_join_arkhire"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/aestetico"
+                android:gravity="center"
+                android:layout_marginStart="32sp"
+                android:layout_marginEnd="32sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+                <RelativeLayout
+                    android:layout_below="@id/tv_letsgetStartedDesc"
+                    android:layout_marginTop="40dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        tools:ignore="UselessParent">
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <EditText
+                                android:id="@+id/et_fullName"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="26dp"
+                                android:layout_marginStart="20dp"
+                                android:layout_marginEnd="20dp"
+                                android:paddingStart="25dp"
+                                android:background="@drawable/round_border"
+                                android:drawableStart="@drawable/ic_account"
+                                android:drawablePadding="16dp"
+                                android:ems="10"
+                                android:fontFamily="@font/aestetico"
+                                android:hint="@string/full_name"
+                                android:inputType="textPersonName"
+                                android:padding="16dp"
+                                tools:ignore="RtlSymmetry" />
+
+                            <EditText
+                                android:id="@+id/et_registEmail"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="26dp"
+                                android:layout_marginStart="20dp"
+                                android:layout_marginEnd="20dp"
+                                android:paddingStart="25dp"
+                                android:background="@drawable/round_border"
+                                android:drawableStart="@drawable/ic_email"
+                                android:drawablePadding="16dp"
+                                android:fontFamily="@font/aestetico"
+                                android:ems="10"
+                                android:hint="@string/email"
+                                android:inputType="textEmailAddress"
+                                android:padding="16dp"
+                                tools:ignore="RtlSymmetry" />
+
+                            <EditText
+                                android:id="@+id/et_registCompanyName"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="26dp"
+                                android:layout_marginStart="20dp"
+                                android:layout_marginEnd="20dp"
+                                android:paddingStart="25dp"
+                                android:fontFamily="@font/aestetico"
+                                android:background="@drawable/round_border"
+                                android:drawableStart="@drawable/ic_company"
+                                android:drawablePadding="16dp"
+                                android:ems="10"
+                                android:hint="@string/company"
+                                android:padding="16dp"
+                                tools:ignore="RtlSymmetry" />
+
+                            <EditText
+                                android:id="@+id/et_registCompanyPosition"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="26dp"
+                                android:layout_marginStart="20dp"
+                                android:layout_marginEnd="20dp"
+                                android:paddingStart="25dp"
+                                android:fontFamily="@font/aestetico"
+                                android:background="@drawable/round_border"
+                                android:drawableStart="@drawable/ic_position"
+                                android:drawablePadding="16dp"
+                                android:ems="10"
+                                android:hint="@string/your_position_at_company"
+                                android:padding="16dp"
+                                tools:ignore="RtlSymmetry" />
+
+                            <EditText
+                                android:id="@+id/et_registPhone"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="26dp"
+                                android:layout_marginStart="20dp"
+                                android:layout_marginEnd="20dp"
+                                android:paddingStart="25dp"
+                                android:fontFamily="@font/aestetico"
+                                android:background="@drawable/round_border"
+                                android:drawableStart="@drawable/ic_phone_number"
+                                android:drawablePadding="16dp"
+                                android:ems="10"
+                                android:hint="@string/phone_number"
+                                android:inputType="phone"
+                                android:padding="16dp"
+                                tools:ignore="RtlSymmetry" />
+
+                            <EditText
+                                android:id="@+id/et_registPassword"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="26dp"
+                                android:layout_marginStart="20dp"
+                                android:layout_marginEnd="20dp"
+                                android:paddingStart="25dp"
+                                android:fontFamily="@font/aestetico"
+                                android:background="@drawable/round_border"
+                                android:drawableStart="@drawable/ic_password"
+                                android:drawablePadding="16dp"
+                                android:ems="10"
+                                android:hint="@string/password"
+                                android:inputType="textPassword"
+                                android:padding="16dp"
+                                tools:ignore="RtlSymmetry" />
+
+                            <EditText
+                                android:id="@+id/et_confirmRegistPassword"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="26dp"
+                                android:layout_marginStart="20dp"
+                                android:layout_marginEnd="20dp"
+                                android:paddingStart="25dp"
+                                android:fontFamily="@font/aestetico"
+                                android:background="@drawable/round_border"
+                                android:drawableStart="@drawable/ic_password"
+                                android:drawablePadding="16dp"
+                                android:ems="10"
+                                android:hint="@string/confirm_password"
+                                android:inputType="textPassword"
+                                android:padding="16dp"
+                                tools:ignore="RtlSymmetry" />
+
+                            <android.widget.Button
+                                android:id="@+id/bt_register"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="90dp"
+                                android:layout_marginTop="36dp"
+                                android:layout_marginBottom="20dp"
+                                android:layout_marginEnd="90dp"
+                                android:background="@drawable/round_bg"
+                                android:text="@string/sign_up"
+                                android:textColor="@android:color/white"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/tv_backLogin"
+                                android:gravity="center"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="36dp"
+                                android:text="@string/already_have_account_click_here"
+                                android:textColor="@color/primary"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+                    </ScrollView>
+                </RelativeLayout>
         </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
 
-            <View
-                android:id="@+id/view5"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:background="@drawable/login_header"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
-        </RelativeLayout>
-
-
-        <ScrollView
-            android:layout_width="414dp"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="32dp"
-                android:layout_marginEnd="32dp"
-                android:orientation="vertical">
-
-                <EditText
-                    android:id="@+id/et_fullName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:background="@drawable/round_border"
-                    android:drawableStart="@drawable/ic_account"
-                    android:drawablePadding="16dp"
-                    android:ems="10"
-                    android:fontFamily="@font/opensans"
-                    android:hint="Full Name"
-                    android:inputType="textPersonName"
-                    android:padding="16dp" />
-
-                <EditText
-                    android:id="@+id/et_registEmail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="26dp"
-                    android:background="@drawable/round_border"
-                    android:drawableStart="@drawable/ic_email"
-                    android:drawablePadding="16dp"
-                    android:ems="10"
-                    android:hint="@string/email"
-                    android:inputType="textEmailAddress"
-                    android:padding="16dp" />
-
-                <EditText
-                    android:id="@+id/et_registCompanyName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="26dp"
-                    android:background="@drawable/round_border"
-                    android:drawableStart="@drawable/ic_company"
-                    android:drawablePadding="16dp"
-                    android:ems="10"
-                    android:hint="@string/company"
-                    android:padding="16dp" />
-
-                <EditText
-                    android:id="@+id/et_registCompanyPosition"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="26dp"
-                    android:background="@drawable/round_border"
-                    android:drawableStart="@drawable/ic_position"
-                    android:drawablePadding="16dp"
-                    android:ems="10"
-                    android:hint="@string/your_position_at_company"
-                    android:padding="16dp" />
-
-                <EditText
-                    android:id="@+id/et_registPhone"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="26dp"
-                    android:background="@drawable/round_border"
-                    android:drawableStart="@drawable/ic_phone_number"
-                    android:drawablePadding="16dp"
-                    android:ems="10"
-                    android:hint="@string/phone_number"
-                    android:inputType="phone"
-                    android:padding="16dp" />
-
-                <EditText
-                    android:id="@+id/et_registPassword"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="26dp"
-                    android:background="@drawable/round_border"
-                    android:drawableStart="@drawable/ic_password"
-                    android:drawablePadding="16dp"
-                    android:ems="10"
-                    android:hint="@string/password"
-                    android:inputType="textPassword"
-                    android:padding="16dp" />
-
-                <EditText
-                    android:id="@+id/et_confirmRegistPassword"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="26dp"
-                    android:background="@drawable/round_border"
-                    android:drawableStart="@drawable/ic_password"
-                    android:drawablePadding="16dp"
-                    android:ems="10"
-                    android:hint="@string/confirm_password"
-                    android:inputType="textPassword"
-                    android:padding="16dp" />
-
-                <android.widget.Button
-                    android:id="@+id/bt_register"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="32dp"
-                    android:background="@drawable/round_bg"
-                    android:text="Register"
-                    android:textColor="@android:color/white"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/tv_backLogin"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="57dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="32dp"
-                    android:layout_marginBottom="16dp"
-                    android:text="@string/already_have_account_click_here"
-                    android:textColor="@color/primary"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-        </ScrollView>
 
 
     </LinearLayout>

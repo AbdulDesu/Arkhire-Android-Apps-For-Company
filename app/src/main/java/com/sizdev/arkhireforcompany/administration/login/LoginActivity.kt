@@ -79,12 +79,6 @@ class LoginActivity : AppCompatActivity() {
         viewModel.onSuccess.observe(this, {
             if (it) {
                 if(viewModel.loginData.value?.privilege == "1"){
-
-                    // Stop Loading
-                    binding.loadingScreen.visibility = View.GONE
-
-                    Toast.makeText(this@LoginActivity, "Welcome Back !", Toast.LENGTH_SHORT).show()
-
                     // Save Token
                     val sharedPref = this@LoginActivity.getSharedPreferences("Token", Context.MODE_PRIVATE)
                     val editor = sharedPref.edit()
@@ -94,6 +88,7 @@ class LoginActivity : AppCompatActivity() {
                     editor.apply()
 
                     val intent = Intent(this@LoginActivity, HomeActivity::class.java)
+                    Toast.makeText(this@LoginActivity, "Welcome Back !", Toast.LENGTH_SHORT).show()
                     startActivity(intent)
                     finish()
                 }

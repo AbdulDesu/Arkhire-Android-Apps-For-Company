@@ -158,6 +158,7 @@ class TalentProfileActivity : AppCompatActivity(), TalentProfileContract.View {
         binding.tvProfileTalentTitle.text = talentTitle
         binding.tvProfileTalentDesc.text = talentDesc
         binding.tvProfileTalentLocation.text =  talentCity
+
         Picasso.get()
                 .load("http://54.82.81.23:911/image/$talentImage")
                 .resize(512, 512)
@@ -166,8 +167,16 @@ class TalentProfileActivity : AppCompatActivity(), TalentProfileContract.View {
 
         if (talentTime == "Freelance") {
             binding.ivTalentProfileCover.setImageResource(R.drawable.ic_freelancer)
+            binding.btWorkTime.setImageResource(R.drawable.ic_time_freelancer)
+            binding.btWorkTime.setOnClickListener {
+                Toast.makeText(this, "This Talent Is Freelancer", Toast.LENGTH_LONG).show()
+            }
         } else {
             binding.ivTalentProfileCover.setImageResource(R.drawable.ic_fulltimework)
+            binding.btWorkTime.setImageResource(R.drawable.ic_worktime)
+            binding.btWorkTime.setOnClickListener {
+                Toast.makeText(this, "This Talent Is Full Time Worker", Toast.LENGTH_LONG).show()
+            }
         }
 
         //Validate Skill Null or not
@@ -318,7 +327,7 @@ class TalentProfileActivity : AppCompatActivity(), TalentProfileContract.View {
                 //permission denied
                 val permissions = arrayOf(Manifest.permission.CALL_PHONE)
                 //show popup to request runtime permission
-                requestPermissions(permissions, PERMISSION_CODE);
+                requestPermissions(permissions, PERMISSION_CODE)
             }
             else{
                 //permission already granted

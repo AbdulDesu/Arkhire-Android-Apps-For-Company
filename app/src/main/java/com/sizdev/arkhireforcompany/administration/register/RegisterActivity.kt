@@ -55,6 +55,10 @@ class RegisterActivity : AppCompatActivity() {
             finish()
         }
 
+        binding.backButton.setOnClickListener {
+            finish()
+        }
+
     }
 
     private fun setService() {

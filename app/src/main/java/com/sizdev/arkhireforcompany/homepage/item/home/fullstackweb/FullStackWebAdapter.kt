@@ -52,15 +52,12 @@ class FullStackWebAdapter : RecyclerView.Adapter<FullStackWebAdapter.FullStackWe
         holder.itemView.setOnClickListener {
             val context = holder.binding.itemTalentHolder.context
             val intent = Intent(context, TalentProfileActivity::class.java)
-            val talentID = item.talentID.toString()
-            val talentName = item.accountName.toString()
-            val talentTitle = item.talentTitle.toString()
-            val talentImage = item.talentImage.toString()
 
-            intent.putExtra("talentID", talentID)
-            intent.putExtra("talentName", talentName)
-            intent.putExtra("talentTitle", talentTitle)
-            intent.putExtra("talentImage", talentImage)
+            intent.putExtra("talentID", item.talentID)
+            intent.putExtra("accountID", item.accountID)
+            intent.putExtra("talentName", item.accountName)
+            intent.putExtra("talentTitle", item.talentTitle)
+            intent.putExtra("talentImage", item.talentImage)
 
             context.startActivity(intent)
         }
