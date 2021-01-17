@@ -2,6 +2,7 @@ package com.sizdev.arkhireforcompany.homepage.item.project.showproject.detailpro
 
 data class ProjectHiringModel (val offeringID : String?,
                                val hiringStatus: String?,
+                               val offeredSalary: String?,
                                val replyMsg: String?,
                                val talentID: String?,
                                val talentName: String?,

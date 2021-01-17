@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sizdev.arkhireforcompany.R
 import com.sizdev.arkhireforcompany.databinding.ItemHiringListBinding
 import com.squareup.picasso.Picasso
+import java.text.NumberFormat
+import java.util.*
 
 class ProjectHiringAdapter : RecyclerView.Adapter<ProjectHiringAdapter.HiringListHolder>() {
     private var items = mutableListOf<ProjectHiringModel>()
@@ -27,9 +29,13 @@ class ProjectHiringAdapter : RecyclerView.Adapter<ProjectHiringAdapter.HiringLis
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: HiringListHolder, position: Int) {
         val item = items[position]
+        val format = NumberFormat.getCurrencyInstance()
+        format.maximumFractionDigits = 0
+        format.currency = Currency.getInstance("IDR")
+
         holder.binding.tvTalentName.text = item.talentName
         holder.binding.tvTalentTitle.text = item.talentTitle
-        holder.binding.tvTalentSalary.text = item.projectSalary
+        holder.binding.tvTalentSalary.text = format.format(item.offeredSalary?.toDouble())
 
         when(item.talentImage){
             null -> holder.binding.ivTalentImage.setImageResource(R.drawable.ic_empty_image)

@@ -10,6 +10,8 @@ import com.sizdev.arkhireforcompany.R
 import com.sizdev.arkhireforcompany.databinding.ItemListProjectBinding
 import com.sizdev.arkhireforcompany.homepage.item.project.showproject.detailproject.ProjectDetailActivity
 import com.squareup.picasso.Picasso
+import java.text.NumberFormat
+import java.util.*
 
 class ProjectAdapter : RecyclerView.Adapter<ProjectAdapter.showProjectList>() {
     private var items = mutableListOf<ProjectModel>()
@@ -29,8 +31,12 @@ class ProjectAdapter : RecyclerView.Adapter<ProjectAdapter.showProjectList>() {
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: showProjectList, position: Int) {
         val item = items[position]
+        val format = NumberFormat.getCurrencyInstance()
+        format.maximumFractionDigits = 0
+        format.currency = Currency.getInstance("IDR")
+
         holder.binding.tvProjectTitle.text = item.projectTitle
-        holder.binding.tvProjectSalary.text = item.projectSalary
+        holder.binding.tvProjectSalary.text = format.format(item.projectSalary?.toDouble())
         holder.binding.tvProjectDuration.text = "In ${item.projectDuration}"
         holder.binding.tvProjectCreated.text = item.postedAt
         Picasso.get()

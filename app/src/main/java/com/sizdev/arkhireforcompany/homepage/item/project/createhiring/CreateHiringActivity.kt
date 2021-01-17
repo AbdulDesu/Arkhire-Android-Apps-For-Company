@@ -1,5 +1,6 @@
 package com.sizdev.arkhireforcompany.homepage.item.project.createhiring
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -18,6 +19,8 @@ import com.sizdev.arkhireforcompany.networking.ArkhireApiClient
 import com.sizdev.arkhireforcompany.networking.ArkhireApiService
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.*
+import java.text.NumberFormat
+import java.util.*
 
 class CreateHiringActivity : AppCompatActivity() {
 
@@ -25,8 +28,13 @@ class CreateHiringActivity : AppCompatActivity() {
     private lateinit var viewModel: CreateHiringViewModel
     private lateinit var coroutineScope: CoroutineScope
     private lateinit var service: ArkhireApiService
+
     private var projectTag: String? = null
+    private var projectTitle: String? = null
     private var salaryExpectation: String? = null
+    private var accountID: String? = null
+    private var talentID: String? = null
+    private var talentName: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,28 +45,22 @@ class CreateHiringActivity : AppCompatActivity() {
 
         // Set Service
         setService()
+
+        // Set Progress Bar
+        binding.tvSendingData.visibility = View.GONE
+        binding.loadingScreen.visibility = View.VISIBLE
+
+        // Observe Data
         subscribeLiveData()
 
-        // Get Saved ID
-        val sharedPrefData = this.getSharedPreferences("Token", Context.MODE_PRIVATE)
-        val savedID = sharedPrefData.getString("accID", null)
+        // Get Current Login Data
+        getCurentLoginData()
 
-        // Get Saved Data
-        val talentName = intent.getStringExtra("talentName")
-        val talentTitle = intent.getStringExtra("talentTitle")
-        val talentImage = intent.getStringExtra("talentImage")
-
-        // Set Saved Data
-        binding.tvTalentName.text = talentName
-        binding.tvTalentTitle.text = talentTitle
-        Picasso.get()
-            .load("http://54.82.81.23:911/image/$talentImage")
-            .resize(512, 512)
-            .centerCrop()
-            .into(binding.ivTalentImage)
+        // Get & Set Saved Talent Data
+        getSetTalentData()
 
         // Show Project To Spinner
-        showProject(savedID!!)
+        showProject(accountID!!)
 
         // Enable Spinner
         binding.srSelectProject.adapter = CreateHiringSpinnerAdapter(this)
@@ -66,11 +68,62 @@ class CreateHiringActivity : AppCompatActivity() {
 
     }
 
+    @SuppressLint("SetTextI18n", "ResourceAsColor")
+    private fun verifyHiring() {
+        coroutineScope.launch {
+            val result = withContext(Dispatchers.IO) {
+                try {
+                    service.checkHiredResponse(projectTag!!, talentName!!)
+                } catch (e: Throwable) {
+                    e.printStackTrace()
+                }
+            }
+
+            if (result is CreateHiringResponses) {
+                binding.btSendOffering.visibility = View.GONE
+                binding.btHired.visibility = View.VISIBLE
+                binding.btHired.setOnClickListener {
+                    Toast.makeText(this@CreateHiringActivity, "$talentName already hired in $projectTitle", Toast.LENGTH_LONG).show()
+                }
+            }
+
+            else {
+                binding.btSendOffering.visibility = View.VISIBLE
+                binding.btHired.visibility = View.GONE
+                binding.btSendOffering.setOnClickListener {
+                    sendOffering()
+                }
+            }
+
+            binding.loadingScreen.visibility = View.GONE
+        }
+    }
+
+    private fun getSetTalentData() {
+        talentID = intent.getStringExtra("talentID")
+        talentName = intent.getStringExtra("talentName")
+        val talentTitle = intent.getStringExtra("talentTitle")
+        val talentImage = intent.getStringExtra("talentImage")
+
+        binding.tvTalentName.text = talentName
+        binding.tvTalentTitle.text = talentTitle
+        Picasso.get()
+                .load("http://54.82.81.23:911/image/$talentImage")
+                .resize(512, 512)
+                .centerCrop()
+                .into(binding.ivTalentImage)
+    }
+
+    private fun getCurentLoginData() {
+        val sharedPrefData = this.getSharedPreferences("Token", Context.MODE_PRIVATE)
+        accountID = sharedPrefData.getString("accID", null)
+    }
+
     private fun showProject(accountID: String) {
         coroutineScope.launch {
             val result = withContext(Dispatchers.IO) {
                 try {
-                    service?.getAllProjectResponse(accountID)
+                    service.getAllProjectResponse(accountID)
                 } catch (e: Throwable) {
                     e.printStackTrace()
                 }
@@ -97,6 +150,8 @@ class CreateHiringActivity : AppCompatActivity() {
                         val spinner = list[position]
                         projectTag = spinner.projectID
                         salaryExpectation = spinner.projectSalary
+                        projectTitle = spinner.projectTitle
+                        verifyHiring()
                     }
 
                     override fun onNothingSelected(parent: AdapterView<*>?) {}
@@ -104,20 +159,25 @@ class CreateHiringActivity : AppCompatActivity() {
 
                 // Enable Send Offering Feature
                 binding.btSendOffering.setOnClickListener {
+                    sendOffering()
 
-                    // Get Data Saved
-                    val talentID = intent.getStringExtra("talentID")
-                    val offeredSalary = binding.etOfferingSalary.text.toString()
-
-                    if (offeredSalary >= salaryExpectation!!){
-                        viewModel?.sendHiring(projectTag!!, talentID!!, offeredSalary)
-                    }
-                    else {
-                        Toast.makeText(this@CreateHiringActivity, "Salary Is Too low from expecation : $salaryExpectation", Toast.LENGTH_LONG).show()
-                    }
                 }
-                
             }
+        }
+    }
+
+    private fun sendOffering() {
+        val talentID = intent.getStringExtra("talentID")
+        val offeredSalary = binding.etOfferingSalary.text.toString()
+        val format = NumberFormat.getCurrencyInstance()
+        format.maximumFractionDigits = 0
+        format.currency = Currency.getInstance("IDR")
+
+        if (offeredSalary >= salaryExpectation!!){
+            viewModel?.sendHiring(projectTag!!, talentID!!, offeredSalary)
+        }
+        else {
+            Toast.makeText(this@CreateHiringActivity, "Salary Is Too low from expectation : ${format.format(salaryExpectation)}", Toast.LENGTH_LONG).show()
         }
     }
 

@@ -6,31 +6,29 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.location.Address
 import android.location.Location
-import android.location.LocationManager
 import android.net.Uri
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.widget.Toast
 import androidx.annotation.NonNull
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.loader.content.CursorLoader
-import com.google.android.gms.location.LocationListener
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.sizdev.arkhireforcompany.R
 import com.sizdev.arkhireforcompany.databinding.ActivityCompanyEditProfileBinding
-import com.sizdev.arkhireforcompany.homepage.item.account.profile.CompanyProfileActivity
 import com.sizdev.arkhireforcompany.networking.ArkhireApiClient
 import com.sizdev.arkhireforcompany.networking.ArkhireApiService
+import kotlinx.android.synthetic.main.activity_company_edit_profile.*
+import kotlinx.android.synthetic.main.activity_company_profile.*
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -38,58 +36,31 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
 import java.util.*
 
-class CompanyEditProfileActivity : AppCompatActivity(), OnMapReadyCallback, LocationListener, GoogleMap.OnCameraMoveListener, GoogleMap.OnCameraMoveStartedListener, GoogleMap.OnCameraIdleListener, GoogleMap.OnMarkerClickListener {
+
+class CompanyEditProfileActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private lateinit var binding: ActivityCompanyEditProfileBinding
     private lateinit var viewModel: CompanyEditProfileViewModel
     private lateinit var markerDefault: Marker
-    lateinit var locationManager: LocationManager
-    private var locationGps: Location? = null
+
     private var locationDefault = LatLng(-6.200000, 106.816666)
 
     companion object {
-        private const val IMAGE_PICK_CODE = 1000;
-        const val PERMISSION_CODE = 1001;
+        private const val IMAGE_PICK_CODE = 1000
+        const val PERMISSION_CODE = 1001
     }
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_company_edit_profile)
-        viewModel = ViewModelProvider(this).get(CompanyEditProfileViewModel::class.java)
 
-        val service = ArkhireApiClient.getApiClient(this)?.create(ArkhireApiService::class.java)
-        if (service != null) {
-            viewModel.setService(service)
-        }
 
-        val mapFragment = supportFragmentManager
-            .findFragmentById(R.id.editCompanyLocationmap) as SupportMapFragment
-        mapFragment.getMapAsync(this)
+        // Set Service
+        setService()
 
-        binding.etEditCompanyLocation.setOnClickListener {
-            locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-            if (ActivityCompat.checkSelfPermission(
-                    this,
-                    Manifest.permission.ACCESS_FINE_LOCATION
-                ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                    this,
-                    Manifest.permission.ACCESS_COARSE_LOCATION
-                ) != PackageManager.PERMISSION_GRANTED
-            ) {
-                return@setOnClickListener
-            }
-
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 0F
-            ) { location ->
-                locationGps = location
-                val latitude = locationGps!!.latitude.toString()
-                val longitude = locationGps!!.longitude.toString()
-
-                binding.tvCurrentLatitude.text = latitude
-                binding.tvCurrentLongitude.text = longitude
-            }
-        }
+        // Set Map
+        setMap()
 
         binding.btEditProfileImage.setOnClickListener {
             if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) ==
@@ -108,22 +79,32 @@ class CompanyEditProfileActivity : AppCompatActivity(), OnMapReadyCallback, Loca
         binding.btNewProfileDone.setOnClickListener {
 
         }
+    }
 
+    private fun setMap() {
+        val mapFragment = supportFragmentManager
+                .findFragmentById(R.id.editCompanyLocationmap) as SupportMapFragment
+        mapFragment.getMapAsync(this)
+    }
+
+    private fun setService() {
+        viewModel = ViewModelProvider(this).get(CompanyEditProfileViewModel::class.java)
+        val service = ArkhireApiClient.getApiClient(this)?.create(ArkhireApiService::class.java)
+        viewModel.setService(service!!)
     }
 
     override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
+            requestCode: Int,
+            permissions: Array<out String>,
+            grantResults: IntArray
     ) {
         when(requestCode) {
             CompanyEditProfileActivity.PERMISSION_CODE -> {
                 if (grantResults.isNotEmpty() && grantResults[0] ==
-                    PackageManager.PERMISSION_GRANTED){
+                        PackageManager.PERMISSION_GRANTED) {
                     //permission from popup granted
                     pickImageFromGallery()
-                }
-                else{
+                } else {
                     //permission from popup denied
                     Toast.makeText(this, "Please Allow Permission", Toast.LENGTH_SHORT).show()
                 }
@@ -136,6 +117,7 @@ class CompanyEditProfileActivity : AppCompatActivity(), OnMapReadyCallback, Loca
         intent.type = "image/*"
         startActivityForResult(intent, CompanyEditProfileActivity.IMAGE_PICK_CODE)
     }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -185,32 +167,42 @@ class CompanyEditProfileActivity : AppCompatActivity(), OnMapReadyCallback, Loca
         googleMap.uiSettings.isMyLocationButtonEnabled = true
         googleMap.mapType = GoogleMap.MAP_TYPE_TERRAIN
 
+        if (ContextCompat.checkSelfPermission(this,
+                        Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            googleMap.isMyLocationEnabled = true
+            googleMap.setOnMyLocationClickListener (object : GoogleMap.OnMyLocationClickListener {
+                override fun onMyLocationClick(p0: Location) {
+                    binding.tvCurrentLatitude.text = p0.latitude.toString()
+                    binding.tvCurrentLongitude.text = p0.longitude.toString()
+                    markerDefault.position = LatLng(p0.latitude, p0.longitude)
+                }
+            })
+        }
+
         markerDefault = googleMap.addMarker(
-            MarkerOptions()
-                .position(locationDefault)
+                MarkerOptions()
+                        .position(locationDefault)
+                        .draggable(true)
         )
 
         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(locationDefault, 16f))
         googleMap.setOnMarkerClickListener(this)
-    }
 
-    override fun onLocationChanged(location: Location?) {
-    }
-
-
-    override fun onCameraMove() {
-
-    }
-
-    override fun onCameraMoveStarted(camera: Int) {
-
-    }
-
-    override fun onCameraIdle() {
+        googleMap.setOnMapClickListener(object : GoogleMap.OnMapClickListener {
+            override fun onMapClick(p0: LatLng) {
+                binding.tvCurrentLatitude.text = p0.latitude.toString()
+                binding.tvCurrentLongitude.text = p0.longitude.toString()
+                markerDefault.position = p0
+                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(p0, 16f))
+                googleMap.setOnMarkerClickListener(this@CompanyEditProfileActivity)
+            }
+        })
 
     }
+
 
     override fun onMarkerClick(marker: Marker?): Boolean {
+        Toast.makeText(this, "Select Area On Map To Update Location", Toast.LENGTH_SHORT).show()
         return false
     }
 

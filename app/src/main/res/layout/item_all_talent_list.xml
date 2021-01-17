@@ -35,6 +35,7 @@
 
                 <ImageView
                     android:id="@+id/iv_talentImage"
+                    android:background="@drawable/ic_profile_loading"
                     android:layout_width="70dp"
                     android:layout_height="70dp"/>
 

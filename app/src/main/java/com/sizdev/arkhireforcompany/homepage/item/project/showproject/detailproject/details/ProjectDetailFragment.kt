@@ -145,4 +145,9 @@ class ProjectDetailFragment : Fragment() {
             }
         }
     }
+
+    override fun onDestroy() {
+        coroutineScope.cancel()
+        super.onDestroy()
+    }
 }

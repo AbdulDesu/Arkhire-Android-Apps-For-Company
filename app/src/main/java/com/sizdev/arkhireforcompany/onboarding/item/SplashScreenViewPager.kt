@@ -36,6 +36,7 @@ class SplashScreenViewPager : Fragment() {
         )
 
         binding.welcomeViewPager.adapter = adapter
+
         return binding.root
     }
 

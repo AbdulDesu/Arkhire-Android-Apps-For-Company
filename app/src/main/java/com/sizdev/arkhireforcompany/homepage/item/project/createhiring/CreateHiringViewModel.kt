@@ -27,7 +27,6 @@ class CreateHiringViewModel : ViewModel(), CoroutineScope {
     fun sendHiring( projectID: String, projectTarget: String, offeredSalary: String) {
         launch {
             isLoading.value = true
-
             val result = withContext(Dispatchers.IO) {
                 try {
                     service?.hireTalentResponse(projectID, projectTarget, offeredSalary)
@@ -48,6 +47,7 @@ class CreateHiringViewModel : ViewModel(), CoroutineScope {
 
             if (result is CreateHiringResponses) {
                 isLoading.value = false
+
                 if(result.success) {
                     onSuccess.value = true
                 }

@@ -12,7 +12,7 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="login">Login</string>
-    <string name="forget_password">Forget password</string>
+    <string name="forget_password">Forgot your password?</string>
     <string name="or">or</string>
     <string name="register">REGISTER</string>
     <string name="welcome_let_s_get_started">Welcome, Let\'s get Started</string>
@@ -61,5 +61,7 @@
     <string name="send">SEND</string>
     <string name="loging_in">Loging in...</string>
     <string name="open_repository">open repository</string>
+    <string name="hired">Hired</string>
+    <string name="sign_up_question">Sign up</string>
 
 </resources>

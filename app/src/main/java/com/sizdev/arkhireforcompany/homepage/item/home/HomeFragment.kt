@@ -154,6 +154,7 @@ class HomeFragment : Fragment(), HomeContract.View {
 
     override fun setError(error: String) {
         if (error == "Session Expired !"){
+            handler.removeCallbacksAndMessages(null)
             sessionExpiredAlert()
             dialog.show()
         }

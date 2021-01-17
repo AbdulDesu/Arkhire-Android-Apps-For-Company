@@ -7,6 +7,7 @@ import com.sizdev.arkhireforcompany.homepage.item.account.profile.edit.CompanyEd
 import com.sizdev.arkhireforcompany.homepage.item.home.HomeResponse
 import com.sizdev.arkhireforcompany.homepage.item.explore.ExploreResponse
 import com.sizdev.arkhireforcompany.homepage.item.home.android.AndroidDeveloperResponse
+import com.sizdev.arkhireforcompany.homepage.item.home.detailedtalent.TalentProfileResponse
 import com.sizdev.arkhireforcompany.homepage.item.home.detailedtalent.portfolio.PortfolioResponse
 import com.sizdev.arkhireforcompany.homepage.item.home.detailedtalent.workexperience.WorkExperienceResponse
 import com.sizdev.arkhireforcompany.homepage.item.home.devops.DevOpsEngineerResponse
@@ -64,8 +65,11 @@ interface ArkhireApiService {
     suspend fun getAccountResponse(@Path("accountID") accountID: String): HomeResponse
 
     // Talent Service
-    @GET("/talent/filter/name")
+    @GET("talent/")
     suspend fun getAllTalentResponse(): ExploreResponse
+
+    @GET("/talent/{talentID}")
+    suspend fun getTalentByIDResponse(@Path("talentID") talentID: String): TalentProfileResponse
 
     @GET("/talent/filter/name")
     suspend fun filterTalentByName(@Query("search") name: String): ExploreResponse
@@ -132,6 +136,10 @@ interface ArkhireApiService {
     suspend fun hireTalentResponse(@Field("projectID") projectID: String,
                                    @Field("offering_owner") talentID: String,
                                    @Field("offered_salary") offeredSalary: String): CreateHiringResponses
+
+    @GET("contributor/check/{projectID}")
+    suspend fun checkHiredResponse(@Path("projectID") projectID: String,
+                                   @Query("search") talentName: String): CreateHiringResponses
 
     // Portfolio Service
     @GET("portfolio/owner/{accountID}")

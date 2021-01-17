@@ -37,7 +37,7 @@ class LoginViewModel: ViewModel(), CoroutineScope {
                             e.code() == 404 -> {
                                 onFail.value = "Account is not registered !"
                             }
-                            e.code() == 400 -> {
+                            e.code() == 405 -> {
                                 onFail.value = "Invalid Password !"
                             }
                             else -> {
