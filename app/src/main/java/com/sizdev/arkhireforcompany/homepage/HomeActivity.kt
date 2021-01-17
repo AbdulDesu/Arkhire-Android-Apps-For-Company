@@ -1,5 +1,6 @@
 package com.sizdev.arkhireforcompany.homepage
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -77,6 +78,8 @@ class HomeActivity : AppCompatActivity() {
 
         if (doubleBackToExitPressedOnce) {
             super.onBackPressed()
+            Intent.FLAG_ACTIVITY_CLEAR_TASK
+            finish()
             return
         }
 

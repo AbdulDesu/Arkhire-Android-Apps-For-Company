@@ -152,15 +152,14 @@ class CreateHiringActivity : AppCompatActivity() {
                         salaryExpectation = spinner.projectSalary
                         projectTitle = spinner.projectTitle
                         verifyHiring()
+
+                        // Enable Send Offering Feature
+                        binding.btSendOffering.setOnClickListener {
+                            sendOffering()
+                        }
                     }
 
                     override fun onNothingSelected(parent: AdapterView<*>?) {}
-                }
-
-                // Enable Send Offering Feature
-                binding.btSendOffering.setOnClickListener {
-                    sendOffering()
-
                 }
             }
         }
@@ -177,7 +176,7 @@ class CreateHiringActivity : AppCompatActivity() {
             viewModel?.sendHiring(projectTag!!, talentID!!, offeredSalary)
         }
         else {
-            Toast.makeText(this@CreateHiringActivity, "Salary Is Too low from expectation : ${format.format(salaryExpectation)}", Toast.LENGTH_LONG).show()
+            Toast.makeText(this@CreateHiringActivity, "Salary Is Too low from expectation : ${format.format(salaryExpectation!!.toDouble())}", Toast.LENGTH_LONG).show()
         }
     }
 

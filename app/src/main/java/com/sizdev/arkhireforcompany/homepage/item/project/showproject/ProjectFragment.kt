@@ -164,5 +164,4 @@ class ProjectFragment : Fragment(), ProjectContract.View {
             activity?.finish()
         }
     }
-
 }

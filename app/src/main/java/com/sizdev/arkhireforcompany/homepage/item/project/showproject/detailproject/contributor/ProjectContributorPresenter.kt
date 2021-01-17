@@ -35,7 +35,7 @@ class ProjectContributorPresenter (private val coroutineScope: CoroutineScope,
 
                             e.code() == 404 -> {
                                 view?.hideProgressBar()
-                                view?.setError("Project Not Found !")
+                                view?.setError("Data Not Found !")
                             }
 
                             else -> {

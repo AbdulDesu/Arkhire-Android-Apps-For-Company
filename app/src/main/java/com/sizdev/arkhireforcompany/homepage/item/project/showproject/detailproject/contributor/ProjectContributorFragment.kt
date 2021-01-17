@@ -81,7 +81,7 @@ class ProjectContributorFragment : Fragment(), ProjectContributorContract.View {
                 dialog.show()
             }
 
-            "Project Not Found !" -> {
+            "Data Not Found !" -> {
                 binding.rvContributorList.visibility = View.GONE
                 binding.notfound.visibility = View.VISIBLE
             }
@@ -141,15 +141,6 @@ class ProjectContributorFragment : Fragment(), ProjectContributorContract.View {
     override fun onStart() {
         super.onStart()
         presenter?.bindToView(this)
-
-        // Data Refresh Management
-        val mainHandler = Handler(Looper.getMainLooper())
-        mainHandler.post(object : Runnable {
-            override fun run() {
-                presenter?.showContributorApi(projectTag!!)
-                mainHandler.postDelayed(this, 15000)
-            }
-        })
     }
 
     override fun onStop() {

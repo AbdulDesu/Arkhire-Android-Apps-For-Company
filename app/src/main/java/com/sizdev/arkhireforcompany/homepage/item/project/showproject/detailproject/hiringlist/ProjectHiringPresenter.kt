@@ -5,6 +5,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import retrofit2.HttpException
 
 class ProjectHiringPresenter(private val coroutineScope: CoroutineScope,
                              private val service: ArkhireApiService?) : ProjectHiringContract.Presenter {
@@ -24,8 +25,23 @@ class ProjectHiringPresenter(private val coroutineScope: CoroutineScope,
             val result = withContext(Dispatchers.IO) {
                 try {
                     service?.getHiringListResponse(projectID)
-                } catch (e: Throwable) {
+                } catch (e: HttpException) {
                     e.printStackTrace()
+                    withContext(Dispatchers.Main){
+                        when{
+                            e.code() == 403 -> {
+                                view?.setError("Session Expired !")
+                            }
+                            e.code() == 404 -> {
+                                view?.hideProgressBar()
+                                view?.setError("Data Not Found !")
+                            }
+
+                            else -> {
+                                view?.setError("Unknown Error, Please Try Again Later !")
+                            }
+                        }
+                    }
                 }
             }
 
@@ -34,6 +50,7 @@ class ProjectHiringPresenter(private val coroutineScope: CoroutineScope,
                     ProjectHiringModel(it.offeringID, it.hiringStatus, it.offeredSalary, it.replyMsg, it.talentID, it.talentName, it.talentTitle, it.talentImage, it.projectSalary, it.projectImage)
                 }
                 view?.addListHiring(list)
+                view?.hideProgressBar()
             }
         }
     }
