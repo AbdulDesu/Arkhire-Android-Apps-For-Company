@@ -60,6 +60,19 @@ interface ArkhireApiService {
                               @Part("company_facebook") companyFacebook: RequestBody,
                               @Part companyImage: MultipartBody.Part) : CompanyEditProfileResponse
 
+    @FormUrlEncoded
+    @PUT("company/data/{companyID}")
+    suspend fun updateCompanyWithoutImage(@Path("companyID") companyID: String,
+                                          @Field("company_location") companyLocation: String,
+                                          @Field("company_latitude") companyLatitude: String,
+                                          @Field("company_longitude") companyLongitude: String,
+                                          @Field("company_type") companyType: String,
+                                          @Field("company_detail") companyDetail: String,
+                                          @Field("company_linkedin") companyLinkedin: String,
+                                          @Field("company_instagram") companyInstagram: String,
+                                          @Field("company_facebook") companyFacebook: String,
+                                          @Field("company_image") companyImage: String) : CompanyEditProfileResponse
+
     // Home Service
     @GET("/account/{accountID}")
     suspend fun getAccountResponse(@Path("accountID") accountID: String): HomeResponse

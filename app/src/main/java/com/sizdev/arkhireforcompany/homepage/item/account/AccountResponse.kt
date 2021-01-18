@@ -9,6 +9,7 @@ data class AccountResponse(val success: Boolean, val message: String, val data: 
             @SerializedName("account_name") val accountName: String,
             @SerializedName("company_name") val companyName: String,
             @SerializedName("company_position") val companyPosition: String?,
+            @SerializedName("company_location") val companyLocation: String?,
             @SerializedName("company_latitude") val companyLatitude: String?,
             @SerializedName("company_longitude") val companyLongitude: String?,
             @SerializedName("company_type") val companyType: String?,

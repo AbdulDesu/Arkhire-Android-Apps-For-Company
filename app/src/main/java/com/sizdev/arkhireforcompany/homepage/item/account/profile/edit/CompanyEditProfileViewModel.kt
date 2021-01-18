@@ -42,4 +42,28 @@ class CompanyEditProfileViewModel: ViewModel(), CoroutineScope {
             }
         }
     }
+
+    fun updateCompanyWithoutImage(companyID : String, companyLocation:String, companyLatitude:String, companyLongitude:String, companyType:String, companyDesc: String, companyLinkedin: String, companyInstagram: String, companyFacebook: String, companyImage: String) {
+        launch {
+            val result = withContext(Dispatchers.IO) {
+                try {
+                    service?.updateCompanyWithoutImage(companyID, companyLocation, companyLatitude, companyLongitude, companyType, companyDesc, companyLinkedin, companyInstagram, companyFacebook, companyImage)
+                } catch (e: Throwable) {
+                    e.printStackTrace()
+                    withContext(Dispatchers.Main){
+                        isSuccess.value = "Failed"
+                    }
+                }
+            }
+
+            if (result is CompanyEditProfileResponse) {
+                if (result.success) {
+                    isSuccess.value = "Success"
+                }
+                else {
+                    isSuccess.value = "Failed"
+                }
+            }
+        }
+    }
 }

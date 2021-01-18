@@ -52,6 +52,7 @@ class ProjectHiringPresenter(private val coroutineScope: CoroutineScope,
                 view?.addListHiring(list)
                 view?.hideProgressBar()
             }
+
         }
     }
 }

@@ -50,6 +50,7 @@
                     android:id="@+id/iv_company_profile_image"
                     android:layout_width="76dp"
                     android:layout_height="76dp"
+                    android:background="@drawable/ic_profile_loading"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentBottom="true"
                     android:layout_marginEnd="11dp"

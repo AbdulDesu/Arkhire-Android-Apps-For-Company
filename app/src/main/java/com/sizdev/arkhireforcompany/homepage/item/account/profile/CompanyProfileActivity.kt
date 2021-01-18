@@ -1,12 +1,16 @@
 package com.sizdev.arkhireforcompany.homepage.item.account.profile
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.Menu
 import android.view.View
 import android.widget.PopupMenu
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,47 +23,114 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.sizdev.arkhireforcompany.R
+import com.sizdev.arkhireforcompany.administration.login.LoginActivity
 import com.sizdev.arkhireforcompany.databinding.ActivityCompanyProfileBinding
 import com.sizdev.arkhireforcompany.homepage.HomeActivity
+import com.sizdev.arkhireforcompany.homepage.item.account.AccountPresenter
 import com.sizdev.arkhireforcompany.homepage.item.account.profile.edit.CompanyEditProfileActivity
+import com.sizdev.arkhireforcompany.networking.ArkhireApiClient
+import com.sizdev.arkhireforcompany.networking.ArkhireApiService
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_company_edit_profile.*
+import kotlinx.android.synthetic.main.activity_company_profile.*
+import kotlinx.android.synthetic.main.alert_session_expired.view.*
 import kotlinx.coroutines.*
+import java.lang.Runnable
 
-class CompanyProfileActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
+class CompanyProfileActivity : AppCompatActivity(), CompanyProfileContract.View, OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private lateinit var binding: ActivityCompanyProfileBinding
     private lateinit var markerDefault: Marker
+    private lateinit var dialog: AlertDialog
+    private lateinit var handler: Handler
+    private lateinit var coroutineScope: CoroutineScope
+    private lateinit var map: GoogleMap
 
+    private var companyID: String? = null
+    private var presenter: CompanyProfilePresenter? = null
     private var defaultLocation = LatLng(-6.200000, 106.816666)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_company_profile)
 
-        // Data Loading Management
-        binding.loadingScreen.visibility = View.VISIBLE
-        binding.progressBar.max = 100
+        // Set Services
+        setService()
 
-        // Get Saved Data
-        val companyID = intent.getStringExtra("companyID")
-        val companyName = intent.getStringExtra("companyName")
-        val companyType = intent.getStringExtra("companyType")
-        val companyImage = intent.getStringExtra("companyImage")
-        val companyLinkedin = intent.getStringExtra("companyLinkedin")
-        val companyInstagram = intent.getStringExtra("companyInstagram")
-        val companyFacebook = intent.getStringExtra("companyFacebook")
-        val companyDesc = intent.getStringExtra("companyDesc")
-        val companyLatitude = intent.getStringExtra("companyLatitude")
-        val companyLongitude = intent.getStringExtra("companyLongitude")
+        // Show Progress bar
+        showProgressBar()
+
+        // Get Current Login Data
+        getCurrentLoginData()
+
+        // Set Data Refresh manager
+        setDataRefreshManagement()
 
         // Set Map
-        if (companyLatitude != "null" && companyLongitude != "null") {
-            if (companyLatitude != null && companyLongitude != null) {
-                defaultLocation = LatLng(companyLatitude.toDouble(), companyLongitude.toDouble())
-            }
+        setMap()
+
+
+        //RecyclerViewAdapter Manager
+        binding.rvCompanyLookingFor.adapter = CompanyLookingForAdapter()
+        binding.rvCompanyLookingFor.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
+
+        binding.backButton.setOnClickListener {
+            finish()
+        }
+    }
+
+    override fun onMapReady(googleMap: GoogleMap) {
+        googleMap.uiSettings.isZoomControlsEnabled = true
+        googleMap.mapType = GoogleMap.MAP_TYPE_TERRAIN
+
+        markerDefault = googleMap.addMarker(
+            MarkerOptions()
+                .position(defaultLocation)
+                .title(binding.tvCompanyProfileName.text as String?)
+        )
+
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(defaultLocation, 12f))
+        googleMap.setOnMarkerClickListener(this)
+
+        map = googleMap
         }
 
-        // Set Company Data
+        override fun onMarkerClick(marker: Marker): Boolean {
+            Toast.makeText(this, "Navigate to ${marker.title} ?", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+    override fun setError(error: String) {
+        when (error){
+            "Session Expired !" -> {
+                handler.removeCallbacksAndMessages(null)
+                showSessionExpiredAlert()
+                dialog.show()
+            }
+            else -> {
+                Toast.makeText(this, error, Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+
+    override fun setService() {
+        coroutineScope = CoroutineScope(Job() + Dispatchers.Main)
+        val service = this.let { ArkhireApiClient.getApiClient(it)?.create(ArkhireApiService::class.java) }
+        presenter = CompanyProfilePresenter(coroutineScope, service)
+    }
+
+    override fun getCurrentLoginData() {
+        val sharedPrefData = this.getSharedPreferences("Token", Context.MODE_PRIVATE)
+        companyID = sharedPrefData.getString("accID", null)
+    }
+
+    override fun setMap() {
+        val mapFragment = supportFragmentManager
+                .findFragmentById(R.id.map) as SupportMapFragment
+        mapFragment.getMapAsync(this)
+    }
+
+    override fun setCompanyData(companyID: String, accountID: String, accountName: String, companyName: String, companyLocation: String, companyPosition: String, companyLatitude: String, companyLongitude: String, companyType: String, companyDesc: String, companyLinkedin: String, companyInstagram: String, companyFacebook: String, companyImage: String) {
         binding.tvCompanyProfileName.text = companyName
         binding.tvCompanyType.text = companyType
         binding.tvCompanyDescription.text = companyDesc
@@ -102,7 +173,6 @@ class CompanyProfileActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMa
             ).show()
         }
 
-
         binding.menuButton.setOnClickListener {
             val showMenu = PopupMenu(this@CompanyProfileActivity, binding.menuButton)
             showMenu.menu.add(Menu.NONE, 0, 0, "Edit Profile")
@@ -118,50 +188,85 @@ class CompanyProfileActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMa
                                 CompanyEditProfileActivity::class.java
                         )
                         intent.putExtra("companyID", companyID)
-                        intent.putExtra("companyName", companyName)
+                        intent.putExtra("companyLocation", companyLocation)
+                        intent.putExtra("companyLatitude", companyLatitude)
+                        intent.putExtra("companyLongitude", companyLongitude)
+                        intent.putExtra("companyType", companyType)
+                        intent.putExtra("companyDesc", companyDesc)
+                        intent.putExtra("companyLinkedin", companyLinkedin)
+                        intent.putExtra("companyInstagram", companyInstagram)
+                        intent.putExtra("companyFacebook", companyFacebook)
+                        intent.putExtra("companyImage", companyImage)
                         startActivity(intent)
                     }
                     1 -> {
-                        startActivity(
-                                Intent(this@CompanyProfileActivity, HomeActivity::class.java))
+                        Toast.makeText(this, "Coming Soon", Toast.LENGTH_LONG).show()
                     }
                 }
                 false
             }
         }
 
-        // End Of Loading
+        if (companyLatitude != "" && companyLongitude != ""){
+            markerDefault.position = LatLng(companyLatitude.toDouble(), companyLongitude.toDouble())
+            map.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(companyLatitude.toDouble(), companyLongitude.toDouble()), 12f))
+            map.setOnMarkerClickListener(this)
+        }
+    }
+
+    override fun setDataRefreshManagement() {
+        handler = Handler(Looper.getMainLooper())
+        handler.post(object : Runnable {
+            override fun run() {
+                presenter?.getCompanyData(companyID!!)
+                handler.postDelayed(this, 5000)
+            }
+        })
+    }
+
+    override fun showProgressBar() {
+        binding.loadingScreen.visibility = View.VISIBLE
+        binding.progressBar.max = 100
+    }
+
+    override fun hideProgressBar() {
         binding.loadingScreen.visibility = View.GONE
+    }
 
-        val mapFragment = supportFragmentManager
-            .findFragmentById(R.id.map) as SupportMapFragment
-        mapFragment.getMapAsync(this)
+    override fun showSessionExpiredAlert() {
+        val view: View = layoutInflater.inflate(R.layout.alert_session_expired, null)
 
-        //RecyclerViewAdapter Manager
-        binding.rvCompanyLookingFor.adapter = CompanyLookingForAdapter()
-        binding.rvCompanyLookingFor.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
+        dialog = this.let {
+            AlertDialog.Builder(it)
+                    .setView(view)
+                    .setCancelable(false)
+                    .create()
+        }
 
-        binding.backButton.setOnClickListener {
+        view.bt_okRelog.setOnClickListener {
+            dialog.dismiss()
+            val intent = Intent(this, LoginActivity::class.java)
+            val sharedPref = this.getSharedPreferences("Token", Context.MODE_PRIVATE)
+            val editor = sharedPref.edit()
+            editor.putString("accID", null)
+            editor.apply()
+            startActivity(intent)
             finish()
         }
     }
 
-    override fun onMapReady(googleMap: GoogleMap) {
-        googleMap.uiSettings.isZoomControlsEnabled = true
-        googleMap.mapType = GoogleMap.MAP_TYPE_TERRAIN
+    override fun onStart() {
+        super.onStart()
+        presenter?.bindToView(this)
+    }
 
-        markerDefault = googleMap.addMarker(
-            MarkerOptions()
-                .position(defaultLocation)
-                .title(binding.tvCompanyProfileName.text as String?)
-        )
+    override fun onStop() {
+        super.onStop()
+        presenter?.unbind()
+    }
 
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(defaultLocation, 12f))
-        googleMap.setOnMarkerClickListener(this)
-        }
-
-        override fun onMarkerClick(marker: Marker): Boolean {
-            Toast.makeText(this, marker.title, Toast.LENGTH_SHORT).show()
-            return false
-        }
+    override fun onDestroy() {
+        coroutineScope.cancel()
+        super.onDestroy()
+    }
 }

@@ -27,6 +27,7 @@ import com.sizdev.arkhireforcompany.R
 import com.sizdev.arkhireforcompany.databinding.ActivityCompanyEditProfileBinding
 import com.sizdev.arkhireforcompany.networking.ArkhireApiClient
 import com.sizdev.arkhireforcompany.networking.ArkhireApiService
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_company_edit_profile.*
 import kotlinx.android.synthetic.main.activity_company_profile.*
 import okhttp3.MediaType.Companion.toMediaType
@@ -44,6 +45,7 @@ class CompanyEditProfileActivity : AppCompatActivity(), OnMapReadyCallback, Goog
     private lateinit var markerDefault: Marker
 
     private var locationDefault = LatLng(-6.200000, 106.816666)
+    private var companyID: String? =null
 
     companion object {
         private const val IMAGE_PICK_CODE = 1000
@@ -55,12 +57,14 @@ class CompanyEditProfileActivity : AppCompatActivity(), OnMapReadyCallback, Goog
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_company_edit_profile)
 
-
         // Set Service
         setService()
 
         // Set Map
         setMap()
+
+        // Get Current Login Company Data
+        setCurrentData()
 
         binding.btEditProfileImage.setOnClickListener {
             if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) ==
@@ -77,8 +81,38 @@ class CompanyEditProfileActivity : AppCompatActivity(), OnMapReadyCallback, Goog
         }
 
         binding.btNewProfileDone.setOnClickListener {
-
+            val currentImage = intent.getStringExtra("companyImage")
+            viewModel.updateCompanyWithoutImage(
+                    companyID!!,
+                    binding.etCompanyLocation.text.toString(),
+                    binding.tvCurrentLatitude.text.toString(),
+                    binding.tvCurrentLongitude.text.toString(),
+                    binding.etEditCompanyType.text.toString(),
+                    binding.etEditCompanyDesc.text.toString(),
+                    binding.etEditCompanyLinkedin.text.toString(),
+                    binding.etEditCompanyInstagram.text.toString(),
+                    binding.etEditCompanyFacebook.text.toString(),
+                    currentImage!!)
+            subscribeLiveData()
         }
+    }
+
+    private fun setCurrentData() {
+        companyID = intent.getStringExtra("companyID")
+        binding.etCompanyLocation.setText(intent.getStringExtra("companyLocation"))
+        binding.etEditCompanyType.setText(intent.getStringExtra("companyType"))
+        binding.etEditCompanyDesc.setText(intent.getStringExtra("companyDesc"))
+        binding.etEditCompanyLinkedin.setText(intent.getStringExtra("companyLinkedin"))
+        binding.etEditCompanyInstagram.setText(intent.getStringExtra("companyInstagram"))
+        binding.etEditCompanyFacebook.setText(intent.getStringExtra("companyFacebook"))
+        binding.tvCurrentLatitude.text = intent.getStringExtra("companyLatitude")
+        binding.tvCurrentLongitude.text = intent.getStringExtra("companyLongitude")
+
+        Picasso.get()
+                .load("http://54.82.81.23:911/image/${intent.getStringExtra("companyImage")}")
+                .resize(512, 512)
+                .centerCrop()
+                .into(binding.ivEditProfileImage)
     }
 
     private fun setMap() {
@@ -125,8 +159,6 @@ class CompanyEditProfileActivity : AppCompatActivity(), OnMapReadyCallback, Goog
         if (resultCode == Activity.RESULT_OK && requestCode == CompanyEditProfileActivity.IMAGE_PICK_CODE) {
             binding.ivEditProfileImage.setImageURI(data?.data)
 
-            var companyID = intent.getStringExtra("companyID")
-
             val filePath = data?.data?.let { getPath(this, it) }
             val file = File(filePath)
 
@@ -155,6 +187,9 @@ class CompanyEditProfileActivity : AppCompatActivity(), OnMapReadyCallback, Goog
                 else {
                     if (companyImage != null) {
                         viewModel.updateCompany(companyID!!, companyLocation, companyLatitude, companyLongitude, companyType, companyDesc, companyLinkedin, companyInstagram, companyFacebook, companyImage)
+                    }
+                    else {
+                        Toast.makeText(this, "Please Pick Image!", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
