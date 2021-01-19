@@ -84,12 +84,18 @@ class CreateProjectActivity : AppCompatActivity(), DatePickerDialog.OnDateSetLis
             }
             else{
                 //permission already granted
-                pickImageFromGallery();
+                if (binding.etProjectName.text.isNullOrEmpty() || binding.etProjectSallary.text.isNullOrEmpty() || binding.etProjectDuration.text.isNullOrEmpty() || binding.etProjectDesc.text.isNullOrEmpty()){
+                    Toast.makeText(this, "Fill All Form Before Pick Image Of This Project", Toast.LENGTH_SHORT).show()
+                }
+                else {
+                    pickImageFromGallery()
+                }
+
             }
         }
 
         binding.btCreateProject.setOnClickListener {
-            Toast.makeText(this, "Please Input All Field !", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Please Input All Field & Pick An Image!", Toast.LENGTH_SHORT).show()
         }
     }
 

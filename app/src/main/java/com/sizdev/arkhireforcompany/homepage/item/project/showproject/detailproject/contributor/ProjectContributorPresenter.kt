@@ -48,7 +48,7 @@ class ProjectContributorPresenter (private val coroutineScope: CoroutineScope,
 
             if (result is ProjectContributorResponse) {
                 val list = result.data?.map{
-                    ProjectContributorModel(it.accountName, it.accountTitle, it.talentImage)
+                    ProjectContributorModel(it.talentID, it.talentAccountID, it.accountName, it.accountTitle, it.talentImage)
                 }
                 view?.addListContributor(list)
                 view?.hideProgressBar()

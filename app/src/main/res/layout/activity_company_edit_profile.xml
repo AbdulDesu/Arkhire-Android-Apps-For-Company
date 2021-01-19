@@ -12,6 +12,31 @@
         android:layout_height="match_parent">
 
         <RelativeLayout
+            android:id="@+id/loadingScreen"
+            android:background="@color/white"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:text="Updating..."
+                android:textSize="20sp"
+                android:layout_centerInParent="true"
+                android:layout_above="@id/progressBar"
+                android:layout_marginBottom="22dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:max="50"
+                android:layout_centerInParent="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -64,7 +89,7 @@
                     android:drawablePadding="16dp"
                     android:ems="10"
                     android:textSize="14sp"
-                    android:hint="Company Location"
+                    android:hint="Company Location, Example: Bandung"
                     android:padding="16dp" />
 
                 <EditText
@@ -139,7 +164,6 @@
 
                 <FrameLayout
                     android:id="@+id/frameLayout"
-                    android:nestedScrollingEnabled="true"
                     android:layout_width="match_parent"
                     android:layout_height="250dp"
                     android:layout_marginStart="32dp"
@@ -218,6 +242,7 @@
                     android:layout_marginEnd="32dp"
                     android:background="@drawable/round_bg"
                     android:text="@string/done"
+                    android:layout_marginBottom="32dp"
                     android:textColor="@android:color/white"
                     android:textSize="18sp"
                     android:textStyle="bold" />

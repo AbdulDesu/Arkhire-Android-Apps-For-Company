@@ -1,12 +1,14 @@
 package com.sizdev.arkhireforcompany.homepage.item.project.showproject.detailproject.contributor
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.sizdev.arkhireforcompany.R
 import com.sizdev.arkhireforcompany.databinding.ItemProjectContributorBinding
+import com.sizdev.arkhireforcompany.homepage.item.home.detailedtalent.TalentProfileActivity
 import com.squareup.picasso.Picasso
 
 class ProjectContributorAdapter : RecyclerView.Adapter<ProjectContributorAdapter.ContributorHolder>() {
@@ -39,6 +41,17 @@ class ProjectContributorAdapter : RecyclerView.Adapter<ProjectContributorAdapter
                         .centerCrop()
                         .into(holder.binding.ivTalentImage)
             }
+        }
+
+        holder.itemView.setOnClickListener {
+            val item = items[position]
+            val context = holder.binding.holderContributor.context
+            val intent = Intent(context, TalentProfileActivity::class.java)
+
+            intent.putExtra("talentID", item.talentID)
+            intent.putExtra("accountID", item.talentAccountID)
+
+            context.startActivity(intent)
         }
     }
 

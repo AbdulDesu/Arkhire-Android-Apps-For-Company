@@ -40,7 +40,13 @@ class ProjectAdapter : RecyclerView.Adapter<ProjectAdapter.showProjectList>() {
         val timeSplitter = dateSplitter?.get(1)?.split(".")
 
         holder.binding.tvProjectTitle.text = item.projectTitle
-        holder.binding.tvProjectSalary.text = format.format(item.projectSalary?.toDouble())
+        if(item.projectSalary.isNullOrEmpty()){
+            holder.binding.tvProjectSalary.text = "Data Malformed"
+        }
+        else{
+            holder.binding.tvProjectSalary.text = format.format(item.projectSalary?.toDouble())
+        }
+
         holder.binding.tvProjectDuration.text = "Expired At: ${item.projectDuration}"
         holder.binding.tvProjectCreated.text = "${dateSplitter!![0]} - ${timeSplitter!![0]}"
 

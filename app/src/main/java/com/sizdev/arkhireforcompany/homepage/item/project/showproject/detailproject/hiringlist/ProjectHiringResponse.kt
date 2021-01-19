@@ -12,6 +12,8 @@ data class ProjectHiringResponse (val success: Boolean, val message: String, val
                             @SerializedName("account_name") val talentName: String,
                             @SerializedName("talent_tittle") val talentTitle: String,
                             @SerializedName("talent_image") val talentImage: String,
+                            @SerializedName("project_tittle") val projectTitle: String,
+                            @SerializedName("project_duration") val projectDuration: String,
                             @SerializedName("project_sallary") val projectSalary: String,
                             @SerializedName("project_image") val projectImage: String)
 }

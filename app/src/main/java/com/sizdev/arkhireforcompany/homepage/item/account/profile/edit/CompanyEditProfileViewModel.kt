@@ -10,6 +10,8 @@ import kotlin.coroutines.CoroutineContext
 
 class CompanyEditProfileViewModel: ViewModel(), CoroutineScope {
     val isSuccess = MutableLiveData<String>()
+    val isLoading = MutableLiveData<Boolean>()
+
     private lateinit var service: ArkhireApiService
 
     override val coroutineContext: CoroutineContext
@@ -21,6 +23,8 @@ class CompanyEditProfileViewModel: ViewModel(), CoroutineScope {
 
     fun updateCompany(companyID : String, companyLocation:RequestBody, companyLatitude:RequestBody, companyLongitude:RequestBody, companyType:RequestBody, companyDesc: RequestBody, companyLinkedin: RequestBody, companyInstagram: RequestBody, companyFacebook: RequestBody, companyImage: MultipartBody.Part) {
         launch {
+            isLoading.value = true
+
             val result = withContext(Dispatchers.IO) {
                 try {
                     service?.updateCompany(companyID, companyLocation, companyLatitude, companyLongitude, companyType, companyDesc, companyLinkedin, companyInstagram, companyFacebook, companyImage)
@@ -33,6 +37,7 @@ class CompanyEditProfileViewModel: ViewModel(), CoroutineScope {
             }
 
             if (result is CompanyEditProfileResponse) {
+                isLoading.value = false
                 if (result.success) {
                     isSuccess.value = "Success"
                 }
@@ -45,6 +50,7 @@ class CompanyEditProfileViewModel: ViewModel(), CoroutineScope {
 
     fun updateCompanyWithoutImage(companyID : String, companyLocation:String, companyLatitude:String, companyLongitude:String, companyType:String, companyDesc: String, companyLinkedin: String, companyInstagram: String, companyFacebook: String, companyImage: String) {
         launch {
+            isLoading.value = false
             val result = withContext(Dispatchers.IO) {
                 try {
                     service?.updateCompanyWithoutImage(companyID, companyLocation, companyLatitude, companyLongitude, companyType, companyDesc, companyLinkedin, companyInstagram, companyFacebook, companyImage)
@@ -57,6 +63,7 @@ class CompanyEditProfileViewModel: ViewModel(), CoroutineScope {
             }
 
             if (result is CompanyEditProfileResponse) {
+                isLoading.value = false
                 if (result.success) {
                     isSuccess.value = "Success"
                 }

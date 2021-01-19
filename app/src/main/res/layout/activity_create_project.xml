@@ -55,6 +55,7 @@
                     android:background="@drawable/bg_editlongtext"
                     android:drawablePadding="16dp"
                     android:ems="10"
+                    android:textSize="14sp"
                     android:fontFamily="@font/opensans"
                     android:hint="Title of this project"
                     android:padding="16dp" />
@@ -77,7 +78,8 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/bg_editlongtext"
                         android:ems="10"
-                        android:hint="6.000.000"
+                        android:textSize="14sp"
+                        android:hint="Expectation Salary"
                         android:inputType="number"
                         android:padding="16dp" />
                 </LinearLayout>

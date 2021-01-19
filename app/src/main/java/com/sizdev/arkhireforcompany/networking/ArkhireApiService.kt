@@ -19,6 +19,8 @@ import com.sizdev.arkhireforcompany.homepage.item.project.showproject.ProjectRes
 import com.sizdev.arkhireforcompany.homepage.item.project.showproject.detailproject.details.ProjectDetailResponse
 import com.sizdev.arkhireforcompany.homepage.item.project.showproject.detailproject.contributor.ProjectContributorResponse
 import com.sizdev.arkhireforcompany.homepage.item.project.showproject.detailproject.hiringlist.ProjectHiringResponse
+import com.sizdev.arkhirefortalent.administration.email.ResetEmailResponse
+import com.sizdev.arkhirefortalent.administration.password.ResetPasswordResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.http.*
@@ -45,6 +47,17 @@ interface ArkhireApiService {
     // Account Service
     @GET("/company/holder/{accountID}")
     suspend fun getAccountDataByHolderResponse(@Path("accountID") accountID : String): AccountResponse
+
+    @FormUrlEncoded
+    @PUT("/account/{accountID}")
+    suspend fun updateEmailResponse(@Path("accountID") accountID: String,
+                                    @Field("account_email") accountEmail: String): ResetEmailResponse
+
+    @FormUrlEncoded
+    @PUT("/account/password/{accountID}")
+    suspend fun updatePasswordResponse(@Path("accountID") accountID: String,
+                                       @Field("password") newPassword: String): ResetPasswordResponse
+
 
     // Profile Service
     @Multipart
@@ -113,6 +126,10 @@ interface ArkhireApiService {
     @GET("project/owner/{accountID}")
     suspend fun getAllProjectResponse(@Path("accountID") accountID: String): ProjectResponse
 
+    @GET("project/owner/{accountID}")
+    suspend fun searchProjectResponse(@Path("accountID") accountID: String,
+                                      @Query("search") projectTitle: String): ProjectResponse
+
     @GET("project/{projectID}")
     suspend fun getProjectByIDResponse(@Path("projectID") projectID: String) : ProjectDetailResponse
 
@@ -140,7 +157,7 @@ interface ArkhireApiService {
                                       @Field("project_desc") projectDesc: String,
                                       @Field("project_sallary") projectSalary: String): ProjectResponse
 
-    @DELETE("/project/{projectID}")
+    @DELETE("/project/new/{projectID}")
     suspend fun deleteProjectResponse(@Path ("projectID") projectID: String): ProjectResponse
 
     // Hiring Service

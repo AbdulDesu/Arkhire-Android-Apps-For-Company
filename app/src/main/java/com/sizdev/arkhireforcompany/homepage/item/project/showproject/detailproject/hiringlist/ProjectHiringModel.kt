@@ -8,5 +8,7 @@ data class ProjectHiringModel (val offeringID : String?,
                                val talentName: String?,
                                val talentTitle: String?,
                                val talentImage: String?,
+                               val projectTitle: String?,
+                               val projectDuration: String?,
                                val projectSalary : String?,
                                val projectImage: String?)

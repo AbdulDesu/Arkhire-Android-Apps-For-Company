@@ -21,6 +21,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ArkhireCompany"
         android:usesCleartextTraffic="true">
+        <activity android:name=".homepage.item.project.showproject.detailproject.hiringlist.ProjectHiringDetailActivity"></activity>
+        <activity android:name=".administration.email.ResetEmailActivity" />
         <activity android:name=".homepage.item.project.createhiring.CreateHiringActivity" />
         <activity android:name=".extra.CostumerServiceActivity" />
         <activity android:name=".homepage.item.home.detailedtalent.portfolio.PortfolioDetailsActivity" />
@@ -39,7 +41,7 @@
             android:value="${mapsApiKey}" />
 
         <activity android:name=".homepage.item.account.profile.CompanyProfileActivity" />
-        <activity android:name=".administration.password.ForgetPasswordActivity" />
+        <activity android:name=".administration.password.ResetPasswordActivity" />
         <activity android:name=".administration.register.RegisterActivity" />
         <activity android:name=".administration.login.LoginActivity" />
         <activity android:name=".homepage.HomeActivity" />

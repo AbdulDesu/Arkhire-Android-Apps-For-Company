@@ -63,6 +63,11 @@ class ExploreFragment : Fragment(), ExploreContract.View {
         // Manage Search View
         searchManager()
 
+        // Manage Buton
+        binding.filter.setOnClickListener {
+            Toast.makeText(activity, "Please Input Text", Toast.LENGTH_SHORT).show()
+        }
+
 
         return binding.root
     }
@@ -95,8 +100,9 @@ class ExploreFragment : Fragment(), ExploreContract.View {
                     binding.filter.setOnClickListener {
                         popupMenu.setOnMenuItemClickListener { menuItem ->
                             when (menuItem.itemId) {
-                                0 -> presenter?.searchByLocation(query)
-                                1 -> presenter?.searchByWorkTime(query)
+                                0 -> presenter?.searchByTitle(query)
+                                1 -> presenter?.searchByLocation(query)
+                                2 -> presenter?.searchByWorkTime(query)
                             }
                             false
                         }
@@ -110,7 +116,22 @@ class ExploreFragment : Fragment(), ExploreContract.View {
                 if (newText != null) {
                     handler.removeCallbacksAndMessages(null)
                     searchKeyword = newText
-                    presenter?.searchByName(newText)
+                    if (newText.length >= 3){
+                        presenter?.searchByName(newText)
+                    }
+                    binding.filter.setOnClickListener {
+                        popupMenu.setOnMenuItemClickListener { menuItem ->
+                            if(newText.length >= 3) {
+                                when (menuItem.itemId) {
+                                    0 -> presenter?.searchByTitle(newText)
+                                    1 -> presenter?.searchByLocation(newText)
+                                    2 -> presenter?.searchByWorkTime(newText)
+                                }
+                            }
+                            false
+                        }
+                        popupMenu.show()
+                    }
                 }
                 return false
             }
@@ -125,8 +146,9 @@ class ExploreFragment : Fragment(), ExploreContract.View {
 
     private fun popUpManager() {
         popupMenu = PopupMenu(activity, binding.filter)
-        popupMenu.menu.add(Menu.NONE, 0 ,0, "Location")
-        popupMenu.menu.add(Menu.NONE, 1 ,1, "WorkTime")
+        popupMenu.menu.add(Menu.NONE, 0 ,0, "Job Title")
+        popupMenu.menu.add(Menu.NONE, 1 ,1, "Location")
+        popupMenu.menu.add(Menu.NONE, 2 ,2, "WorkTime")
     }
 
     private fun showProgressBar() {
@@ -177,9 +199,6 @@ class ExploreFragment : Fragment(), ExploreContract.View {
                 binding.tvQueryNotfound.text = "Search result of $searchKeyword is not found"
             }
 
-            else -> {
-                Toast.makeText(activity, error, Toast.LENGTH_LONG).show()
-            }
         }
     }
 

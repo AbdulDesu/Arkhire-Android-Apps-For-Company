@@ -46,7 +46,8 @@ class TalentProfileActivity : AppCompatActivity(), TalentProfileContract.View {
     private lateinit var coroutineScope: CoroutineScope
 
     private var talentID: String? =null
-    private var phoneNumber : String? = null
+    private var phoneNumber: String? = null
+    private var emailAddress: String? = null
 
     private var presenter: TalentProfilePresenter? = null
 
@@ -99,27 +100,6 @@ class TalentProfileActivity : AppCompatActivity(), TalentProfileContract.View {
             finish()
         }
 
-        binding.menuButton.setOnClickListener {
-            val showMenu = PopupMenu(this, binding.menuButton)
-            val talentCv = intent.getStringExtra("talentCv")
-            showMenu.menu.add(Menu.NONE, 0 ,0, "Show CV")
-            showMenu.menu.add(Menu.NONE, 1 ,1, "Report Talent")
-            showMenu.show()
-
-            showMenu.setOnMenuItemClickListener { menuItem ->
-                val id = menuItem.itemId
-                when (id) {
-                    0 -> {
-                        val intent = Intent(this, ArkhireWebViewerActivity::class.java)
-                        intent.putExtra("webScale", "100")
-                        intent.putExtra("url", "http://54.82.81.23:911/image/$talentCv")
-                        startActivity(intent)
-                    }
-                    1 -> Toast.makeText(this, "Coming Soon", Toast.LENGTH_SHORT).show()
-                }
-                false
-            }
-        }
     }
 
     override fun setError(error: String) {
@@ -158,6 +138,9 @@ class TalentProfileActivity : AppCompatActivity(), TalentProfileContract.View {
         binding.tvProfileTalentTitle.text = talentTitle
         binding.tvProfileTalentDesc.text = talentDesc
         binding.tvProfileTalentLocation.text =  talentCity
+
+        phoneNumber = accountPhone
+        emailAddress = accountEmail
 
         Picasso.get()
                 .load("http://54.82.81.23:911/image/$talentImage")
@@ -220,14 +203,36 @@ class TalentProfileActivity : AppCompatActivity(), TalentProfileContract.View {
             dialog.show()
         }
 
-        binding.ivTalentGithub.setOnClickListener {
-            val intent = Intent(this, ArkhireWebViewerActivity::class.java)
-            if (talentGithub != "null"){
-                intent.putExtra("url", "https://github.com/$talentGithub")
-                startActivity(intent)
+        when(talentGithub) {
+            "" -> binding.ivTalentGithub.setImageResource(R.drawable.ic_github_disabled)
+            null -> binding.ivTalentGithub.setImageResource(R.drawable.ic_github_disabled)
+            else -> {
+                binding.ivTalentGithub.setOnClickListener {
+                    val intent = Intent(this, ArkhireWebViewerActivity::class.java)
+                    intent.putExtra("url", "https://github.com/$talentGithub")
+                    startActivity(intent)
+                }
             }
-            else{
-                Toast.makeText(this, "This talent not have github account", Toast.LENGTH_SHORT).show()
+        }
+
+        binding.menuButton.setOnClickListener {
+            val showMenu = PopupMenu(this, binding.menuButton)
+            showMenu.menu.add(Menu.NONE, 0 ,0, "Show CV")
+            showMenu.menu.add(Menu.NONE, 1 ,1, "Report Talent")
+            showMenu.show()
+
+            showMenu.setOnMenuItemClickListener { menuItem ->
+                val id = menuItem.itemId
+                when (id) {
+                    0 -> {
+                        val intent = Intent(this, ArkhireWebViewerActivity::class.java)
+                        intent.putExtra("webScale", "100")
+                        intent.putExtra("url", "http://54.82.81.23:911/image/$talentCv")
+                        startActivity(intent)
+                    }
+                    1 -> Toast.makeText(this, "Coming Soon", Toast.LENGTH_SHORT).show()
+                }
+                false
             }
         }
 
@@ -312,14 +317,13 @@ class TalentProfileActivity : AppCompatActivity(), TalentProfileContract.View {
     @SuppressLint("InflateParams")
     private fun startAlertCallConfirmation() {
         val view: View = layoutInflater.inflate(R.layout.alert_call_confirmation, null)
-        val talentPhone = intent.getStringExtra("talentPhone")
-        phoneNumber = talentPhone
+
         dialog = AlertDialog.Builder(this)
             .setView(view)
             .setCancelable(false)
             .create()
 
-        view.tv_alertNumberTalent.text = talentPhone
+        view.tv_alertNumberTalent.text = phoneNumber
         view.bt_yesCall.setOnClickListener {
             dialog.dismiss()
             if (checkSelfPermission(Manifest.permission.CALL_PHONE) ==
@@ -331,7 +335,7 @@ class TalentProfileActivity : AppCompatActivity(), TalentProfileContract.View {
             }
             else{
                 //permission already granted
-                callTalent(talentPhone!!)
+                callTalent(phoneNumber!!)
             }
         }
 
@@ -363,20 +367,19 @@ class TalentProfileActivity : AppCompatActivity(), TalentProfileContract.View {
     @SuppressLint("InflateParams")
     private fun startAlertEmailConfirmation() {
         val view: View = layoutInflater.inflate(R.layout.alert_mailing_confirmation, null)
-        val talentEmail = intent.getStringExtra("talentEmail")
         dialog = AlertDialog.Builder(this)
             .setView(view)
             .setCancelable(false)
             .create()
 
-        view.tv_alertEmailAddressTalent.text = talentEmail
+        view.tv_alertEmailAddressTalent.text = emailAddress
 
         view.bt_yesSend.setOnClickListener {
             dialog.dismiss()
             val sendEmail = Intent(Intent.ACTION_SENDTO)
-            sendEmail.putExtra(Intent.EXTRA_EMAIL, talentEmail)
+            sendEmail.putExtra(Intent.EXTRA_EMAIL, emailAddress)
             sendEmail.putExtra(Intent.EXTRA_SUBJECT, "Arkhire Email")
-            sendEmail.data = Uri.parse("mailto: $talentEmail")
+            sendEmail.data = Uri.parse("mailto: $emailAddress")
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             intent.addFlags(Intent.FLAG_FROM_BACKGROUND)
             try {

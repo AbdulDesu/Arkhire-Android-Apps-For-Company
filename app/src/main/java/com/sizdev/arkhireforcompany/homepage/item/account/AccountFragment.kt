@@ -8,6 +8,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,12 +17,15 @@ import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.sizdev.arkhireforcompany.R
+import com.sizdev.arkhireforcompany.administration.email.ResetEmailActivity
 import com.sizdev.arkhireforcompany.administration.login.LoginActivity
+import com.sizdev.arkhireforcompany.administration.password.ResetPasswordActivity
 import com.sizdev.arkhireforcompany.databinding.FragmentAccountBinding
 import com.sizdev.arkhireforcompany.homepage.item.account.profile.CompanyProfileActivity
 import com.sizdev.arkhireforcompany.homepage.item.account.profile.edit.CompanyEditProfileActivity
 import com.sizdev.arkhireforcompany.networking.ArkhireApiClient
 import com.sizdev.arkhireforcompany.networking.ArkhireApiService
+import com.sizdev.arkhireforcompany.webviewer.ArkhireWebViewerActivity
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.alert_logout_confirmation.view.*
 import kotlinx.android.synthetic.main.alert_session_expired.view.*
@@ -71,7 +75,7 @@ class AccountFragment : Fragment(), AccountContract.View {
                         Uri.parse("market://details?id=Arkhire")
                     )
                 )
-            } catch (anfe: ActivityNotFoundException) {
+            } catch (e: ActivityNotFoundException) {
                 startActivity(
                     Intent(
                         Intent.ACTION_VIEW,
@@ -79,6 +83,41 @@ class AccountFragment : Fragment(), AccountContract.View {
                     )
                 )
             }
+        }
+
+        binding.tvMyEmail.setOnClickListener {
+            val intent = Intent(activity, ResetEmailActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.tvMyPassword.setOnClickListener {
+            val intent = Intent(activity, ResetPasswordActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.tvMyLanguage.setOnClickListener {
+            Toast.makeText(activity, "Coming Soon", Toast.LENGTH_SHORT).show()
+        }
+
+        binding.tvCostumerService.setOnClickListener {
+            val sendEmail = Intent(Intent.ACTION_SENDTO)
+            sendEmail.putExtra(Intent.EXTRA_EMAIL, "abdul.richard@outlook.com")
+            sendEmail.putExtra(Intent.EXTRA_SUBJECT, "Arkhire Feedback")
+            sendEmail.data = Uri.parse("mailto: abdul.richard@outlook.com")
+            activity?.intent?.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            activity?.intent?.addFlags(Intent.FLAG_FROM_BACKGROUND)
+            try {
+                startActivity(sendEmail)
+            } catch (e: ActivityNotFoundException) {
+                e.printStackTrace()
+                Log.d("Email error:", e.toString())
+            }
+        }
+
+        binding.tvPrivacyPolicy.setOnClickListener {
+            val intent = Intent(activity, ArkhireWebViewerActivity::class.java)
+            intent.putExtra("url", "http://bit.ly/arkhire-privacy-policy")
+            startActivity(intent)
         }
 
         binding.tvLogout.setOnClickListener {
@@ -167,11 +206,11 @@ class AccountFragment : Fragment(), AccountContract.View {
             if(companyType == "null"){
                 val intent2 = Intent(activity, CompanyEditProfileActivity::class.java)
                 intent2.putExtra("companyID", companyID)
+                intent2.putExtra("editCode", "0")
                 startActivity(intent2)
             }
             else {
-                intent.putExtra("companyLatitude", companyLatitude)
-                intent.putExtra("companyLongitude", companyLatitude)
+                intent.putExtra("editCode", "1")
                 startActivity(intent)
             }
         }

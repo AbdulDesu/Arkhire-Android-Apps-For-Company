@@ -72,9 +72,9 @@ class ExploreAdapter : RecyclerView.Adapter<ExploreAdapter.ShowAllTalentHolder>(
             val item = items[position]
             val context = holder.binding.showAllTalentItem.context
             val intent = Intent(context, TalentProfileActivity::class.java)
-            val talentID = item.talentID.toString()
 
-            intent.putExtra("talentID", talentID)
+            intent.putExtra("talentID", item.talentID)
+            intent.putExtra("accountID", item.accountID)
 
             context.startActivity(intent)
         }

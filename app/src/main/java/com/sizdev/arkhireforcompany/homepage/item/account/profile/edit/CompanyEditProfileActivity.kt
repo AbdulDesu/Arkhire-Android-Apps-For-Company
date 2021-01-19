@@ -11,6 +11,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.view.View
 import android.widget.Toast
 import androidx.annotation.NonNull
 import androidx.appcompat.app.AppCompatActivity
@@ -60,12 +61,44 @@ class CompanyEditProfileActivity : AppCompatActivity(), OnMapReadyCallback, Goog
         // Set Service
         setService()
 
+        // Subscribe Live Data
+        subscribeLiveData()
+
         // Set Map
         setMap()
 
         // Get Current Login Company Data
         setCurrentData()
 
+        val editCode = intent.getStringExtra("editCode")
+
+        if(editCode == "0"){
+            binding.btNewProfileDone.setOnClickListener {
+                Toast.makeText(this, "Please Pick Image", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        else{
+            binding.btNewProfileDone.setOnClickListener {
+                val currentImage = intent.getStringExtra("companyImage")
+                if(binding.etCompanyLocation.text.isEmpty() || binding.tvCurrentLatitude.text.isEmpty() || binding.tvCurrentLongitude.text.isEmpty() || binding.etEditCompanyType.text.isEmpty() || binding.etEditCompanyDesc.text.isEmpty()){
+                    Toast.makeText(this, "Please Fill All Field", Toast.LENGTH_LONG).show()
+                }
+                else {
+                    viewModel.updateCompanyWithoutImage(
+                            companyID!!,
+                            binding.etCompanyLocation.text.toString(),
+                            binding.tvCurrentLatitude.text.toString(),
+                            binding.tvCurrentLongitude.text.toString(),
+                            binding.etEditCompanyType.text.toString(),
+                            binding.etEditCompanyDesc.text.toString(),
+                            binding.etEditCompanyLinkedin.text.toString(),
+                            binding.etEditCompanyInstagram.text.toString(),
+                            binding.etEditCompanyFacebook.text.toString(),
+                            currentImage!!)
+                }
+            }
+        }
         binding.btEditProfileImage.setOnClickListener {
             if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) ==
                 PackageManager.PERMISSION_DENIED){
@@ -76,24 +109,14 @@ class CompanyEditProfileActivity : AppCompatActivity(), OnMapReadyCallback, Goog
             }
             else{
                 //permission already granted
-                pickImageFromGallery();
-            }
-        }
+                if(binding.etCompanyLocation.text.isNullOrEmpty() || binding.etEditCompanyType.text.isNullOrEmpty() || binding.etEditCompanyDesc.text.isNullOrEmpty() || binding.tvCurrentLatitude.text.isNullOrEmpty() || binding.tvCurrentLongitude.text.isNullOrEmpty()){
+                    Toast.makeText(this, "Please Input All Required field, Include set location !", Toast.LENGTH_SHORT).show()
+                }
+                else {
+                    pickImageFromGallery();
+                }
 
-        binding.btNewProfileDone.setOnClickListener {
-            val currentImage = intent.getStringExtra("companyImage")
-            viewModel.updateCompanyWithoutImage(
-                    companyID!!,
-                    binding.etCompanyLocation.text.toString(),
-                    binding.tvCurrentLatitude.text.toString(),
-                    binding.tvCurrentLongitude.text.toString(),
-                    binding.etEditCompanyType.text.toString(),
-                    binding.etEditCompanyDesc.text.toString(),
-                    binding.etEditCompanyLinkedin.text.toString(),
-                    binding.etEditCompanyInstagram.text.toString(),
-                    binding.etEditCompanyFacebook.text.toString(),
-                    currentImage!!)
-            subscribeLiveData()
+            }
         }
     }
 
@@ -108,11 +131,16 @@ class CompanyEditProfileActivity : AppCompatActivity(), OnMapReadyCallback, Goog
         binding.tvCurrentLatitude.text = intent.getStringExtra("companyLatitude")
         binding.tvCurrentLongitude.text = intent.getStringExtra("companyLongitude")
 
-        Picasso.get()
-                .load("http://54.82.81.23:911/image/${intent.getStringExtra("companyImage")}")
-                .resize(512, 512)
-                .centerCrop()
-                .into(binding.ivEditProfileImage)
+        when(intent.getStringExtra("companyImage")){
+            null -> binding.ivEditProfileImage.setImageResource(R.drawable.ic_empty_image)
+            else -> {
+                Picasso.get()
+                        .load("http://54.82.81.23:911/image/${intent.getStringExtra("companyImage")}")
+                        .resize(512, 512)
+                        .centerCrop()
+                        .into(binding.ivEditProfileImage)
+            }
+        }
     }
 
     private fun setMap() {
@@ -137,7 +165,13 @@ class CompanyEditProfileActivity : AppCompatActivity(), OnMapReadyCallback, Goog
                 if (grantResults.isNotEmpty() && grantResults[0] ==
                         PackageManager.PERMISSION_GRANTED) {
                     //permission from popup granted
-                    pickImageFromGallery()
+                    if(binding.etCompanyLocation.text.isNullOrEmpty() || binding.etEditCompanyType.text.isNullOrEmpty() || binding.etEditCompanyDesc.text.isNullOrEmpty() || binding.tvCurrentLatitude.text.isNullOrEmpty() || binding.tvCurrentLongitude.text.isNullOrEmpty()){
+                        Toast.makeText(this, "Please Input All Required field, Include set location !", Toast.LENGTH_SHORT).show()
+                    }
+                    else {
+                        pickImageFromGallery()
+                    }
+
                 } else {
                     //permission from popup denied
                     Toast.makeText(this, "Please Allow Permission", Toast.LENGTH_SHORT).show()
@@ -193,7 +227,6 @@ class CompanyEditProfileActivity : AppCompatActivity(), OnMapReadyCallback, Goog
                     }
                 }
             }
-            subscribeLiveData()
         }
     }
 
@@ -219,9 +252,25 @@ class CompanyEditProfileActivity : AppCompatActivity(), OnMapReadyCallback, Goog
                         .position(locationDefault)
                         .draggable(true)
         )
+        val companyLatitude = intent.getStringExtra("companyLatitude")
+        val companyLongitude = intent.getStringExtra("companyLongitude")
 
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(locationDefault, 16f))
-        googleMap.setOnMarkerClickListener(this)
+        if(companyLongitude == null || companyLatitude == null){
+            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(locationDefault, 16f))
+            googleMap.setOnMarkerClickListener(this)
+        }
+
+        else if(companyLongitude != "" && companyLatitude != ""){
+            markerDefault.position = LatLng(companyLatitude!!.toDouble(), companyLongitude!!.toDouble())
+            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(companyLatitude.toDouble(), companyLongitude.toDouble()), 16f))
+            googleMap.setOnMarkerClickListener(this)
+        }
+
+        else {
+            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(locationDefault, 16f))
+            googleMap.setOnMarkerClickListener(this)
+        }
+
 
         googleMap.setOnMapClickListener(object : GoogleMap.OnMapClickListener {
             override fun onMapClick(p0: LatLng) {
@@ -265,6 +314,10 @@ class CompanyEditProfileActivity : AppCompatActivity(), OnMapReadyCallback, Goog
     }
 
     private fun subscribeLiveData() {
+        viewModel.isLoading.observe(this, {
+            binding.loadingScreen.visibility = View.VISIBLE
+        })
+
         viewModel.isSuccess.observe(this, {
             if (viewModel.isSuccess.value == "Success") {
                 Toast.makeText(this, "Profile Updated !", Toast.LENGTH_SHORT).show()

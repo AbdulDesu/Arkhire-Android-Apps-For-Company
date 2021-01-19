@@ -4,204 +4,220 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".homepage.item.project.showproject.detailproject.details.ProjectDetailFragment">
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <RelativeLayout
-            android:id="@+id/loadingScreen"
-            android:background="@color/white"
-            android:visibility="gone"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ProgressBar
-                android:id="@+id/progressBar"
-                android:layout_centerInParent="true"
+            <RelativeLayout
+                android:id="@+id/loadingScreen"
+                android:background="@color/white"
+                android:visibility="gone"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="match_parent">
 
-        </RelativeLayout>
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    android:layout_centerInParent="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
 
-        <ImageView
-            android:id="@+id/iv_projectImage"
-            android:src="@drawable/ic_empty_image"
-            android:scaleType="centerCrop"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"/>
+            </RelativeLayout>
 
-        <TextView
-            android:id="@+id/tv_projectTitle"
-            android:layout_marginTop="20dp"
-            android:text="Lorem ipsum dolor sid amed"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/tv_projectDesc"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginTop="12dp"
-            android:text="@string/lorem_ipsum"
-            android:justificationMode="inter_word"
-            android:textSize="16sp"
-            android:padding="4dp"
-            android:maxLength="300"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_marginTop="14dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/iv_projectImage"
+                        android:src="@drawable/ic_empty_image"
+                        android:scaleType="centerCrop"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"/>
 
-            <ImageView
-                android:src="@drawable/ic_rupiah"
+                    <TextView
+                        android:id="@+id/tv_projectTitle"
+                        android:layout_marginTop="20dp"
+                        android:text="Lorem ipsum dolor sid amed"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
 
-                android:background="@color/primary"
-                android:layout_width="40dp"
-                android:layout_height="match_parent"/>
+                    <TextView
+                        android:id="@+id/tv_projectDesc"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginTop="12dp"
+                        android:text="@string/lorem_ipsum"
+                        android:justificationMode="inter_word"
+                        android:textSize="16sp"
+                        android:padding="4dp"
+                        android:maxLength="500"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
 
-            <TextView
-                android:id="@+id/tv_projectSalary"
-                android:text="Rp. 8.000.000"
-                android:textSize="14sp"
-                android:padding="6dp"
-                android:layout_marginStart="12dp"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"/>
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_marginTop="14dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/help_projectSalary"
-                android:src="@drawable/ic_help"
-                android:layout_marginStart="10dp"
-                android:layout_gravity="end"
-                android:layout_width="18dp"
-                android:layout_height="match_parent"/>
+                        <ImageView
+                            android:src="@drawable/ic_rupiah"
+
+                            android:background="@color/primary"
+                            android:layout_width="40dp"
+                            android:layout_height="match_parent"/>
+
+                        <TextView
+                            android:id="@+id/tv_projectSalary"
+                            android:text="Rp. 8.000.000"
+                            android:textSize="14sp"
+                            android:padding="6dp"
+                            android:layout_marginStart="12dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="30dp"/>
+
+                        <ImageView
+                            android:id="@+id/help_projectSalary"
+                            android:src="@drawable/ic_help"
+                            android:layout_marginStart="10dp"
+                            android:layout_gravity="end"
+                            android:layout_width="18dp"
+                            android:layout_height="match_parent"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_marginTop="14dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:src="@drawable/ic_time_freelancer"
+                            android:background="@color/primary"
+                            android:layout_width="40dp"
+                            android:padding="8dp"
+                            android:scaleType="centerCrop"
+                            android:layout_height="match_parent"
+                            app:tint="@color/white" />
+
+                        <TextView
+                            android:id="@+id/tv_projectDuration"
+                            android:text="1 WEEK"
+                            android:layout_marginStart="12dp"
+                            android:textSize="14sp"
+                            android:padding="6dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="30dp"/>
+
+                        <ImageView
+                            android:id="@+id/help_projectDeadline"
+                            android:src="@drawable/ic_help"
+                            android:layout_marginStart="10dp"
+                            android:layout_gravity="end"
+                            android:layout_width="18dp"
+                            android:layout_height="match_parent"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_marginTop="14dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:src="@drawable/ic_added"
+                            android:background="@color/primary"
+                            android:layout_width="40dp"
+                            android:padding="8dp"
+                            android:scaleType="centerCrop"
+                            android:layout_height="match_parent"
+                            app:tint="@color/white" />
+
+                        <TextView
+                            android:id="@+id/tv_projectCreated"
+                            android:text="23-08-2002"
+                            android:textSize="14sp"
+                            android:padding="6dp"
+                            android:layout_marginStart="12dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="30dp"/>
+
+                        <ImageView
+                            android:id="@+id/help_projectCreated"
+                            android:src="@drawable/ic_help"
+                            android:layout_marginStart="10dp"
+                            android:layout_gravity="end"
+                            android:layout_width="18dp"
+                            android:layout_height="match_parent"/>
+
+                    </LinearLayout>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_marginTop="28dp"
+                        app:cardElevation="8dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/tv_projectEdit"
+                            android:text="EDIT PROJECT"
+                            android:textSize="16sp"
+                            android:textColor="@color/primary"
+                            android:gravity="center_vertical|center_horizontal"
+                            android:maxLength="300"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"/>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/tv_projectDelete"
+                        android:layout_marginTop="15dp"
+                        app:cardElevation="8dp"
+                        android:visibility="invisible"
+                        android:layout_marginBottom="50dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:text="DELETE PROJECT"
+                            android:textSize="16sp"
+                            android:textColor="#FF0000"
+                            android:gravity="center_vertical|center_horizontal"
+                            android:maxLength="300"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"/>
+
+
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+            </ScrollView>
+
+
 
         </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_marginTop="14dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:src="@drawable/ic_time_freelancer"
-                android:background="@color/primary"
-                android:layout_width="40dp"
-                android:padding="8dp"
-                android:scaleType="centerCrop"
-                android:layout_height="match_parent"
-                app:tint="@color/white" />
-
-            <TextView
-                android:id="@+id/tv_projectDuration"
-                android:text="1 WEEK"
-                android:layout_marginStart="12dp"
-                android:textSize="14sp"
-                android:padding="6dp"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"/>
-
-            <ImageView
-                android:id="@+id/help_projectDeadline"
-                android:src="@drawable/ic_help"
-                android:layout_marginStart="10dp"
-                android:layout_gravity="end"
-                android:layout_width="18dp"
-                android:layout_height="match_parent"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_marginTop="14dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:src="@drawable/ic_added"
-                android:background="@color/primary"
-                android:layout_width="40dp"
-                android:padding="8dp"
-                android:scaleType="centerCrop"
-                android:layout_height="match_parent"
-                app:tint="@color/white" />
-
-            <TextView
-                android:id="@+id/tv_projectCreated"
-                android:text="23-08-2002"
-                android:textSize="14sp"
-                android:padding="6dp"
-                android:layout_marginStart="12dp"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"/>
-
-            <ImageView
-                android:id="@+id/help_projectCreated"
-                android:src="@drawable/ic_help"
-                android:layout_marginStart="10dp"
-                android:layout_gravity="end"
-                android:layout_width="18dp"
-                android:layout_height="match_parent"/>
-
-        </LinearLayout>
-
-        <androidx.cardview.widget.CardView
-            android:layout_marginTop="28dp"
-            app:cardElevation="8dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/tv_projectEdit"
-                android:text="EDIT PROJECT"
-                android:textSize="16sp"
-                android:textColor="@color/primary"
-                android:gravity="center_vertical|center_horizontal"
-                android:maxLength="300"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"/>
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_marginTop="15dp"
-            app:cardElevation="8dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/tv_projectDelete"
-                android:text="DELETE PROJECT"
-                android:textSize="16sp"
-                android:textColor="#FF0000"
-                android:gravity="center_vertical|center_horizontal"
-                android:maxLength="300"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"/>
-
-
-        </androidx.cardview.widget.CardView>
-
-
-    </LinearLayout>
 </layout>

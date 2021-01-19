@@ -47,7 +47,7 @@ class ProjectHiringPresenter(private val coroutineScope: CoroutineScope,
 
             if (result is ProjectHiringResponse) {
                 val list = result.data?.map{
-                    ProjectHiringModel(it.offeringID, it.hiringStatus, it.offeredSalary, it.replyMsg, it.talentID, it.talentName, it.talentTitle, it.talentImage, it.projectSalary, it.projectImage)
+                    ProjectHiringModel(it.offeringID, it.hiringStatus, it.offeredSalary, it.replyMsg, it.talentID, it.talentName, it.talentTitle, it.talentImage, it.projectTitle, it.projectDuration, it.projectSalary, it.projectImage)
                 }
                 view?.addListHiring(list)
                 view?.hideProgressBar()

@@ -1,6 +1,7 @@
 package com.sizdev.arkhireforcompany.homepage.item.project.showproject.detailproject.hiringlist
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -52,6 +53,22 @@ class ProjectHiringAdapter : RecyclerView.Adapter<ProjectHiringAdapter.HiringLis
             "Approved" -> holder.binding.ivHiringStatus.setImageResource(R.drawable.ic_approved)
             "Declined" -> holder.binding.ivHiringStatus.setImageResource(R.drawable.ic_declined)
             else -> holder.binding.ivHiringStatus.setImageResource(R.drawable.ic_waiting)
+        }
+
+        holder.itemView.setOnClickListener {
+            val item = items[position]
+            val context = holder.binding.hiringListHolder.context
+            val intent = Intent(context, ProjectHiringDetailActivity::class.java)
+            intent.putExtra("talentName", item.talentName)
+            intent.putExtra("talentTitle", item.talentTitle)
+            intent.putExtra("talentImage", item.talentImage)
+            intent.putExtra("projectTitle", item.projectTitle)
+            intent.putExtra("projectDeadline", item.projectDuration)
+            intent.putExtra("projectImage", item.projectImage)
+            intent.putExtra("projectSalary", item.offeredSalary)
+            intent.putExtra("hiringStatus", item.hiringStatus)
+            intent.putExtra("replyMsg", item.replyMsg)
+            context.startActivity(intent)
         }
     }
 

@@ -33,6 +33,9 @@ class ExplorePresenter(private val coroutineScope: CoroutineScope,
                                 view?.setError("Session Expired !")
                             }
 
+                            e.code() == 404 -> {
+                                view?.setError("Search Result Not Found !")
+                            }
                             else -> {
                                 view?.setError("Unknown Error, Please Try Again Later !")
                             }

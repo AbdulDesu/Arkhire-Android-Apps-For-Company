@@ -20,6 +20,7 @@ interface ProjectDetailContract {
         fun unbind()
         fun getProject(projectID: String)
         fun deleteProject(projectID: String)
+        fun verifyProject(projectID: String)
     }
 
 }

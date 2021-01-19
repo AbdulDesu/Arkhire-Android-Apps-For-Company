@@ -42,7 +42,7 @@
     <string name="done">done</string>
     <string name="github_nickname">http://github.com/</string>
     <string name="edit_company_name">Company name</string>
-    <string name="edit_company_type">Company type</string>
+    <string name="edit_company_type">Company type (Enterprise, Startup, Etc)</string>
     <string name="id_linkedin_com_company">id.linkedin.com/company/</string>
     <string name="www_instagram_com">www.instagram.com/</string>
     <string name="web_facebook_com">web.facebook.com/</string>
@@ -66,5 +66,10 @@
     <string name="create_account_to_join_arkhire">Create account to become partner and start exploring</string>
     <string name="full_name">Full Name</string>
     <string name="sign_up">Sign Up</string>
+    <string name="email_settings">Email Settings</string>
+    <string name="please_verify_your_identity_to_continue">Please Verify your identity to continue</string>
+    <string name="new_email_address">New Email Address..</string>
+    <string name="updatingEmail">Updating Email…</string>
+    <string name="password_settings">Password Settings</string>
 
 </resources>

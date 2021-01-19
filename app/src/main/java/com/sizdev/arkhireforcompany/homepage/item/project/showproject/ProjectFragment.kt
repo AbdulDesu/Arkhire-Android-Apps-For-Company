@@ -8,6 +8,7 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
@@ -35,6 +36,7 @@ class ProjectFragment : Fragment(), ProjectContract.View {
 
     private var accountID: String? = null
     private var presenter: ProjectPresenter? = null
+    private var searchKeyword: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,6 +59,9 @@ class ProjectFragment : Fragment(), ProjectContract.View {
 
         // Data Refresh Management
         dataRefreshManager()
+
+        // Search Manager
+        searchManager()
 
         // Enable FAB
         enableFab()
@@ -119,6 +124,8 @@ class ProjectFragment : Fragment(), ProjectContract.View {
 
     override fun addProjectList(list: List<ProjectModel>) {
         (binding.rvProjectList.adapter as ProjectAdapter).addList(list)
+        binding.notfound.visibility = View.GONE
+        binding.rvProjectList.visibility = View.VISIBLE
     }
 
     override fun setError(error: String) {
@@ -136,6 +143,37 @@ class ProjectFragment : Fragment(), ProjectContract.View {
             else -> {
                 Toast.makeText(activity, error, Toast.LENGTH_LONG).show()
             }
+        }
+    }
+
+    override fun searchManager() {
+        binding.projectSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                binding.projectSearch.clearFocus()
+                if (query != null) {
+                    binding.rvProjectList.visibility = View.VISIBLE
+                    binding.notfound.visibility = View.GONE
+                    handler.removeCallbacksAndMessages(null)
+                    presenter?.searchByTitle(accountID!!, query)
+                    searchKeyword = query
+                }
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if (newText != null) {
+                    handler.removeCallbacksAndMessages(null)
+                    searchKeyword = newText
+                    presenter?.searchByTitle(accountID!!, newText)
+                }
+                return false
+            }
+        })
+
+        binding.projectSearch.setOnCloseListener {
+            binding.projectSearch.clearFocus()
+            presenter?.getProject(accountID!!)
+            false
         }
     }
 

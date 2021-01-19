@@ -184,41 +184,60 @@
                                 android:padding="16dp"
                                 tools:ignore="RtlSymmetry" />
 
-                            <EditText
-                                android:id="@+id/et_registPassword"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/inputPasswordLayout"
                                 android:layout_marginTop="26dp"
                                 android:layout_marginStart="20dp"
                                 android:layout_marginEnd="20dp"
-                                android:paddingStart="25dp"
-                                android:fontFamily="@font/aestetico"
-                                android:background="@drawable/round_border"
-                                android:drawableStart="@drawable/ic_password"
-                                android:drawablePadding="16dp"
-                                android:ems="10"
-                                android:hint="@string/password"
-                                android:inputType="textPassword"
-                                android:padding="16dp"
-                                tools:ignore="RtlSymmetry" />
+                                app:passwordToggleEnabled="true"
+                                app:hintEnabled="false"
+                                app:boxStrokeColor="@color/primary"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
 
-                            <EditText
-                                android:id="@+id/et_confirmRegistPassword"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
+                                <EditText
+                                    android:id="@+id/et_registPassword"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:paddingStart="25dp"
+                                    android:fontFamily="@font/aestetico"
+                                    android:background="@drawable/round_border"
+                                    android:drawableStart="@drawable/ic_password"
+                                    android:drawablePadding="16dp"
+                                    android:ems="10"
+                                    android:hint="@string/password"
+                                    android:inputType="textPassword"
+                                    android:padding="16dp"
+                                    tools:ignore="RtlSymmetry" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/confirmPasswordLayout"
                                 android:layout_marginTop="26dp"
                                 android:layout_marginStart="20dp"
                                 android:layout_marginEnd="20dp"
-                                android:paddingStart="25dp"
-                                android:fontFamily="@font/aestetico"
-                                android:background="@drawable/round_border"
-                                android:drawableStart="@drawable/ic_password"
-                                android:drawablePadding="16dp"
-                                android:ems="10"
-                                android:hint="@string/confirm_password"
-                                android:inputType="textPassword"
-                                android:padding="16dp"
-                                tools:ignore="RtlSymmetry" />
+                                app:passwordToggleEnabled="true"
+                                app:hintEnabled="false"
+                                app:boxStrokeColor="@color/primary"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <EditText
+                                    android:id="@+id/et_confirmRegistPassword"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:paddingStart="25dp"
+                                    android:fontFamily="@font/aestetico"
+                                    android:background="@drawable/round_border"
+                                    android:drawableStart="@drawable/ic_password"
+                                    android:drawablePadding="16dp"
+                                    android:ems="10"
+                                    android:hint="@string/confirm_password"
+                                    android:inputType="textPassword"
+                                    android:padding="16dp"
+                                    tools:ignore="RtlSymmetry" />
+                            </com.google.android.material.textfield.TextInputLayout>
 
                             <android.widget.Button
                                 android:id="@+id/bt_register"

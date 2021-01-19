@@ -106,19 +106,30 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <EditText
-                            android:id="@+id/et_loginPassword"
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/inputCurrentPasswordLayout"
+                            android:layout_below="@+id/confirmPasswordLayout"
+                            app:passwordToggleEnabled="true"
+                            app:hintEnabled="false"
+                            app:boxStrokeColor="@color/primary"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="#f5f5f5"
-                            android:textColor="@color/black"
-                            android:textColorHint="#a6a5ad"
-                            android:drawableStart="@drawable/ic_password"
-                            android:drawablePadding="16dp"
-                            android:ems="10"
-                            android:hint="@string/password"
-                            android:inputType="textPassword"
-                            android:padding="16dp" />
+                            android:layout_height="wrap_content">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/et_loginPassword"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="#f5f5f5"
+                                android:textColor="@color/black"
+                                android:textColorHint="#a6a5ad"
+                                android:drawableStart="@drawable/ic_password"
+                                android:drawablePadding="16dp"
+                                android:ems="10"
+                                android:hint="@string/password"
+                                android:inputType="textPassword"
+                                android:padding="16dp"/>
+
+                        </com.google.android.material.textfield.TextInputLayout>
 
                     </androidx.cardview.widget.CardView>
 

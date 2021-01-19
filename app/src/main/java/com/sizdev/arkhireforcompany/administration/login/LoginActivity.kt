@@ -11,7 +11,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.sizdev.arkhireforcompany.R
 import com.sizdev.arkhireforcompany.administration.register.RegisterActivity
-import com.sizdev.arkhireforcompany.administration.password.ForgetPasswordActivity
+import com.sizdev.arkhireforcompany.administration.password.ResetPasswordActivity
 import com.sizdev.arkhireforcompany.databinding.ActivityLoginBinding
 import com.sizdev.arkhireforcompany.homepage.HomeActivity
 import com.sizdev.arkhireforcompany.networking.ArkhireApiClient
@@ -59,8 +59,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.tvForgetPassword.setOnClickListener {
-            val intent = Intent(this, ForgetPasswordActivity::class.java)
-            startActivity(intent)
+            Toast.makeText(this, "Currently Unavailable", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -86,6 +85,9 @@ class LoginActivity : AppCompatActivity() {
                     editor.putString("accToken", viewModel.loginData.value?.token)
                     editor.putString("accID", viewModel.loginData.value?.userId)
                     editor.putString("accName", viewModel.loginData.value?.userName)
+                    editor.putString("accName", viewModel.loginData.value?.userName)
+                    editor.putString("accEmail", viewModel.loginData.value?.userEmail)
+                    editor.putString("accPassword", binding.etLoginPassword.text.toString())
                     editor.apply()
 
                     val intent = Intent(this@LoginActivity, HomeActivity::class.java)

@@ -49,8 +49,8 @@ class ProjectDetailPresenter (private val coroutineScope: CoroutineScope,
 
             if (result is ProjectDetailResponse) {
                 if (result.success){
-                    view?.hideProgressBar()
                     view?.setProjectData(result.data.projectID, result.data.projectTitle, result.data.projectDuration, result.data.projectDesc, result.data.projectSalary, result.data.projectImage, result.data.postedAt)
+                    view?.hideProgressBar()
                 }
                 else {
                     view?.hideProgressBar()
@@ -76,6 +76,44 @@ class ProjectDetailPresenter (private val coroutineScope: CoroutineScope,
                             e.code() == 404 -> {
                                 view?.hideProgressBar()
                                 view?.setError("Project Not Found !")
+                            }
+
+                            else -> {
+                                view?.setError("Unknown Error, Please Try Again Later !")
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (result is ProjectResponse) {
+                if (result.success){
+                    view?.hideProgressBar()
+                }
+                else {
+                    view?.hideProgressBar()
+                    view?.setError(result.message)
+                }
+            }
+        }
+    }
+
+    override fun verifyProject(projectID: String) {
+        coroutineScope.launch {
+            val result = withContext(Dispatchers.IO) {
+                try {
+                    service?.showContributor(projectID)
+                } catch (e: HttpException) {
+                    e.printStackTrace()
+                    withContext(Dispatchers.Main){
+                        when{
+                            e.code() == 403 -> {
+                                view?.setError("Session Expired !")
+                            }
+
+                            e.code() == 404 -> {
+                                view?.hideProgressBar()
+                                view?.setError("Project Clear !")
                             }
 
                             else -> {

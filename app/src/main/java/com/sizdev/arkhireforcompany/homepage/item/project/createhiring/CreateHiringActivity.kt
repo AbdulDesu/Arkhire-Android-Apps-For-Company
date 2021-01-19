@@ -19,6 +19,7 @@ import com.sizdev.arkhireforcompany.networking.ArkhireApiClient
 import com.sizdev.arkhireforcompany.networking.ArkhireApiService
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.*
+import retrofit2.HttpException
 import java.text.NumberFormat
 import java.util.*
 
@@ -64,8 +65,6 @@ class CreateHiringActivity : AppCompatActivity() {
 
         // Enable Spinner
         binding.srSelectProject.adapter = CreateHiringSpinnerAdapter(this)
-
-
     }
 
     @SuppressLint("SetTextI18n", "ResourceAsColor")
@@ -124,8 +123,19 @@ class CreateHiringActivity : AppCompatActivity() {
             val result = withContext(Dispatchers.IO) {
                 try {
                     service.getAllProjectResponse(accountID)
-                } catch (e: Throwable) {
-                    e.printStackTrace()
+                } catch (e: HttpException) {
+                    withContext(Dispatchers.Main){
+                        when{
+                            e.code() == 404 -> {
+                                binding.loadingScreen.visibility = View.GONE
+                                binding.notfound.visibility = View.VISIBLE
+                                Toast.makeText(this@CreateHiringActivity, "Nothing Project Found, Please Create One !", Toast.LENGTH_SHORT).show()
+                            }
+                            else -> {
+                                Toast.makeText(this@CreateHiringActivity, "Unknown Error!", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    }
                 }
             }
 

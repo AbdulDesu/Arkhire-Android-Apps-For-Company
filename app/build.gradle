@@ -14,7 +14,7 @@ android {
         minSdkVersion 26
         targetSdkVersion 30
         versionCode 1
-        versionName "1.9 Beta"
+        versionName "2.0 Stable"
 
         Properties properties = new Properties()
         if (rootProject.file("local.properties").exists()) {

@@ -78,6 +78,8 @@ class ProjectDetailFragment : Fragment(), ProjectDetailContract.View {
         view.bt_yesDelete.setOnClickListener {
             presenter?.deleteProject(projectID!!)
             dialog.dismiss()
+            Toast.makeText(activity, "Project Deleted !", Toast.LENGTH_SHORT).show()
+            activity?.finish()
         }
 
         view.bt_noDelete.setOnClickListener {
@@ -130,6 +132,10 @@ class ProjectDetailFragment : Fragment(), ProjectDetailContract.View {
                 dialog.show()
             }
 
+            "Project Clear !" -> {
+                binding.tvProjectDelete.visibility = View.VISIBLE
+            }
+
             else -> {
                 Toast.makeText(activity, error, Toast.LENGTH_LONG).show()
             }
@@ -161,7 +167,14 @@ class ProjectDetailFragment : Fragment(), ProjectDetailContract.View {
 
         binding.tvProjectTitle.text = projectTitle
         binding.tvProjectDuration.text = projectDuration
-        binding.tvProjectSalary.text = format.format(projectSalary.toDouble())
+
+        if(projectSalary == "" || projectSalary.isEmpty()){
+           binding.tvProjectSalary.text = "Data Malformed"
+        }
+        else{
+            binding.tvProjectSalary.text = format.format(projectSalary.toDouble())
+        }
+
         binding.tvProjectDesc.text = projectDesc
         binding.tvProjectCreated.text = "${dateSplitter[0]} - ${timeSplitter[0]}"
 
@@ -200,6 +213,7 @@ class ProjectDetailFragment : Fragment(), ProjectDetailContract.View {
         handler.post(object : Runnable {
             override fun run() {
                 presenter?.getProject(projectID!!)
+                presenter?.verifyProject(projectID!!)
                 handler.postDelayed(this, 5000)
             }
         })

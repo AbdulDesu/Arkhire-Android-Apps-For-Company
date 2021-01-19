@@ -36,10 +36,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <androidx.appcompat.widget.SearchView
+                <SearchView
                     android:id="@+id/project_search"
-                    app:queryHint="Search Project By Name"
-                    app:iconifiedByDefault="false"
+                    android:iconifiedByDefault="false"
+                    android:queryHint="Search By Project Name..."
                     android:background="@color/white"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>

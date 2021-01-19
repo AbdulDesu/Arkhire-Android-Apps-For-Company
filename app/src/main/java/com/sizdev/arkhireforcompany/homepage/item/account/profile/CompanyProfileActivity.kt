@@ -149,29 +149,48 @@ class CompanyProfileActivity : AppCompatActivity(), CompanyProfileContract.View,
                 .centerCrop()
                 .into(binding.ivCompanyProfileImage)
 
-        binding.ivCompanyLinkedIn.setOnClickListener {
-            Toast.makeText(
-                    this@CompanyProfileActivity,
-                    "Your Linked is: $companyLinkedin",
-                    Toast.LENGTH_SHORT
-            ).show()
+        when(companyLinkedin){
+            null -> binding.ivCompanyLinkedIn.setImageResource(R.drawable.ic_linkedin_disabled)
+            "" -> binding.ivCompanyLinkedIn.setImageResource(R.drawable.ic_linkedin_disabled)
+            else -> {
+                binding.ivCompanyLinkedIn.setOnClickListener {
+                    Toast.makeText(
+                        this@CompanyProfileActivity,
+                        "Your Linked is: $companyLinkedin",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
         }
 
-        binding.ivCompanyInstagram.setOnClickListener {
-            Toast.makeText(
-                    this@CompanyProfileActivity,
-                    "Your Instagram is: $companyInstagram",
-                    Toast.LENGTH_SHORT
-            ).show()
+        when(companyInstagram){
+            null -> binding.ivCompanyInstagram.setImageResource(R.drawable.ic_instagram_disabled)
+            "" -> binding.ivCompanyInstagram.setImageResource(R.drawable.ic_instagram_disabled)
+            else -> {
+                binding.ivCompanyInstagram.setOnClickListener {
+                    Toast.makeText(
+                        this@CompanyProfileActivity,
+                        "Your Instagram is: $companyLinkedin",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
         }
 
-        binding.ivCompanyFacebook.setOnClickListener {
-            Toast.makeText(
-                    this@CompanyProfileActivity,
-                    "Your Facebook is: $companyFacebook",
-                    Toast.LENGTH_SHORT
-            ).show()
+        when(companyFacebook){
+            null -> binding.ivCompanyFacebook.setImageResource(R.drawable.ic_facebook_disabled)
+            "" -> binding.ivCompanyFacebook.setImageResource(R.drawable.ic_facebook_disabled)
+            else -> {
+                binding.ivCompanyFacebook.setOnClickListener {
+                    Toast.makeText(
+                        this@CompanyProfileActivity,
+                        "Your Facebook is: $companyLinkedin",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
         }
+
 
         binding.menuButton.setOnClickListener {
             val showMenu = PopupMenu(this@CompanyProfileActivity, binding.menuButton)
@@ -187,6 +206,7 @@ class CompanyProfileActivity : AppCompatActivity(), CompanyProfileContract.View,
                                 this@CompanyProfileActivity,
                                 CompanyEditProfileActivity::class.java
                         )
+                        intent.putExtra("editCode", "1")
                         intent.putExtra("companyID", companyID)
                         intent.putExtra("companyLocation", companyLocation)
                         intent.putExtra("companyLatitude", companyLatitude)
