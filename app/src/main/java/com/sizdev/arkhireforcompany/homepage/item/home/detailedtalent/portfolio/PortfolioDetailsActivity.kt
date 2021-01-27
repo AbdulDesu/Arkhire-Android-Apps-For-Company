@@ -58,7 +58,7 @@ class PortfolioDetailsActivity : AppCompatActivity() {
         binding.tvPortfolioDesc.text = portfolioDesc
         Picasso.get()
             .load("http://54.82.81.23:911/image/$portfolioImage")
-            .resize(512, 512)
+            .resize(1024, 800)
             .centerCrop()
             .into(binding.ivPortfolioImage)
 

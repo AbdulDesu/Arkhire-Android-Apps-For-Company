@@ -110,6 +110,7 @@
                 app:passwordToggleEnabled="true"
                 app:boxStrokeColor="@color/primary"
                 app:hintEnabled="false"
+                app:boxBackgroundMode="none"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 

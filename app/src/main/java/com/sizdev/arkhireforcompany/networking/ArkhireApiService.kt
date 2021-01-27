@@ -150,7 +150,7 @@ interface ArkhireApiService {
                                      ) : CreateProjectResponse
 
     @FormUrlEncoded
-    @PUT("/project/{projectID}")
+    @PUT("/project/text/{projectID}")
     suspend fun updateProjectResponse(@Path("projectID") projectID: String,
                                       @Field ("project_tittle") projectTitle: String,
                                       @Field("project_duration") projectDuration: String,
