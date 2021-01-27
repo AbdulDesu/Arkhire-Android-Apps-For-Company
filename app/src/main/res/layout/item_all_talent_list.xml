@@ -6,23 +6,22 @@
 
     <androidx.cardview.widget.CardView
         android:layout_marginTop="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginHorizontal="8dp"
         app:cardCornerRadius="10dp"
         app:cardElevation="12dp"
         android:id="@+id/showAllTalentItem"
-        android:layout_width="190dp"
+        android:layout_width="wrap_content"
         android:layout_height="220dp">
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="190dp"
-        android:layout_height="220dp">
-
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
 
         <RelativeLayout
             android:layout_marginTop="8dp"
             android:layout_marginBottom="10dp"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent">
 
             <androidx.cardview.widget.CardView
@@ -92,9 +91,8 @@
                 android:id="@+id/la_highlightSKill"
                 android:layout_marginTop="6dp"
                 android:layout_below="@id/la_talentLocation"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_width="match_parent"
+                android:layout_marginHorizontal="10dp"
+                android:layout_width="wrap_content"
                 android:layout_height="22dp">
 
                 <androidx.appcompat.widget.AppCompatButton
@@ -127,14 +125,10 @@
                 android:layout_height="wrap_content"/>
 
 
-        </RelativeLayout>
+            </RelativeLayout>
 
-    </LinearLayout>
+        </LinearLayout>
 
-        </androidx.cardview.widget.CardView>
-
-
-
-
+    </androidx.cardview.widget.CardView>
 
 </layout>
