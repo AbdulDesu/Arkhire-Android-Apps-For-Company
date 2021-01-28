@@ -49,6 +49,7 @@ class CompanyProfileActivity : AppCompatActivity(), CompanyProfileContract.View,
     private var companyID: String? = null
     private var presenter: CompanyProfilePresenter? = null
     private var defaultLocation = LatLng(-6.200000, 106.816666)
+    private var markerName: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -86,7 +87,7 @@ class CompanyProfileActivity : AppCompatActivity(), CompanyProfileContract.View,
         markerDefault = googleMap.addMarker(
             MarkerOptions()
                 .position(defaultLocation)
-                .title(binding.tvCompanyProfileName.text as String?)
+                .title(markerName)
         )
 
         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(defaultLocation, 12f))
@@ -96,7 +97,7 @@ class CompanyProfileActivity : AppCompatActivity(), CompanyProfileContract.View,
         }
 
         override fun onMarkerClick(marker: Marker): Boolean {
-            Toast.makeText(this, "Navigate to ${marker.title} ?", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "$markerName Location", Toast.LENGTH_SHORT).show()
             return false
         }
 
@@ -131,6 +132,7 @@ class CompanyProfileActivity : AppCompatActivity(), CompanyProfileContract.View,
     }
 
     override fun setCompanyData(companyID: String, accountID: String, accountName: String, companyName: String, companyLocation: String, companyPosition: String, companyLatitude: String, companyLongitude: String, companyType: String, companyDesc: String, companyLinkedin: String, companyInstagram: String, companyFacebook: String, companyImage: String) {
+        markerName = companyName
         binding.tvCompanyProfileName.text = companyName
         binding.tvCompanyType.text = companyType
         binding.tvCompanyDescription.text = companyDesc
