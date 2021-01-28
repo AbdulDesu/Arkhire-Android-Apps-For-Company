@@ -67,8 +67,9 @@
                 <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
                     android:id="@+id/bt_createProject"
                     android:layout_marginEnd="24dp"
-                    android:layout_marginTop="600dp"
                     android:layout_alignParentEnd="true"
+                    android:layout_above="@id/bottomLimiter"
+                    android:layout_marginBottom="8dp"
                     app:backgroundTint="@color/primary"
                     app:icon="@drawable/ic_edit"
                     app:iconTint="@color/white"
@@ -76,14 +77,16 @@
                     android:textColor="@color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:contentDescription="@string/add_project"
-                    tools:ignore="RelativeOverlap" />
+                    android:contentDescription="@string/add_project"/>
+
+                <LinearLayout
+                    android:id="@+id/bottomLimiter"
+                    android:orientation="horizontal"
+                    android:layout_alignParentBottom="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"/>
 
             </RelativeLayout>
-
-
-
-
 
         </LinearLayout>
 
