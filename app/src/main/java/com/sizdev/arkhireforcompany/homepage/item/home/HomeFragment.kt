@@ -142,7 +142,7 @@ class HomeFragment : Fragment(), HomeContract.View {
         }
 
         else {
-            val lastName = nameSplitter[1]
+            val lastName = nameSplitter.last()
             when (timeOfDay){
                 in 0..11 -> binding.tvUserGreeting.text = "Good Morning, $lastName"
                 in 12..15 -> binding.tvUserGreeting.text = "Good Afternoon, $lastName"
