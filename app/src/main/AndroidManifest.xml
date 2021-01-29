@@ -21,17 +21,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ArkhireCompany"
         android:usesCleartextTraffic="true">
-        <activity android:name=".homepage.item.project.showproject.detailproject.hiringlist.ProjectHiringDetailActivity"></activity>
-        <activity android:name=".administration.email.ResetEmailActivity" />
-        <activity android:name=".homepage.item.project.createhiring.CreateHiringActivity" />
-        <activity android:name=".extra.CostumerServiceActivity" />
-        <activity android:name=".homepage.item.home.detailedtalent.portfolio.PortfolioDetailsActivity" />
-        <activity android:name=".homepage.item.project.showproject.editproject.ProjectEditActivity" />
-        <activity android:name=".homepage.item.project.showproject.detailproject.ProjectDetailActivity" />
-        <activity android:name=".homepage.item.account.profile.edit.CompanyEditProfileActivity" />
-        <activity android:name=".homepage.item.project.createproject.CreateProjectActivity" />
-        <activity android:name=".webviewer.ArkhireWebViewerActivity" />
-        <activity android:name=".homepage.item.home.detailedtalent.TalentProfileActivity" />
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -40,11 +29,49 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="${mapsApiKey}" />
 
-        <activity android:name=".homepage.item.account.profile.CompanyProfileActivity" />
-        <activity android:name=".administration.password.ResetPasswordActivity" />
-        <activity android:name=".administration.register.RegisterActivity" />
-        <activity android:name=".administration.login.LoginActivity" />
-        <activity android:name=".homepage.HomeActivity" />
+        <activity
+            android:name=".homepage.item.project.showproject.detailproject.hiringlist.ProjectHiringDetailActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".administration.email.ResetEmailActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".homepage.item.project.createhiring.CreateHiringActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".homepage.item.home.detailedtalent.portfolio.PortfolioDetailsActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".homepage.item.project.showproject.editproject.ProjectEditActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".homepage.item.project.showproject.detailproject.ProjectDetailActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".homepage.item.account.profile.edit.CompanyEditProfileActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".homepage.item.project.createproject.CreateProjectActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".webviewer.ArkhireWebViewerActivity"/>
+        <activity
+            android:name=".homepage.item.home.detailedtalent.TalentProfileActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".homepage.item.account.profile.CompanyProfileActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".administration.password.ResetPasswordActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".administration.register.RegisterActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".administration.login.LoginActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".homepage.HomeActivity"
+            android:screenOrientation="portrait"/>
         <activity android:name=".onboarding.OnBoardingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
