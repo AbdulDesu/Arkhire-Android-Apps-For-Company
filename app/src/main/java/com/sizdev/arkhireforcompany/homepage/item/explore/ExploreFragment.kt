@@ -121,7 +121,7 @@ class ExploreFragment : Fragment(), ExploreContract.View {
                     }
                     binding.filter.setOnClickListener {
                         popupMenu.setOnMenuItemClickListener { menuItem ->
-                            if(newText.length >= 3) {
+                            if(newText.isNotEmpty()) {
                                 when (menuItem.itemId) {
                                     0 -> presenter?.searchByTitle(newText)
                                     1 -> presenter?.searchByLocation(newText)

@@ -56,7 +56,6 @@
                         android:id="@+id/filter"
                         android:src="@drawable/ic_filter"
                         android:scaleType="centerCrop"
-                        android:layout_marginEnd="8dp"
                         android:layout_gravity="center_vertical"
                         android:layout_width="30dp"
                         android:layout_height="30dp"/>
