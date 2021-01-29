@@ -36,21 +36,6 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_marginTop="8dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/notfound"
-            android:visibility="gone"
-            android:background="@color/white"
-            android:src="@drawable/empty_data_set"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
-        </RelativeLayout>
-
-        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -81,183 +66,215 @@
                 android:layout_height="wrap_content"/>
 
         </RelativeLayout>
+        <ScrollView
 
-        <androidx.cardview.widget.CardView
-            android:layout_marginTop="106dp"
             android:layout_width="match_parent"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp"
-            app:cardCornerRadius="4dp"
-            app:cardElevation="4dp"
-            app:cardBackgroundColor="@color/primary"
-            android:layout_height="80dp">
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
-                <TextView
-                    android:text="Select Project :"
-                    android:textSize="16sp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:textColor="@color/white"
+
+                <androidx.cardview.widget.CardView
+                    android:layout_marginTop="16dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_marginStart="32dp"
+                    android:layout_marginEnd="32dp"
+                    app:cardCornerRadius="4dp"
+                    app:cardElevation="4dp"
+                    app:cardBackgroundColor="@color/primary"
+                    android:layout_height="80dp">
 
-                <Spinner
-                    android:id="@+id/sr_selectProject"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="12dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"/>
-
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_marginTop="16dp"
-            android:layout_width="match_parent"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp"
-            app:cardCornerRadius="4dp"
-            app:cardElevation="4dp"
-            app:cardBackgroundColor="@color/primary"
-            android:layout_height="140dp">
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:text="Selected Talent :"
-                    android:textSize="16sp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:textColor="@color/white"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
-                <LinearLayout
-                    android:background="@color/white"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginBottom="16dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <RelativeLayout
+                    <LinearLayout
+                        android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
-                        <de.hdodenhof.circleimageview.CircleImageView
-                            android:id="@+id/iv_talentImage"
-                            android:layout_marginStart="22dp"
-                            android:layout_centerVertical="true"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"/>
-
                         <TextView
-                            android:id="@+id/tv_talentName"
-                            android:text="Muhammad Sirius Aldebaran"
-                            android:textColor="@color/black"
-                            android:layout_marginTop="19dp"
-                            android:layout_marginStart="16dp"
-                            android:layout_toEndOf="@id/iv_talentImage"
-                            android:layout_width="wrap_content"
+                            android:text="Select Project :"
+                            android:textSize="16sp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginEnd="20dp"
+                            android:textColor="@color/white"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"/>
 
-                        <TextView
-                            android:id="@+id/tv_talentTitle"
-                            android:text="Android Developer"
-                            android:layout_marginTop="6dp"
-                            android:layout_marginStart="16dp"
-                            android:textSize="12sp"
-                            android:layout_toEndOf="@id/iv_talentImage"
-                            android:layout_below="@id/tv_talentName"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
-                    </RelativeLayout>
+                        <Spinner
+                            android:id="@+id/sr_selectProject"
+                            android:popupBackground="@color/primary"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="12dp"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginEnd="20dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"/>
 
-                </LinearLayout>
-            </LinearLayout>
+                    </LinearLayout>
 
-        </androidx.cardview.widget.CardView>
+                </androidx.cardview.widget.CardView>
 
-        <androidx.cardview.widget.CardView
-            android:layout_marginTop="16dp"
-            android:layout_width="match_parent"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp"
-            app:cardCornerRadius="4dp"
-            app:cardElevation="4dp"
-            app:cardBackgroundColor="@color/primary"
-            android:layout_height="80dp">
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:text="Input Salary :"
-                    android:textSize="16sp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:textColor="@color/white"
+                <androidx.cardview.widget.CardView
+                    android:layout_marginTop="16dp"
                     android:layout_width="match_parent"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginEnd="32dp"
+                    app:cardCornerRadius="4dp"
+                    app:cardElevation="4dp"
+                    app:cardBackgroundColor="@color/primary"
+                    android:layout_height="140dp">
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:text="Selected Talent :"
+                            android:textSize="16sp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginEnd="20dp"
+                            android:textColor="@color/white"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+
+                        <LinearLayout
+                            android:background="@color/white"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="20dp"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginBottom="16dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <de.hdodenhof.circleimageview.CircleImageView
+                                    android:id="@+id/iv_talentImage"
+                                    android:layout_marginStart="22dp"
+                                    android:layout_centerVertical="true"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"/>
+
+                                <TextView
+                                    android:id="@+id/tv_talentName"
+                                    android:text="Muhammad Sirius Aldebaran"
+                                    android:textColor="@color/black"
+                                    android:layout_marginTop="19dp"
+                                    android:layout_marginStart="16dp"
+                                    android:layout_toEndOf="@id/iv_talentImage"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"/>
+
+                                <TextView
+                                    android:id="@+id/tv_talentTitle"
+                                    android:text="Android Developer"
+                                    android:layout_marginTop="6dp"
+                                    android:layout_marginStart="16dp"
+                                    android:textSize="12sp"
+                                    android:layout_toEndOf="@id/iv_talentImage"
+                                    android:layout_below="@id/tv_talentName"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"/>
+                            </RelativeLayout>
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_marginTop="16dp"
+                    android:layout_width="match_parent"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginEnd="32dp"
+                    app:cardCornerRadius="4dp"
+                    app:cardElevation="4dp"
+                    app:cardBackgroundColor="@color/primary"
+                    android:layout_height="80dp">
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:text="Input Salary :"
+                            android:textSize="16sp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginEnd="20dp"
+                            android:textColor="@color/white"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+
+                        <EditText
+                            android:id="@+id/et_offeringSalary"
+                            android:background="@color/white"
+                            android:hint="Rp. 21.000.000"
+                            android:textSize="16sp"
+                            android:textColor="@color/black"
+                            android:paddingLeft="12dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="12dp"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginEnd="20dp"
+                            android:inputType="number"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"/>
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/bt_sendOffering"
+                    android:text="@string/send"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginBottom="50dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@color/primary"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"/>
 
-                <EditText
-                    android:id="@+id/et_offeringSalary"
-                    android:background="@color/white"
-                    android:hint="Rp. 21.000.000"
-                    android:textSize="16sp"
-                    android:textColor="@color/black"
-                    android:paddingLeft="12dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="12dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:inputType="number"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"/>
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/bt_hired"
+                    android:text="@string/hired"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:visibility="gone"
+                    android:layout_marginTop="50dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@color/quantum_grey"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"/>
 
             </LinearLayout>
 
-        </androidx.cardview.widget.CardView>
+        </ScrollView>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/bt_sendOffering"
-            android:text="@string/send"
-            android:textColor="@color/white"
-            android:textSize="15sp"
-            android:layout_marginTop="50dp"
-            android:layout_gravity="center_horizontal"
-            android:background="@color/primary"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"/>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/bt_hired"
-            android:text="@string/hired"
-            android:textColor="@color/white"
-            android:textSize="15sp"
+        <ImageView
+            android:id="@+id/notfound"
             android:visibility="gone"
-            android:layout_marginTop="50dp"
-            android:layout_gravity="center_horizontal"
-            android:background="@color/quantum_grey"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"/>
+            android:background="@color/white"
+            android:src="@drawable/empty_data_set"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        </RelativeLayout>
+
+
+
     </LinearLayout>
 
 </layout>

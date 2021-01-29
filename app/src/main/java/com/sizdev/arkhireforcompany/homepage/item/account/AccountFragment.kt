@@ -203,7 +203,7 @@ class AccountFragment : Fragment(), AccountContract.View {
             val intent = Intent(activity, CompanyProfileActivity::class.java)
             intent.putExtra("companyID", companyID)
 
-            if(companyType == "null"){
+            if(companyType.isEmpty()){
                 val intent2 = Intent(activity, CompanyEditProfileActivity::class.java)
                 intent2.putExtra("companyID", companyID)
                 intent2.putExtra("editCode", "0")
