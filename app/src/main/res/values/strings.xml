@@ -71,5 +71,6 @@
     <string name="new_email_address">New Email Address..</string>
     <string name="updatingEmail">Updating Email…</string>
     <string name="password_settings">Password Settings</string>
+    <string name="this_is_first_time_you_loged_in_to_continue_please_finish_your_profile">This is first time you loged in, To continue please finish your profile</string>
 
 </resources>

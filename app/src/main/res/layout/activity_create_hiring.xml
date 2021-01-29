@@ -35,6 +35,7 @@
 
         </RelativeLayout>
 
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -66,12 +67,42 @@
                 android:layout_height="wrap_content"/>
 
         </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/notFound"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/bt_createProject"
+                app:cardCornerRadius="41dp"
+                android:layout_marginHorizontal="50dp"
+                android:layout_centerInParent="true"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <TextView
+                    android:gravity="center"
+                    android:text="Create Project"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:background="@color/primary"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+            </androidx.cardview.widget.CardView>
+
+        </RelativeLayout>
+
         <ScrollView
 
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <LinearLayout
+                android:layout_gravity="center"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -260,19 +291,6 @@
             </LinearLayout>
 
         </ScrollView>
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/notfound"
-            android:visibility="gone"
-            android:background="@color/white"
-            android:src="@drawable/empty_data_set"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
-        </RelativeLayout>
 
 
 

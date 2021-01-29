@@ -47,7 +47,7 @@ class ProjectAdapter : RecyclerView.Adapter<ProjectAdapter.showProjectList>() {
             holder.binding.tvProjectSalary.text = format.format(item.projectSalary?.toDouble())
         }
 
-        holder.binding.tvProjectDuration.text = "Expired At: ${item.projectDuration}"
+        holder.binding.tvProjectDuration.text = "Deadline At: ${item.projectDuration}"
         holder.binding.tvProjectCreated.text = "${dateSplitter!![0]} - ${timeSplitter!![0]}"
 
         Picasso.get()

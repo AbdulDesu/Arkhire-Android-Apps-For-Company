@@ -14,9 +14,10 @@ interface HomeContract {
         fun addDevOpsEngineerTalent(list: List<DevOpsEngineerModel>)
         fun addFullStackMobileTalent(list: List<FullStackMobileModel>)
         fun addFullStackWebTalent(list: List<FullStackWebModel>)
-        fun setGreeting(name: String)
+        fun setGreeting(name: String, companyID: String, companyType:String)
         fun setError(error: String)
         fun hideProgressBar()
+        fun alertMustCompleteData()
     }
 
     interface Presenter{

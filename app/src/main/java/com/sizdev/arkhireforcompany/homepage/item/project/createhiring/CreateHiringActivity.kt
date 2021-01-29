@@ -5,6 +5,8 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
@@ -13,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.sizdev.arkhireforcompany.R
 import com.sizdev.arkhireforcompany.databinding.ActivityCreateHiringBinding
 import com.sizdev.arkhireforcompany.homepage.HomeActivity
+import com.sizdev.arkhireforcompany.homepage.item.project.createproject.CreateProjectActivity
 import com.sizdev.arkhireforcompany.homepage.item.project.showproject.ProjectModel
 import com.sizdev.arkhireforcompany.homepage.item.project.showproject.ProjectResponse
 import com.sizdev.arkhireforcompany.networking.ArkhireApiClient
@@ -20,6 +23,7 @@ import com.sizdev.arkhireforcompany.networking.ArkhireApiService
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.*
 import retrofit2.HttpException
+import java.lang.Runnable
 import java.text.NumberFormat
 import java.util.*
 
@@ -29,6 +33,7 @@ class CreateHiringActivity : AppCompatActivity() {
     private lateinit var viewModel: CreateHiringViewModel
     private lateinit var coroutineScope: CoroutineScope
     private lateinit var service: ArkhireApiService
+    private lateinit var handler: Handler
 
     private var projectTag: String? = null
     private var projectTitle: String? = null
@@ -61,7 +66,7 @@ class CreateHiringActivity : AppCompatActivity() {
         getSetTalentData()
 
         // Show Project To Spinner
-        showProject(accountID!!)
+        setDataRefreshManager()
 
         // Enable Spinner
         binding.srSelectProject.adapter = CreateHiringSpinnerAdapter(this)
@@ -128,8 +133,10 @@ class CreateHiringActivity : AppCompatActivity() {
                         when{
                             e.code() == 404 -> {
                                 binding.loadingScreen.visibility = View.GONE
-                                binding.notfound.visibility = View.VISIBLE
-                                Toast.makeText(this@CreateHiringActivity, "Nothing Project Found, Please Create One !", Toast.LENGTH_SHORT).show()
+                                binding.notFound.visibility = View.VISIBLE
+                                binding.btCreateProject.setOnClickListener {
+                                    startActivity(Intent(this@CreateHiringActivity, CreateProjectActivity::class.java))
+                                }
                             }
                             else -> {
                                 Toast.makeText(this@CreateHiringActivity, "Unknown Error!", Toast.LENGTH_SHORT).show()
@@ -153,6 +160,8 @@ class CreateHiringActivity : AppCompatActivity() {
                 }
 
                 (binding.srSelectProject.adapter as CreateHiringSpinnerAdapter).addList(list)
+
+                binding.notFound.visibility = View.GONE
 
                 binding.srSelectProject.onItemSelectedListener = object :
                     AdapterView.OnItemSelectedListener {
@@ -221,4 +230,13 @@ class CreateHiringActivity : AppCompatActivity() {
         })
     }
 
+    private fun setDataRefreshManager() {
+        handler = Handler(Looper.getMainLooper())
+        handler.post(object : Runnable {
+            override fun run() {
+                showProject(accountID!!)
+                handler.postDelayed(this, 2000)
+            }
+        })
+    }
 }

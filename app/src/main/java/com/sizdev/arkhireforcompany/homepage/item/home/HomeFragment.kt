@@ -9,6 +9,7 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sizdev.arkhireforcompany.R
 import com.sizdev.arkhireforcompany.administration.login.LoginActivity
 import com.sizdev.arkhireforcompany.databinding.FragmentHomeBinding
+import com.sizdev.arkhireforcompany.homepage.item.account.profile.edit.CompanyEditProfileActivity
 import com.sizdev.arkhireforcompany.homepage.item.home.android.AndroidDeveloperAdapter
 import com.sizdev.arkhireforcompany.homepage.item.home.android.AndroidDeveloperModel
 import com.sizdev.arkhireforcompany.homepage.item.home.devops.DevOpsEngineerAdapter
@@ -27,6 +29,8 @@ import com.sizdev.arkhireforcompany.homepage.item.home.fullstackweb.FullStackWeb
 import com.sizdev.arkhireforcompany.homepage.item.home.fullstackweb.FullStackWebModel
 import com.sizdev.arkhireforcompany.networking.ArkhireApiClient
 import com.sizdev.arkhireforcompany.networking.ArkhireApiService
+import kotlinx.android.synthetic.main.activity_login.view.*
+import kotlinx.android.synthetic.main.alert_must_complete_data.view.*
 import kotlinx.android.synthetic.main.alert_session_expired.view.*
 import kotlinx.coroutines.*
 import java.text.SimpleDateFormat
@@ -41,6 +45,8 @@ class HomeFragment : Fragment(), HomeContract.View {
     private lateinit var handler: Handler
 
     private var accountID: String? = null
+    private var accountName: String? = null
+    private var companyTag: String? = null
     private var presenter: HomePresenter? = null
 
     @SuppressLint("SimpleDateFormat", "WeekBasedYear", "SetTextI18n")
@@ -116,6 +122,27 @@ class HomeFragment : Fragment(), HomeContract.View {
         binding.loadingScreen.visibility = View.GONE
     }
 
+    @SuppressLint("SetTextI18n")
+    override fun alertMustCompleteData() {
+        val view: View = layoutInflater.inflate(R.layout.alert_must_complete_data, null)
+
+        dialog = activity?.let {
+            AlertDialog.Builder(it)
+                    .setView(view)
+                    .setCancelable(false)
+                    .create()
+        }!!
+
+        view.tv_ownerName.text = "Welcome $accountName"
+        view.bt_goComplete.setOnClickListener {
+            val intent = Intent(activity, CompanyEditProfileActivity::class.java)
+            intent.putExtra("companyID", companyTag)
+            intent.putExtra("editCode", "0")
+            startActivity(intent)
+            dialog.dismiss()
+        }
+    }
+
     private fun setService() {
         coroutineScope = CoroutineScope(Job() + Dispatchers.Main)
         val service = activity?.let { ArkhireApiClient.getApiClient(it)?.create(ArkhireApiService::class.java) }
@@ -123,7 +150,11 @@ class HomeFragment : Fragment(), HomeContract.View {
     }
 
     @SuppressLint("SetTextI18n")
-    override fun setGreeting(name: String) {
+    override fun setGreeting(name: String, companyID: String, companyType:String) {
+
+        // Set Data
+        accountName = name
+        companyTag = companyID
 
         // Split The Name
         val nameSplitter = name.split(" ")
@@ -148,6 +179,14 @@ class HomeFragment : Fragment(), HomeContract.View {
                 in 12..15 -> binding.tvUserGreeting.text = "Good Afternoon, $lastName"
                 in 16..20 -> binding.tvUserGreeting.text = "Good Evening, $lastName"
                 in 21..23 -> binding.tvUserGreeting.text = "Good Night, $lastName"
+            }
+        }
+
+        when(companyType){
+            "null" -> {
+                handler.removeCallbacksAndMessages(null)
+                alertMustCompleteData()
+                dialog.show()
             }
         }
     }

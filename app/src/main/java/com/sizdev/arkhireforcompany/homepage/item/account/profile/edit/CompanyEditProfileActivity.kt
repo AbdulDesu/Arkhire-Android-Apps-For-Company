@@ -74,7 +74,7 @@ class CompanyEditProfileActivity : AppCompatActivity(), OnMapReadyCallback, Goog
 
         if(editCode == "0"){
             binding.btNewProfileDone.setOnClickListener {
-                Toast.makeText(this, "Please Pick Image", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Please Fill All Required Field !", Toast.LENGTH_SHORT).show()
             }
         }
 

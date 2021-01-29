@@ -53,7 +53,7 @@ class HomePresenter(private val coroutineScope: CoroutineScope,
 
             if (result is AccountResponse) {
                 if (result.success){
-                    view?.setGreeting(result.data[0].accountName)
+                    view?.setGreeting(result.data[0].accountName, result.data[0].companyID, result.data[0].companyType.toString())
                     view?.setCompanyID(result.data[0].companyID)
                 }
                 else {
