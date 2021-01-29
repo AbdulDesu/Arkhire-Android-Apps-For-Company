@@ -68,7 +68,6 @@
 
             <TextView
                 android:id="@+id/tv_registeredEmail"
-                android:layout_below="@+id/topView"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginStart="32dp"
@@ -76,8 +75,9 @@
                 android:background="@drawable/round_border"
                 android:drawablePadding="16dp"
                 android:ems="10"
-                android:layout_marginTop="140dp"
                 android:hint="@string/registered_email_address"
+                android:layout_below="@id/topView"
+                android:layout_marginTop="80dp"
                 android:padding="15dp"
                 android:paddingStart="20dp"
                 app:drawableStartCompat="@drawable/ic_email" />
@@ -134,12 +134,12 @@
 
             <android.widget.Button
                 android:id="@+id/bt_update"
-                android:layout_centerHorizontal="true"
                 android:layout_below="@id/inputPasswordLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
                 android:layout_marginTop="56dp"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="42dp"
+                android:layout_marginStart="32dp"
                 android:layout_marginEnd="32dp"
                 android:background="@drawable/round_bg"
                 android:text="Update"
