@@ -5,7 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".onboarding.item.SecondScreenFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
+        android:orientation="vertical"
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -13,37 +15,25 @@
             android:id="@+id/iv_engineerCriteria"
             android:layout_width="188dp"
             android:layout_height="157dp"
-            android:layout_marginTop="220dp"
-            android:src="@drawable/engineer"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:src="@drawable/engineer"/>
 
         <TextView
             android:id="@+id/tv_engineerCriteria"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="29dp"
+            android:layout_marginTop="28dp"
             android:text="@string/hire_engineer_as_your_criteria"
             android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/iv_engineerCriteria"
-            app:layout_constraintHorizontal_bias="0.493"
-            app:layout_constraintStart_toStartOf="@+id/iv_engineerCriteria"
-            app:layout_constraintTop_toBottomOf="@+id/iv_engineerCriteria" />
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/tv_descEngineerCriteria"
             android:layout_width="290dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="56dp"
+            android:layout_marginTop="16dp"
             android:gravity="center"
             android:text="@string/desc_engineerCriteria"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="@+id/tv_engineerCriteria"
-            app:layout_constraintStart_toStartOf="@+id/tv_engineerCriteria"
-            app:layout_constraintTop_toTopOf="@+id/tv_engineerCriteria" />
+            android:textSize="16sp"/>
 
         <TextView
             android:id="@+id/tv_start"
@@ -52,11 +42,7 @@
             android:text="Get Started"
             android:textColor="@color/primary"
             android:textSize="25sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_descEngineerCriteria"
-            app:layout_constraintVertical_bias="0.128" />
+            android:layout_marginTop="18dp"/>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 </layout>

@@ -5,21 +5,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".onboarding.item.FirstScreenFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
+        android:orientation="vertical"
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-
         <ImageView
             android:id="@+id/iv_HandShake"
             android:layout_width="188dp"
             android:layout_height="157dp"
-            android:layout_marginTop="220dp"
-            android:src="@drawable/handshake"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            android:src="@drawable/handshake"/>
 
         <TextView
             android:id="@+id/tv_becomeYourHiringApp"
@@ -28,26 +23,28 @@
             android:layout_marginTop="28dp"
             android:text="@string/become_your_hiring_apps"
             android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/iv_HandShake"
-            app:layout_constraintHorizontal_bias="0.493"
-            app:layout_constraintStart_toStartOf="@+id/iv_HandShake"
-            app:layout_constraintTop_toBottomOf="@+id/iv_HandShake" />
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/tv_descHandShake"
             android:layout_width="290dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="56dp"
+            android:layout_marginTop="16dp"
             android:gravity="center"
             android:text="@string/handshake_desc"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="@+id/tv_becomeYourHiringApp"
-            app:layout_constraintHorizontal_bias="0.518"
-            app:layout_constraintStart_toStartOf="@+id/tv_becomeYourHiringApp"
-            app:layout_constraintTop_toTopOf="@+id/tv_becomeYourHiringApp" />
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/tv_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            android:text="Next"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:layout_marginTop="18dp"/>
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 </layout>

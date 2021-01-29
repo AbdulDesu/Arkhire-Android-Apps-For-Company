@@ -1,16 +1,14 @@
 package com.sizdev.arkhireforcompany.onboarding.item
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import com.sizdev.arkhireforcompany.R
 import com.sizdev.arkhireforcompany.databinding.FragmentWelcomeViewPagerBinding
-import com.sizdev.arkhireforcompany.onboarding.item.AdapterWelcome
-import com.sizdev.arkhireforcompany.onboarding.item.FirstScreenFragment
-import com.sizdev.arkhireforcompany.onboarding.item.SecondScreenFragment
 
 
 class SplashScreenViewPager : Fragment() {
@@ -36,8 +34,10 @@ class SplashScreenViewPager : Fragment() {
         )
 
         binding.welcomeViewPager.adapter = adapter
+        binding.indicator.setViewPager2(binding.welcomeViewPager)
 
         return binding.root
+
     }
 
 
