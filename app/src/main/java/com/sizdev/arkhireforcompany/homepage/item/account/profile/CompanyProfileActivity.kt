@@ -94,7 +94,17 @@ class CompanyProfileActivity : AppCompatActivity(), CompanyProfileContract.View,
         googleMap.setOnMarkerClickListener(this)
 
         map = googleMap
+
+        googleMap.setOnCameraMoveStartedListener {
+            binding.map.parent.requestDisallowInterceptTouchEvent(true)
+
         }
+
+        googleMap.setOnCameraIdleListener {
+            binding.map.parent.requestDisallowInterceptTouchEvent(false)
+        }
+
+    }
 
         override fun onMarkerClick(marker: Marker): Boolean {
             Toast.makeText(this, "$markerName Location", Toast.LENGTH_SHORT).show()

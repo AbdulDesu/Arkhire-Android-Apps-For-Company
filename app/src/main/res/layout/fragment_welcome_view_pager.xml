@@ -4,7 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".onboarding.item.SplashScreenViewPager">
+    tools:context=".onboarding.item.WelcomeFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -20,7 +20,7 @@
             app:dotsColor="@color/primary"
             android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="80dp"
+            android:layout_marginBottom="75dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 

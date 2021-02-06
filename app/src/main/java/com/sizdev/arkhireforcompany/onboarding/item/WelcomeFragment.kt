@@ -11,7 +11,7 @@ import com.sizdev.arkhireforcompany.R
 import com.sizdev.arkhireforcompany.databinding.FragmentWelcomeViewPagerBinding
 
 
-class SplashScreenViewPager : Fragment() {
+class WelcomeFragment : Fragment() {
 
     private lateinit var binding: FragmentWelcomeViewPagerBinding
 

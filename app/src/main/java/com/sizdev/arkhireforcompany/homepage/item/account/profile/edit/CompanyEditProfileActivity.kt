@@ -11,7 +11,9 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.view.Menu
 import android.view.View
+import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.annotation.NonNull
 import androidx.appcompat.app.AppCompatActivity
@@ -70,6 +72,9 @@ class CompanyEditProfileActivity : AppCompatActivity(), OnMapReadyCallback, Goog
         // Get Current Login Company Data
         setCurrentData()
 
+        // Set Pop Up
+        setPopUp()
+
         val editCode = intent.getStringExtra("editCode")
 
         if(editCode == "0"){
@@ -117,6 +122,31 @@ class CompanyEditProfileActivity : AppCompatActivity(), OnMapReadyCallback, Goog
                 }
 
             }
+        }
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun setPopUp() {
+        //Company Type Pop Up Menu
+        val companyType = PopupMenu(this, binding.etEditCompanyType)
+
+        companyType.menu.add(Menu.NONE, 0 ,0, "Enterprise")
+        companyType.menu.add(Menu.NONE, 1 ,1, "Startup")
+        companyType.menu.add(Menu.NONE, 2 ,2, "Software House")
+
+        //Company Type Listener
+        companyType.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                0 -> {binding.etEditCompanyType.text ="Enterprise"}
+                1 -> {binding.etEditCompanyType.text ="Startup"}
+                2 -> {binding.etEditCompanyType.text ="Software House"}
+            }
+            false
+        }
+
+        //Show Pop Up when clicked
+        binding.etEditCompanyType.setOnClickListener {
+            companyType.show()
         }
     }
 
@@ -235,6 +265,15 @@ class CompanyEditProfileActivity : AppCompatActivity(), OnMapReadyCallback, Goog
         googleMap.uiSettings.isMyLocationButtonEnabled = true
         googleMap.mapType = GoogleMap.MAP_TYPE_TERRAIN
 
+        googleMap.setOnCameraMoveStartedListener {
+            binding.editCompanyLocationmap.parent.requestDisallowInterceptTouchEvent(true)
+
+        }
+
+        googleMap.setOnCameraIdleListener {
+            binding.editCompanyLocationmap.parent.requestDisallowInterceptTouchEvent(false)
+        }
+
         if (ContextCompat.checkSelfPermission(this,
                         Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             googleMap.isMyLocationEnabled = true
@@ -290,7 +329,7 @@ class CompanyEditProfileActivity : AppCompatActivity(), OnMapReadyCallback, Goog
         return false
     }
 
-    fun getPath(context: Context, contentUri: Uri) : String? {
+    private fun getPath(context: Context, contentUri: Uri) : String? {
         var result: String? = null
         val data = arrayOf(MediaStore.Images.Media.DATA)
 
