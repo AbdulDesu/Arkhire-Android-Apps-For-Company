@@ -81,7 +81,7 @@ class HomeFragment : Fragment(), HomeContract.View {
                 presenter?.getDevOpsTalent()
                 presenter?.getFullStackMobileTalent()
                 presenter?.getFullStackWebTalent()
-                handler.postDelayed(this, 10000)
+                handler.postDelayed(this, 5000)
             }
         })
 
