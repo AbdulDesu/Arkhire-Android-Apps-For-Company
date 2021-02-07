@@ -244,6 +244,16 @@ class CompanyProfileActivity : AppCompatActivity(), CompanyProfileContract.View,
             map.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(companyLatitude.toDouble(), companyLongitude.toDouble()), 12f))
             map.setOnMarkerClickListener(this)
         }
+
+        binding.ivHelpLookingFor.setOnClickListener {
+            Toast.makeText(this, "Talent/Engineer criteria You searched for any project", Toast.LENGTH_SHORT).show()
+        }
+        binding.ivHelpCompanyDescription.setOnClickListener {
+            Toast.makeText(this, "Describe/Short Information of this company", Toast.LENGTH_SHORT).show()
+        }
+        binding.ivHelpCompanyLocation.setOnClickListener {
+            Toast.makeText(this, "Your Accurate company location, Talent can navigate to this location", Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun setDataRefreshManagement() {

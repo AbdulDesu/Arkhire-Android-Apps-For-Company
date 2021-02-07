@@ -46,11 +46,16 @@ class RegisterActivity : AppCompatActivity() {
                    Toast.makeText(this, "Password not match", Toast.LENGTH_LONG).show()
                }
                else {
-                   if (registerPassword.length >= 8){
-                       viewModel.startRegister(fullName,registerEmail,registerPhoneNumber, registerPassword, 1, registerCompanyName, registerCompanyPosition)
+                   if(registerPhoneNumber.length >= 11){
+                       if (registerPassword.length >= 8){
+                           viewModel.startRegister(fullName,registerEmail,registerPhoneNumber, registerPassword, 1, registerCompanyName, registerCompanyPosition)
+                       }
+                       else {
+                           Toast.makeText(this, "Password Must Contain 8 Character !", Toast.LENGTH_SHORT).show()
+                       }
                    }
                    else {
-                       Toast.makeText(this, "Password Must Contain 8 Character !", Toast.LENGTH_SHORT).show()
+                       Toast.makeText(this, "Please Input A Valid Phone Number !", Toast.LENGTH_SHORT).show()
                    }
                }
             }

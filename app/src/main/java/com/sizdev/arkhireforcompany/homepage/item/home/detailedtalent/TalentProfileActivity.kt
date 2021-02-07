@@ -242,6 +242,13 @@ class TalentProfileActivity : AppCompatActivity(), TalentProfileContract.View {
             dialog.show()
         }
 
+        binding.ivHelpAboutTalent.setOnClickListener {
+            Toast.makeText(this, "Short Description/Information about this talent", Toast.LENGTH_SHORT).show()
+        }
+
+        binding.ivHelpTalentSkill.setOnClickListener {
+            Toast.makeText(this, "5 Best Skill known with this talent", Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun sessionExpiredAlert() {
