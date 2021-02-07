@@ -36,3 +36,11 @@ student. Company can Hire the best prospective workers based on their criteria, 
 - Added Privacy Policy 
 - Added Rate Us
 - And many more..</br>
+
+# Quick Preview
+<img src="https://user-images.githubusercontent.com/49888665/107161459-765ec080-69cf-11eb-96f1-6c11abc3ede1.png" width="match-parent"> <br>
+
+# Try this application
+Marshmallow Operating system Required (Minimum API 24)<br>
+Download Link:
+https://bit.ly/arkhire-apps
